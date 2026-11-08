@@ -662,6 +662,15 @@ BUILTIN_ACTS_FALLBACK: Dict[str, Dict[str, Any]] = {
 }
 
 
+# Add alias references
+BUILTIN_ACTS_FALLBACK["cpc"] = BUILTIN_ACTS_FALLBACK["civil procedure"]
+BUILTIN_ACTS_FALLBACK["order"] = BUILTIN_ACTS_FALLBACK["civil procedure"]
+BUILTIN_ACTS_FALLBACK["ni act"] = BUILTIN_ACTS_FALLBACK["negotiable instruments"]
+BUILTIN_ACTS_FALLBACK["sra"] = BUILTIN_ACTS_FALLBACK["specific relief"]
+BUILTIN_ACTS_FALLBACK["tpa"] = BUILTIN_ACTS_FALLBACK["transfer of property"]
+BUILTIN_ACTS_FALLBACK["ibc"] = BUILTIN_ACTS_FALLBACK["insolvency and bankruptcy"]
+
+
 # ---------------------------------------------------------------------------
 # Query Parsing Utilities
 # ---------------------------------------------------------------------------
@@ -710,6 +719,25 @@ def extract_act_and_section_hints(query: str) -> Tuple[Optional[str], Optional[s
 
     if remainder:
         act_hint = remainder
+
+    # Map well-known abbreviations
+    abbr_map = {
+        "cpc": "CPC, 1908",
+        "crpc": "CrPC, 1973",
+        "ipc": "IPC, 1860",
+        "bns": "BNS, 2023",
+        "bnss": "BNSS, 2023",
+        "bsa": "BSA, 2023",
+        "ni act": "NI Act, 1881",
+        "ni": "NI Act, 1881",
+        "sra": "Specific Relief Act, 1963",
+        "tpa": "Transfer of Property Act, 1882",
+        "ibc": "IBC, 2016",
+        "pocso": "POCSO Act, 2012",
+        "dpdp": "DPDP Act, 2023",
+    }
+    if act_hint and act_hint.lower() in abbr_map:
+        act_hint = abbr_map[act_hint.lower()]
 
     return act_hint, sec_num
 
@@ -859,7 +887,7 @@ class StatutoryDiscoveryService:
                     matched_section=matched_sec,
                     all_matched_sections=all_secs,
                     is_newly_discovered=False,
-                    source_message="Retrieved directly from AMIL PostgreSQL Indian Legal Corpus",
+                    source_message=f"Retrieved directly from AMIL PostgreSQL Indian Legal Corpus ({matched_act.short_title})",
                 )
 
         # 2. Act or requested Section not in DB -> Try dynamic discovery (Fallback Knowledge Base -> Gemini AI)
@@ -889,6 +917,17 @@ class StatutoryDiscoveryService:
                 all_matched_sections=all_sec_resps,
                 is_newly_discovered=True,
                 source_message="Discovered and verified via India Code Repository & Gemini Grounding Engine",
+            )
+
+        # If we had a matched act in DB, return that act rather than a generic fallback
+        if matched_act:
+            detail = self._build_act_detail(matched_act)
+            return ActLookupResponse(
+                act=detail,
+                matched_section=all_secs[0] if all_secs else None,
+                all_matched_sections=all_secs,
+                is_newly_discovered=False,
+                source_message=f"Found {matched_act.short_title} in AMIL Indian Legal Corpus",
             )
 
         # 3. Fallback: If nothing matched, return the best partial match or first act in DB
@@ -939,14 +978,28 @@ class StatutoryDiscoveryService:
         all_sec_resps: List[LegalSectionResponse] = []
         matched_sec: Optional[LegalSectionResponse] = None
 
+        def normalize_order_sec(s: str) -> str:
+            s = s.strip().lower()
+            s = s.replace("xxxix", "39").replace("vii", "7").replace("rules", "rule")
+            s = re.sub(r"\s+", " ", s)
+            return s
+
         for sec in matched_act.sections:
             resp = self._format_section_resp(sec, matched_act)
             all_sec_resps.append(resp)
             if sec_query:
-                # Compare normalized section numbers
                 norm_sec = sec.section_number.strip().lower()
                 norm_q = sec_query.strip().lower()
-                if norm_sec == norm_q or norm_sec.endswith(norm_q) or norm_q in norm_sec:
+                norm_sec_gen = normalize_order_sec(norm_sec)
+                norm_q_gen = normalize_order_sec(norm_q)
+                if (
+                    norm_sec == norm_q
+                    or norm_sec_gen == norm_q_gen
+                    or norm_q in norm_sec
+                    or norm_q_gen in norm_sec_gen
+                    or norm_sec in norm_q
+                    or norm_sec_gen in norm_q_gen
+                ):
                     matched_sec = resp
 
         return matched_act, matched_sec, all_sec_resps
