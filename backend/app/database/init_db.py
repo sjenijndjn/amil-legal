@@ -7,7 +7,7 @@ import math
 from datetime import date, datetime, timedelta, timezone
 from typing import Dict, List
 
-from sqlalchemy import text
+from sqlalchemy import or_, text
 from sqlalchemy.orm import Session
 
 from app.core.config import settings
