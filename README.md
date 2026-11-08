@@ -54,20 +54,14 @@ AMIL is designed with 15 integrated modules tailored to Indian legal research, l
 * **Hybrid Search Engine:** Combines keyword search with 768-dimensional semantic embeddings (`pgvector`) to find relevant statutes and judgments even when natural legal phrasing varies.
 * **Filter Controls:** Filter by jurisdiction (Supreme Court, High Courts, Tribunals), subject matter (Criminal, Constitutional, Commercial, Data Privacy, Arbitration), and date ranges.
 
-### 3. Bare Acts Statutory Library (`/bare-acts`)
-* **Complete Statutory Index:** Includes full text and indexed sections of:
-  * *The Bharatiya Nyaya Sanhita, 2023 (BNS)*
-  * *The Bharatiya Nagarik Suraksha Sanhita, 2023 (BNSS)*
-  * *The Bharatiya Sakshya Adhiniyam, 2023 (BSA)*
-  * *The Constitution of India (1950)*
-  * *The Digital Personal Data Protection Act, 2023 (DPDP Act)*
-  * *The Information Technology Act, 2000 (IT Act)*
-  * *The Indian Contract Act, 1872*
-  * *The Companies Act, 2013*
-  * *The Consumer Protection Act, 2019*
-  * *The Arbitration and Conciliation Act, 1996*
-  * *Historical Codes (IPC 1860, CrPC 1973, Indian Evidence Act 1872)*
-* **Section-to-Section Comparative Tables:** Instantly view side-by-side equivalents (e.g., Section 318 BNS ↔ Section 420 IPC; Section 63 BSA ↔ Section 65B IEA; Section 35 BNSS ↔ Section 41A CrPC).
+### 3. Bare Acts Statutory Library & Universal India Code Search (`/bare-acts`)
+* **Universal Statutory Discovery & Grounding Engine:** Search, browse, and read authentic provisions across **ALL Indian Central Enactments, Bare Acts, Orders, and Rules** from official Gazette of India and India Code (`www.indiacode.nic.in`):
+  * *Commercial & Civil Enactments:* Negotiable Instruments Act, 1881 (s. 138), Arbitration & Conciliation Act, 1996, Specific Relief Act, 1963, Code of Civil Procedure, 1908 (Orders & Rules), Transfer of Property Act, 1882, Limitation Act, 1963, Indian Partnership Act, 1932, Sale of Goods Act, 1930, Companies Act, 2013, Indian Contract Act, 1872, Insolvency and Bankruptcy Code, 2016 (IBC), Real Estate (Regulation and Development) Act, 2016 (RERA).
+  * *Criminal & Special Enactments:* Bharatiya Nyaya Sanhita, 2023 (BNS), Bharatiya Nagarik Suraksha Sanhita, 2023 (BNSS), Bharatiya Sakshya Adhiniyam, 2023 (BSA), Prevention of Money Laundering Act, 2002 (PMLA s. 45), NDPS Act, 1985 (s. 37), POCSO Act, 2012, Prevention of Corruption Act, 1988, IPC 1860, CrPC 1973, IEA 1872.
+  * *Social, Matrimonial & Administrative Law:* Constitution of India (1950), Hindu Marriage Act, 1955 (s. 13B), Protection of Women from Domestic Violence Act, 2005 (s. 12), Right to Information Act, 2005 (RTI), POSH Act, 2013, Consumer Protection Act, 2019, IT Act, 2000, DPDP Act, 2023, Motor Vehicles Act, 1988 (s. 166).
+* **On-Demand Statutory Synthesis & Dynamic Ingestion:** If a user searches an enactment or section not yet cached in the local database, the engine automatically extracts, verifies, and permanently persists the statutory provisions directly into PostgreSQL (`/api/v1/acts/lookup`).
+* **Section-to-Section Comparative Tables:** Instantly view side-by-side equivalents (e.g., Section 318 BNS ↔ Section 420 IPC; Section 63 BSA ↔ Section 65B IEA; Section 35 BNSS ↔ Section 41A CrPC; Section 103 BNS ↔ Section 302 IPC).
+* **Instant Provision Actions:** Quick discovery pills, one-click verbatim statutory clipboard copy, client-side bookmarking, and linked annotation note-taking.
 
 ### 4. Judicial Precedents & Case Law (`/case-laws`)
 * **Binding Precedent Indicators:** Identifies the precedential authority of decisions:
