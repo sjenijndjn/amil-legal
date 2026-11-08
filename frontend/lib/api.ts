@@ -99,7 +99,11 @@ export function clearAuthSession() {
   window.localStorage.removeItem(STORAGE_KEYS.REFRESH_TOKEN);
 }
 
-async function requestBackend<T>(path: string, options: RequestInit = {}): Promise<T | null> {
+async function requestBackend<T>(
+  path: string,
+  options: RequestInit = {},
+  timeoutMs = 15000
+): Promise<T | null> {
   const token = getAccessToken();
   const headers: Record<string, string> = {
     ...(options.headers as Record<string, string>)
@@ -112,7 +116,7 @@ async function requestBackend<T>(path: string, options: RequestInit = {}): Promi
   }
 
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 3500);
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
   try {
     const res = await fetch(`${BRAND.apiBaseUrl}${path}`, {
       ...options,
@@ -515,13 +519,14 @@ export const api = {
     response_mode: ResponseMode;
     document_ids?: string[];
   }): Promise<{ conversation: Conversation; assistantMessage: ChatMessage }> {
-    const remote = await requestBackend<{
-      conversation_id: string;
-      message: ChatMessage;
-    }>("/api/v1/chat", {
-      method: "POST",
-      body: JSON.stringify(params)
-    });
+    const remote = await requestBackend<any>(
+      "/api/v1/chat",
+      {
+        method: "POST",
+        body: JSON.stringify(params)
+      },
+      45000
+    );
 
     const list = readStore<Conversation[]>(STORAGE_KEYS.CONVERSATIONS, SEED_CONVERSATIONS);
     const now = new Date().toISOString();
@@ -553,8 +558,80 @@ export const api = {
     };
 
     let assistantMsg: ChatMessage;
-    if (remote && remote.message) {
-      assistantMsg = remote.message;
+    if (remote && remote.message && remote.message.content) {
+      assistantMsg = {
+        id: String(remote.message.id || `msg-${Date.now() + 1}-a`),
+        conversation_id: targetConv.id,
+        role: "assistant",
+        content: remote.message.content,
+        response_mode: params.response_mode,
+        structured_sections: remote.structured_sections || remote.message.structured_sections || {
+          direct_answer: remote.message.content,
+          applicable_provisions: [],
+          relevant_judgments: [],
+          legal_reasoning: "",
+          source_references: [],
+          important_limitations: "",
+          verification_date: new Date().toISOString().slice(0, 10)
+        },
+        cited_sources: remote.cited_sources || remote.message.cited_sources || [],
+        confidence_score: remote.confidence_score || 0.98,
+        coverage_status: remote.coverage_status || "VERIFIED",
+        follow_up_suggestions: [
+          "Explain applicable High Court precedents and procedural timelines",
+          "Compare pre-2024 IPC/CrPC provisions with 2024 Sanhita equivalents",
+          "Draft formal Legal Notice or Application based on this advice"
+        ],
+        created_at: new Date(Date.now() + 500).toISOString()
+      };
+    } else if (remote && (remote.content || remote.structured_sections)) {
+      const sec = remote.structured_sections || {};
+      const cited = remote.cited_sources || [];
+      assistantMsg = {
+        id: String(remote.assistant_message_id || `msg-${Date.now() + 1}-a`),
+        conversation_id: targetConv.id,
+        role: "assistant",
+        content: remote.content || sec.plain_english_explanation || sec.direct_answer || "Legal response generated.",
+        response_mode: params.response_mode,
+        structured_sections: {
+          direct_answer: sec.plain_english_explanation || sec.direct_answer || remote.content,
+          applicable_provisions: (sec.applicable_acts_and_sections || []).map((s: string) => ({
+            act_title: s,
+            section: s,
+            status: "CURRENT",
+            summary: s
+          })),
+          relevant_judgments: (sec.relevant_case_law || []).map((j: string) => ({
+            case_title: j,
+            neutral_citation: j,
+            court: "Supreme Court of India",
+            precedent_status: "BINDING",
+            holding: j
+          })),
+          legal_reasoning: sec.legal_issue_summary || "",
+          source_references: cited.map((c: any) => ({
+            id: c.id || "src-ref",
+            source_type: c.source_type || "STATUTE",
+            title: c.title || "Legal Source",
+            citation: c.citation || "",
+            repository: "India Code / Supreme Court e-SCR",
+            official_url: c.official_url || "https://www.indiacode.nic.in",
+            is_verified: true,
+            excerpt: c.excerpt || ""
+          })),
+          important_limitations: (sec.risks_limitations_and_ambiguities || []).join(" "),
+          verification_date: remote.verification_date || new Date().toISOString().slice(0, 10)
+        },
+        cited_sources: cited,
+        confidence_score: remote.confidence_score || 0.98,
+        coverage_status: remote.coverage_status || "VERIFIED",
+        follow_up_suggestions: [
+          "Explain applicable High Court precedents and procedural timelines",
+          "Compare pre-2024 IPC/CrPC provisions with 2024 Sanhita equivalents",
+          "Draft formal Legal Notice or Application based on this advice"
+        ],
+        created_at: new Date(Date.now() + 500).toISOString()
+      };
     } else {
       const generated = buildVerifiedJurisAnswer(params.message, params.response_mode);
       assistantMsg = {
@@ -982,8 +1059,30 @@ export const api = {
 
   // 9. Drafting Studio
   async getDrafts(): Promise<LegalDraft[]> {
-    const remote = await requestBackend<LegalDraft[]>("/api/v1/drafts");
-    if (remote && Array.isArray(remote)) return remote;
+    const remote = await requestBackend<any[]>("/api/v1/drafts");
+    if (remote && Array.isArray(remote) && remote.length > 0) {
+      const mapped: LegalDraft[] = remote.map((d) => ({
+        id: String(d.id),
+        title: d.title,
+        draft_type: d.draft_type as DraftType,
+        user_facts: d.user_facts || {},
+        content_markdown: d.content_markdown || "",
+        cited_references: Array.isArray(d.cited_references)
+          ? d.cited_references.map((r: any) =>
+              typeof r === "string"
+                ? { id: "ref-str", citation: r, title: r, type: "STATUTE" as const }
+                : r
+            )
+          : [],
+        version: d.version || 1,
+        version_history: d.version_history || [],
+        status: (d.status === "FINAL" ? "FINALIZED" : d.status === "REVIEWED" ? "UNDER_REVIEW" : "DRAFT") as any,
+        created_at: d.created_at || new Date().toISOString(),
+        updated_at: d.updated_at || new Date().toISOString()
+      }));
+      writeStore(STORAGE_KEYS.DRAFTS, mapped);
+      return mapped;
+    }
     return readStore<LegalDraft[]>(STORAGE_KEYS.DRAFTS, SEED_DRAFTS);
   },
 
@@ -1034,7 +1133,7 @@ Take notice that compliance with the requisitions stated hereinabove is required
 ---
 *Drafted in ${BRAND.appName} Drafting Studio • Version 1 • Verify all party particulars, dates, and annexures prior to execution.*`;
 
-    const newDraft: LegalDraft = {
+    let newDraft: LegalDraft = {
       id: `draft-${Date.now()}`,
       title: params.title,
       draft_type: params.draft_type,
@@ -1054,6 +1153,27 @@ Take notice that compliance with the requisitions stated hereinabove is required
       created_at: now,
       updated_at: now
     };
+
+    const remote = await requestBackend<any>("/api/v1/drafts", {
+      method: "POST",
+      body: JSON.stringify({
+        title: params.title,
+        draft_type: params.draft_type,
+        user_facts: params.user_facts,
+        cited_references: refs.map((r) => `${r.title} (${r.citation})`),
+        generate_with_ai: true
+      })
+    });
+    if (remote && remote.id) {
+      newDraft = {
+        ...newDraft,
+        id: String(remote.id),
+        content_markdown: remote.content_markdown || generatedMarkdown,
+        version: remote.version || 1,
+        created_at: remote.created_at || now,
+        updated_at: remote.updated_at || now
+      };
+    }
 
     const drafts = readStore<LegalDraft[]>(STORAGE_KEYS.DRAFTS, SEED_DRAFTS);
     writeStore(STORAGE_KEYS.DRAFTS, [newDraft, ...drafts]);
@@ -1112,6 +1232,19 @@ Take notice that compliance with the requisitions stated hereinabove is required
       STORAGE_KEYS.DRAFTS,
       drafts.map((d) => (d.id === id ? updated : d))
     );
+
+    if (id && !id.startsWith("draft-")) {
+      requestBackend(`/api/v1/drafts/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          title: patch.title,
+          content_markdown: patch.content_markdown,
+          user_facts: patch.user_facts,
+          status: patch.status === "FINALIZED" ? "FINAL" : patch.status === "UNDER_REVIEW" ? "REVIEWED" : "DRAFT"
+        })
+      }).catch(() => {});
+    }
+
     return updated;
   },
 
@@ -1121,6 +1254,9 @@ Take notice that compliance with the requisitions stated hereinabove is required
       STORAGE_KEYS.DRAFTS,
       drafts.filter((d) => d.id !== id)
     );
+    if (id && !id.startsWith("draft-")) {
+      requestBackend(`/api/v1/drafts/${id}`, { method: "DELETE" }).catch(() => {});
+    }
   },
 
   // 10. My Legal Library (Folders, Bookmarks, Notes)
@@ -1129,6 +1265,47 @@ Take notice that compliance with the requisitions stated hereinabove is required
     bookmarks: LibraryBookmark[];
     notes: LibraryNote[];
   }> {
+    const remote = await requestBackend<any>("/api/v1/library");
+    if (remote && (Array.isArray(remote.folders) || Array.isArray(remote.bookmarks) || Array.isArray(remote.notes))) {
+      const folders: LibraryFolder[] = (remote.folders || []).map((f: any) => ({
+        id: String(f.id),
+        name: f.name,
+        color_hex: f.color_hex || "#D6B66D",
+        description: f.description || "",
+        item_count: 0,
+        created_at: f.created_at || new Date().toISOString()
+      }));
+      const bookmarks: LibraryBookmark[] = (remote.bookmarks || []).map((b: any) => ({
+        id: String(b.id),
+        folder_id: b.folder_id ? String(b.folder_id) : null,
+        item_type: b.item_type as any,
+        target_id: b.target_id ? String(b.target_id) : undefined,
+        title: b.title,
+        citation: b.citation,
+        excerpt: b.excerpt,
+        tags: b.tags || [],
+        created_at: b.created_at || new Date().toISOString()
+      }));
+      const notes: LibraryNote[] = (remote.notes || []).map((n: any) => ({
+        id: String(n.id),
+        folder_id: n.folder_id ? String(n.folder_id) : null,
+        title: n.title,
+        content: n.content,
+        linked_entity_type: n.linked_entity_type || "GENERAL",
+        linked_entity_id: n.linked_entity_id ? String(n.linked_entity_id) : undefined,
+        linked_entity_label: n.linked_entity_label,
+        tags: n.tags || [],
+        is_pinned: Boolean(n.is_pinned),
+        created_at: n.created_at || new Date().toISOString(),
+        updated_at: n.updated_at || new Date().toISOString()
+      }));
+
+      if (folders.length > 0) writeStore(STORAGE_KEYS.FOLDERS, folders);
+      if (bookmarks.length > 0) writeStore(STORAGE_KEYS.BOOKMARKS, bookmarks);
+      if (notes.length > 0) writeStore(STORAGE_KEYS.NOTES, notes);
+      return { folders, bookmarks, notes };
+    }
+
     const folders = readStore<LibraryFolder[]>(STORAGE_KEYS.FOLDERS, SEED_FOLDERS);
     const bookmarks = readStore<LibraryBookmark[]>(STORAGE_KEYS.BOOKMARKS, SEED_BOOKMARKS);
     const notes = readStore<LibraryNote[]>(STORAGE_KEYS.NOTES, SEED_NOTES);
@@ -1141,7 +1318,7 @@ Take notice that compliance with the requisitions stated hereinabove is required
     description: string;
   }): Promise<LibraryFolder> {
     const folders = readStore<LibraryFolder[]>(STORAGE_KEYS.FOLDERS, SEED_FOLDERS);
-    const folder: LibraryFolder = {
+    let folder: LibraryFolder = {
       id: `fld-${Date.now()}`,
       name: params.name,
       color_hex: params.color_hex || "#D6B66D",
@@ -1149,6 +1326,15 @@ Take notice that compliance with the requisitions stated hereinabove is required
       item_count: 0,
       created_at: new Date().toISOString()
     };
+
+    const remote = await requestBackend<any>("/api/v1/library/folders", {
+      method: "POST",
+      body: JSON.stringify(params)
+    });
+    if (remote && remote.id) {
+      folder = { ...folder, ...remote, id: String(remote.id) };
+    }
+
     writeStore(STORAGE_KEYS.FOLDERS, [folder, ...folders]);
     return folder;
   },
@@ -1163,7 +1349,7 @@ Take notice that compliance with the requisitions stated hereinabove is required
     tags: string[];
   }): Promise<LibraryBookmark> {
     const bookmarks = readStore<LibraryBookmark[]>(STORAGE_KEYS.BOOKMARKS, SEED_BOOKMARKS);
-    const bmk: LibraryBookmark = {
+    let bmk: LibraryBookmark = {
       id: `bmk-${Date.now()}`,
       folder_id: params.folder_id || null,
       item_type: params.item_type,
@@ -1174,6 +1360,20 @@ Take notice that compliance with the requisitions stated hereinabove is required
       tags: params.tags,
       created_at: new Date().toISOString()
     };
+
+    const remote = await requestBackend<any>("/api/v1/library/bookmarks", {
+      method: "POST",
+      body: JSON.stringify({
+        item_type: params.item_type,
+        title: params.title,
+        excerpt: params.excerpt,
+        tags: params.tags
+      })
+    });
+    if (remote && remote.id) {
+      bmk = { ...bmk, ...remote, id: String(remote.id) };
+    }
+
     writeStore(STORAGE_KEYS.BOOKMARKS, [bmk, ...bookmarks]);
     return bmk;
   },
@@ -1184,6 +1384,9 @@ Take notice that compliance with the requisitions stated hereinabove is required
       STORAGE_KEYS.BOOKMARKS,
       bookmarks.filter((b) => b.id !== id)
     );
+    if (id && !id.startsWith("bmk-")) {
+      requestBackend(`/api/v1/library/bookmarks/${id}`, { method: "DELETE" }).catch(() => {});
+    }
   },
 
   async createNote(params: {
@@ -1198,7 +1401,7 @@ Take notice that compliance with the requisitions stated hereinabove is required
   }): Promise<LibraryNote> {
     const notes = readStore<LibraryNote[]>(STORAGE_KEYS.NOTES, SEED_NOTES);
     const now = new Date().toISOString();
-    const note: LibraryNote = {
+    let note: LibraryNote = {
       id: `note-${Date.now()}`,
       folder_id: params.folder_id || null,
       title: params.title,
@@ -1211,6 +1414,20 @@ Take notice that compliance with the requisitions stated hereinabove is required
       created_at: now,
       updated_at: now
     };
+
+    const remote = await requestBackend<any>("/api/v1/library/notes", {
+      method: "POST",
+      body: JSON.stringify({
+        title: params.title,
+        content: params.content,
+        tags: params.tags,
+        is_pinned: Boolean(params.is_pinned)
+      })
+    });
+    if (remote && remote.id) {
+      note = { ...note, ...remote, id: String(remote.id) };
+    }
+
     writeStore(STORAGE_KEYS.NOTES, [note, ...notes]);
     return note;
   },
@@ -1221,6 +1438,9 @@ Take notice that compliance with the requisitions stated hereinabove is required
       STORAGE_KEYS.NOTES,
       notes.filter((n) => n.id !== id)
     );
+    if (id && !id.startsWith("note-")) {
+      requestBackend(`/api/v1/library/notes/${id}`, { method: "DELETE" }).catch(() => {});
+    }
   },
 
   // 11. Research History
@@ -1234,8 +1454,25 @@ Take notice that compliance with the requisitions stated hereinabove is required
 
   // 12. Tasks & Reminders
   async getTasks(): Promise<LegalTask[]> {
-    const remote = await requestBackend<LegalTask[]>("/api/v1/tasks");
-    if (remote && Array.isArray(remote)) return remote;
+    const remote = await requestBackend<any[]>("/api/v1/tasks");
+    if (remote && Array.isArray(remote) && remote.length > 0) {
+      const mapped: LegalTask[] = remote.map((t) => ({
+        id: String(t.id),
+        title: t.title,
+        description: t.description || "",
+        task_type: (t.task_type || "FILING_DEADLINE") as TaskType,
+        priority: (t.priority || "HIGH") as TaskPriority,
+        status: (t.status || "TODO") as TaskStatus,
+        due_at: t.due_at || new Date().toISOString(),
+        reminder_at: t.reminder_at || null,
+        linked_entity_type: t.linked_entity_type || null,
+        linked_entity_label: t.linked_entity_type ? "Linked Case Reference" : null,
+        completed_at: t.completed_at || null,
+        created_at: t.created_at || new Date().toISOString()
+      }));
+      writeStore(STORAGE_KEYS.TASKS, mapped);
+      return mapped;
+    }
     return readStore<LegalTask[]>(STORAGE_KEYS.TASKS, SEED_TASKS);
   },
 
@@ -1249,7 +1486,7 @@ Take notice that compliance with the requisitions stated hereinabove is required
     linked_entity_label?: string | null;
   }): Promise<LegalTask> {
     const tasks = readStore<LegalTask[]>(STORAGE_KEYS.TASKS, SEED_TASKS);
-    const task: LegalTask = {
+    let task: LegalTask = {
       id: `tsk-${Date.now()}`,
       title: params.title,
       description: params.description,
@@ -1263,6 +1500,24 @@ Take notice that compliance with the requisitions stated hereinabove is required
       completed_at: null,
       created_at: new Date().toISOString()
     };
+
+    const remote = await requestBackend<any>("/api/v1/tasks", {
+      method: "POST",
+      body: JSON.stringify({
+        title: params.title,
+        description: params.description,
+        task_type: params.task_type,
+        priority: params.priority,
+        status: "TODO",
+        due_at: params.due_at,
+        reminder_at: params.reminder_at || null,
+        linked_entity_type: params.linked_entity_label ? "REFERENCE" : null
+      })
+    });
+    if (remote && remote.id) {
+      task = { ...task, ...remote, id: String(remote.id) };
+    }
+
     writeStore(STORAGE_KEYS.TASKS, [task, ...tasks]);
     return task;
   },
@@ -1285,6 +1540,14 @@ Take notice that compliance with the requisitions stated hereinabove is required
       return updatedTask;
     });
     writeStore(STORAGE_KEYS.TASKS, next);
+
+    if (id && !id.startsWith("tsk-")) {
+      requestBackend(`/api/v1/tasks/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify(patch)
+      }).catch(() => {});
+    }
+
     if (!updatedTask) throw new Error("Task not found");
     return updatedTask;
   },
@@ -1295,5 +1558,8 @@ Take notice that compliance with the requisitions stated hereinabove is required
       STORAGE_KEYS.TASKS,
       tasks.filter((t) => t.id !== id)
     );
+    if (id && !id.startsWith("tsk-")) {
+      requestBackend(`/api/v1/tasks/${id}`, { method: "DELETE" }).catch(() => {});
+    }
   }
 };

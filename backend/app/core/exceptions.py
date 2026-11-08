@@ -46,6 +46,15 @@ class ResourceNotFoundError(AmilError):
         )
 
 
+class ConflictError(AmilError):
+    def __init__(self, detail: str = "Resource conflict") -> None:
+        super().__init__(
+            detail=detail,
+            status_code=status.HTTP_409_CONFLICT,
+            error_code="RESOURCE_CONFLICT",
+        )
+
+
 class ConsentRequiredError(AmilError):
     def __init__(
         self,

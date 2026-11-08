@@ -66,6 +66,7 @@ class ChatCompletionResponse(BaseModel):
     coverage_status: str
     verification_date: str
     ai_provider_used: str
+    message: Optional[MessageResponse] = None
 
 
 class ConversationSummary(BaseModel):

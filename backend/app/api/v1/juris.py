@@ -139,6 +139,7 @@ def juris_chat(
         coverage_status=str(rag_out["coverage_status"]),
         verification_date=str(rag_out["verification_date"]),
         ai_provider_used=str(rag_out["ai_provider_used"]),
+        message=MessageResponse.model_validate(assistant_msg),
     )
 
 

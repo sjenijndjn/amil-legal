@@ -57,7 +57,7 @@ class Settings:
         # Personalized owner defaults
         self.OWNER_DEFAULT_NAME: str = os.getenv("OWNER_DEFAULT_NAME", "Amil Bhatt")
         self.OWNER_DEFAULT_EMAIL: str = os.getenv("OWNER_DEFAULT_EMAIL", "amil@amillegal.in")
-        self.OWNER_DEFAULT_PASSWORD: str = os.getenv("OWNER_DEFAULT_PASSWORD", "AmilLegal#2026")
+        self.OWNER_DEFAULT_PASSWORD: str = os.getenv("OWNER_DEFAULT_PASSWORD", "AmilLegal#2025")
 
         # Database
         self.DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///./amil_legal.db")
