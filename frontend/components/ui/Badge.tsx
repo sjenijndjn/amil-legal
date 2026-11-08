@@ -12,19 +12,19 @@ export function Badge({
   className?: string;
 }) {
   const styles: Record<string, string> = {
-    default: "bg-navy-secondary text-ivory-secondary border-border-subtle",
-    gold: "bg-gold/15 text-gold border-gold/40",
-    success: "bg-status-success/15 text-status-success border-status-success/40",
-    error: "bg-status-error/15 text-status-error border-status-error/40",
-    warning: "bg-amber-500/15 text-amber-400 border-amber-500/40",
-    outline: "bg-transparent text-ivory-secondary border-border-subtle",
-    mono: "bg-navy-primary text-gold border-border-subtle font-mono"
+    default: "bg-white/[0.04] text-slate-300 border-white/10 backdrop-blur-md",
+    gold: "bg-gold/15 text-gold border-gold/40 backdrop-blur-md shadow-[0_0_12px_rgba(214,182,109,0.15)]",
+    success: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30 backdrop-blur-md shadow-[0_0_12px_rgba(16,185,129,0.15)]",
+    error: "bg-rose-500/15 text-rose-300 border-rose-500/30 backdrop-blur-md shadow-[0_0_12px_rgba(244,63,94,0.15)]",
+    warning: "bg-amber-500/15 text-amber-300 border-amber-500/30 backdrop-blur-md shadow-[0_0_12px_rgba(245,158,11,0.15)]",
+    outline: "bg-transparent text-slate-300 border-white/10 backdrop-blur-md",
+    mono: "bg-slate-950/60 text-gold border-gold/30 font-mono backdrop-blur-md"
   };
 
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-md border px-2.5 py-0.5 text-xs font-medium",
+        "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-medium transition-colors",
         styles[variant],
         className
       )}
@@ -37,20 +37,20 @@ export function Badge({
 export function PrecedentBadge({ status }: { status: PrecedentStatus }) {
   switch (status) {
     case "BINDING":
-      return <Badge variant="success">BINDING PRECEDENT</Badge>;
+      return <Badge variant="success">● BINDING PRECEDENT</Badge>;
     case "PERSUASIVE":
-      return <Badge variant="gold">PERSUASIVE AUTHORITY</Badge>;
+      return <Badge variant="gold">● PERSUASIVE AUTHORITY</Badge>;
     case "DISTINGUISHED":
-      return <Badge variant="warning">DISTINGUISHED</Badge>;
+      return <Badge variant="warning">▲ DISTINGUISHED</Badge>;
     case "OVERRULED":
-      return <Badge variant="error">OVERRULED — DO NOT CITE AS GOOD LAW</Badge>;
+      return <Badge variant="error">✕ OVERRULED — DO NOT CITE</Badge>;
     case "REVERSED":
-      return <Badge variant="error">REVERSED ON APPEAL</Badge>;
+      return <Badge variant="error">✕ REVERSED ON APPEAL</Badge>;
     case "STAYED":
-      return <Badge variant="warning">OPERATION STAYED</Badge>;
+      return <Badge variant="warning">⏸ OPERATION STAYED</Badge>;
     case "PENDING_VERIFICATION":
     default:
-      return <Badge variant="default">PENDING VERIFICATION</Badge>;
+      return <Badge variant="default">⏳ PENDING VERIFICATION</Badge>;
   }
 }
 

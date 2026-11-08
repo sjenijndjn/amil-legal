@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
@@ -9,14 +10,11 @@ import {
   Search,
   BookOpen,
   Scale,
-  FileSearch,
+  FileText,
   PenTool,
-  Library,
-  History,
-  CheckSquare,
-  User,
+  Bookmark,
+  Calendar,
   Settings,
-  HelpCircle,
   LogOut,
   ChevronLeft,
   ChevronRight,
@@ -36,21 +34,15 @@ export interface NavItem {
 
 export const MAIN_NAV_ITEMS: NavItem[] = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { label: "Ask Juris", href: "/juris", icon: Sparkles, badge: "AI" },
+  { label: "Juris – Legal AI", href: "/juris", icon: Sparkles },
   { label: "Legal Research", href: "/research", icon: Search },
   { label: "Bare Acts", href: "/bare-acts", icon: BookOpen },
   { label: "Case Laws", href: "/case-laws", icon: Scale },
-  { label: "Document Analyzer", href: "/documents", icon: FileSearch },
+  { label: "Documents & OCR", href: "/documents", icon: FileText },
   { label: "Drafting Studio", href: "/drafting", icon: PenTool },
-  { label: "My Legal Library", href: "/library", icon: Library },
-  { label: "Research History", href: "/history", icon: History },
-  { label: "Tasks and Reminders", href: "/tasks", icon: CheckSquare }
-];
-
-export const BOTTOM_NAV_ITEMS: NavItem[] = [
-  { label: "Profile", href: "/profile", icon: User },
-  { label: "Settings", href: "/settings", icon: Settings },
-  { label: "Help and Support", href: "/help", icon: HelpCircle }
+  { label: "My Library", href: "/library", icon: Bookmark },
+  { label: "Tasks & Reminders", href: "/tasks", icon: Calendar },
+  { label: "Settings", href: "/settings", icon: Settings }
 ];
 
 export function Sidebar({
@@ -83,7 +75,11 @@ export function Sidebar({
     items.map((item) => {
       const Icon = item.icon;
       const isCollapsed = collapsed && !forceExpanded;
-      const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+      const isActive =
+        item.href === "/dashboard"
+          ? pathname === "/dashboard"
+          : pathname === item.href || pathname.startsWith(`${item.href}/`);
+
       return (
         <Link
           key={item.href}
@@ -91,23 +87,23 @@ export function Sidebar({
           onClick={onCloseMobile}
           title={isCollapsed ? item.label : undefined}
           className={cn(
-            "group flex items-center gap-3 rounded-lg px-3 py-2.5 min-h-[42px] text-sm font-medium transition-all",
+            "group relative flex items-center gap-3.5 rounded-xl px-3.5 py-2.5 min-h-[44px] text-sm font-medium transition-all duration-200",
             isActive
-              ? "bg-gold/15 text-gold border border-gold/40 shadow-sm"
-              : "text-ivory-secondary hover:bg-navy-card hover:text-ivory-primary border border-transparent"
+              ? "glass-nav-active text-white font-semibold"
+              : "text-slate-400 hover:text-slate-100 hover:bg-white/[0.04] border border-transparent"
           )}
         >
           <Icon
             className={cn(
-              "h-4 w-4 shrink-0 transition-colors",
-              isActive ? "text-gold" : "text-ivory-secondary group-hover:text-gold"
+              "h-4 w-4 shrink-0 transition-colors duration-200",
+              isActive ? "text-gold drop-shadow-[0_0_8px_rgba(214,182,109,0.5)]" : "text-slate-400 group-hover:text-gold"
             )}
           />
           {!isCollapsed && (
-            <span className="flex-1 truncate">{item.label}</span>
+            <span className="flex-1 truncate tracking-tight">{item.label}</span>
           )}
           {!isCollapsed && item.badge && (
-            <span className="rounded bg-gold/20 px-1.5 py-0.5 font-mono text-[10px] font-semibold text-gold">
+            <span className="rounded-full bg-gold/20 px-2 py-0.5 font-mono text-[10px] font-semibold text-gold border border-gold/30">
               {item.badge}
             </span>
           )}
@@ -118,29 +114,30 @@ export function Sidebar({
   const buildSidebarContent = (forceExpanded: boolean) => {
     const isCollapsed = collapsed && !forceExpanded;
     return (
-      <div className="flex h-full flex-col bg-navy-secondary border-r border-border-subtle select-none pt-safe pb-safe">
+      <div className="flex h-full flex-col bg-[#070D18]/80 backdrop-blur-2xl border-r border-white/[0.06] select-none pt-safe pb-safe shadow-2xl">
         {/* Brand Header */}
-        <div className="flex h-16 shrink-0 items-center justify-between px-4 border-b border-border-subtle">
+        <div className="flex h-20 shrink-0 items-center justify-between px-5 border-b border-white/[0.05]">
           <Link
             href="/dashboard"
             onClick={onCloseMobile}
             className="flex items-center gap-3 overflow-hidden"
           >
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-gold/50 bg-navy-card font-heading text-base font-bold text-gold shadow-gold">
-              {BRAND.appName.slice(0, 1)}
+            {/* Scales Logo with Golden Ambient Glow */}
+            <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-400/20 via-amber-500/10 to-transparent border border-gold/40 shadow-[0_0_15px_rgba(214,182,109,0.2)]">
+              <Scale className="h-5 w-5 text-gold" />
             </div>
             {!isCollapsed && (
               <div className="min-w-0">
-                <div className="flex items-center gap-2">
-                  <span className="font-heading text-base font-bold tracking-tight text-ivory-primary">
+                <div className="flex items-center gap-1.5">
+                  <span className="font-heading text-lg font-bold tracking-tight text-white">
                     {BRAND.appName}
                   </span>
-                  <span className="rounded border border-gold/40 bg-gold/10 px-1.5 py-0.2 font-mono text-[10px] text-gold">
-                    INDIA
+                  <span className="flex h-4 items-center rounded border border-white/10 bg-white/5 px-1 font-mono text-[9px] text-slate-400">
+                    ⌘K
                   </span>
                 </div>
-                <p className="truncate text-[11px] text-ivory-secondary">
-                  {BRAND.assistantTitle}
+                <p className="truncate text-[11px] text-slate-400 font-normal">
+                  Legal Intelligence Platform
                 </p>
               </div>
             )}
@@ -149,7 +146,7 @@ export function Sidebar({
           <button
             type="button"
             onClick={onToggleCollapse}
-            className="hidden lg:flex h-8 w-8 items-center justify-center rounded-md border border-border-subtle text-ivory-secondary hover:border-gold hover:text-gold transition-colors"
+            className="hidden lg:flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/[0.02] text-slate-400 hover:border-gold/40 hover:text-gold hover:bg-white/[0.05] transition-all"
             aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
           >
             {isCollapsed ? (
@@ -162,44 +159,56 @@ export function Sidebar({
           <button
             type="button"
             onClick={onCloseMobile}
-            className="lg:hidden flex h-9 w-9 items-center justify-center rounded-md border border-border-subtle text-ivory-secondary hover:text-ivory-primary"
+            className="lg:hidden flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-slate-400 hover:text-white"
             aria-label="Close navigation drawer"
           >
             <X className="h-4 w-4" />
           </button>
         </div>
 
-        {/* Scrollable Middle Navigation (10 Modules) */}
-        <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-3 py-4">
-          {!isCollapsed && (
-            <p className="px-3 pb-2 font-mono text-[10px] uppercase tracking-wider text-ivory-secondary">
-              Legal Workspace (10 Modules)
-            </p>
-          )}
+        {/* Navigation List */}
+        <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-3 py-4 space-y-1">
           <nav className="space-y-1" aria-label="Main navigation">
             {renderLinks(MAIN_NAV_ITEMS, forceExpanded)}
           </nav>
         </div>
 
-        {/* Bottom Navigation (4 Items) */}
-        <div className="shrink-0 border-t border-border-subtle px-3 py-3">
-          {!isCollapsed && (
-            <p className="px-3 pb-1.5 font-mono text-[10px] uppercase tracking-wider text-ivory-secondary">
-              Account & System
-            </p>
-          )}
-          <nav className="space-y-1" aria-label="Secondary navigation">
-            {renderLinks(BOTTOM_NAV_ITEMS, forceExpanded)}
-            <button
-              type="button"
-              onClick={handleSignOut}
-              title={isCollapsed ? "Sign Out" : undefined}
-              className="w-full group flex items-center gap-3 rounded-lg px-3 py-2.5 min-h-[42px] text-sm font-medium text-ivory-secondary hover:bg-status-error/15 hover:text-status-error border border-transparent transition-all"
-            >
-              <LogOut className="h-4 w-4 shrink-0 text-ivory-secondary group-hover:text-status-error" />
-              {!isCollapsed && <span className="truncate">Sign Out</span>}
-            </button>
-          </nav>
+        {/* Bottom Card / Badge (Indian LegalTech Powered by AI) */}
+        {!isCollapsed && (
+          <div className="p-3 shrink-0">
+            <div className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-gradient-to-b from-white/[0.05] to-white/[0.01] p-3 text-center shadow-lg backdrop-blur-xl">
+              <div className="relative mx-auto mb-2 flex h-14 w-full items-center justify-center overflow-hidden rounded-xl bg-slate-950/60 border border-white/5">
+                {/* Supreme court graphic illustration */}
+                <Image
+                  src="/sidebar-sc-badge.jpg"
+                  alt="Supreme Court of India"
+                  width={140}
+                  height={50}
+                  className="object-contain opacity-90 transition-opacity hover:opacity-100"
+                  unoptimized
+                />
+              </div>
+              <p className="font-heading text-xs font-semibold text-white tracking-tight">
+                Indian LegalTech
+              </p>
+              <p className="text-[10px] text-slate-400 font-medium">
+                Powered by AI
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Sign Out Button */}
+        <div className="shrink-0 border-t border-white/[0.05] px-3 py-2.5">
+          <button
+            type="button"
+            onClick={handleSignOut}
+            title={isCollapsed ? "Sign Out" : undefined}
+            className="w-full group flex items-center gap-3 rounded-xl px-3.5 py-2 text-xs font-medium text-slate-400 hover:bg-rose-500/10 hover:text-rose-400 border border-transparent transition-all"
+          >
+            <LogOut className="h-4 w-4 shrink-0 text-slate-400 group-hover:text-rose-400" />
+            {!isCollapsed && <span className="truncate">Sign Out</span>}
+          </button>
         </div>
       </div>
     );
@@ -210,18 +219,18 @@ export function Sidebar({
       {/* Desktop Sidebar */}
       <aside
         className={cn(
-          "hidden lg:block shrink-0 transition-all duration-200",
+          "hidden lg:block shrink-0 transition-all duration-300 z-20",
           collapsed ? "w-20" : "w-64"
         )}
       >
         {buildSidebarContent(false)}
       </aside>
 
-      {/* Mobile Drawer (Always expanded on iPhone / Android) */}
+      {/* Mobile Drawer */}
       {mobileOpen && (
         <div className="fixed inset-0 z-50 flex lg:hidden">
           <div
-            className="fixed inset-0 bg-black/70 backdrop-blur-xs"
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity"
             onClick={onCloseMobile}
           />
           <aside className="relative z-10 w-72 max-w-[86vw] h-[100dvh]">
