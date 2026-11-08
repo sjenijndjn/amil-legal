@@ -962,8 +962,13 @@ class StatutoryDiscoveryService:
             .first()
         )
 
-        if not matched_act and sec_query:
-            # Maybe query was just "Section 138" without act name
+        has_specific_act = bool(
+            act_query
+            and act_query.strip()
+            and act_query.strip().lower() != (sec_query or "").strip().lower()
+        )
+        if not matched_act and sec_query and not has_specific_act:
+            # Only if the user did NOT specify an act name (e.g. naked query "Section 138")
             sec_rec = (
                 self.db.query(LegalSection)
                 .filter(LegalSection.section_number.ilike(f"%{sec_query.strip()}%"))
