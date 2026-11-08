@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-inter: "Inter";
+  --font-manrope: "Manrope";
+  --font-mono: "IBM Plex Mono";
+}
+
+:root,
+[data-theme="dark"] {
+  --bg-primary: #0B1220;
+  --bg-secondary: #111C2E;
+  --bg-card: #162237;
+  --bg-hover: #1D2C46;
+  --accent-gold: #D6B66D;
+  --accent-gold-muted: rgba(214, 182, 109, 0.14);
+  --text-primary: #F5F3EE;
+  --text-secondary: #A3ADBC;
+  --border-subtle: #26344A;
+  --status-success: #3BAA83;
+  --status-error: #E36D70;
+}
+
+[data-theme="light"] {
+  --bg-primary: #F8F6F1;
+  --bg-secondary: #EFECE4;
+  --bg-card: #FFFFFF;
+  --bg-hover: #E6E1D6;
+  --accent-gold: #9E7B2F;
+  --accent-gold-muted: rgba(158, 123, 47, 0.12);
+  --text-primary: #111C2E;
+  --text-secondary: #4B586E;
+  --border-subtle: #D5CFC2;
+  --status-success: #248461;
+  --status-error: #C84548;
+}
+
+@layer base {
+  html,
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-inter), Inter, system-ui, -apple-system, sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    overscroll-behavior-y: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-manrope), Manrope, system-ui, -apple-system, sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  code,
+  pre,
+  .font-citation {
+    font-family: var(--font-mono), "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  }
+
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    touch-action: manipulation;
+  }
+}
+
+/* Prevent iOS Safari from auto-zooming the viewport when tapping form inputs on mobile */
+@media screen and (max-width: 767px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="date"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* iPhone Notch / Dynamic Island & Android Gesture Bar Safe-Area Utilities */
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.pl-safe {
+  padding-left: env(safe-area-inset-left, 0px);
+}
+
+.pr-safe {
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom sleek scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-gold);
+}
+
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}

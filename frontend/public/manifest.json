@@ -1,0 +1,19 @@
+{
+  "name": "AMIL — Juris Legal Intelligence",
+  "short_name": "AMIL",
+  "description": "Personalized Indian Legal Intelligence Platform & Juris AI — Built for Amil Bhatt.",
+  "start_url": "/dashboard",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0B1220",
+  "theme_color": "#0B1220",
+  "icons": [
+    {
+      "src": "/logo-amil.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
