@@ -385,7 +385,7 @@ function ResearchEngineInner() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 rounded-md border border-gold/40 bg-gold/10 px-3 py-1 text-xs font-semibold text-gold hover:bg-gold hover:text-navy-primary"
                       >
-                        <span>e-SCR Portal</span>
+                        <span>{jud.official_source_url.includes("legal-research") ? "Bharat Courts" : "e-SCR Portal"}</span>
                         <ExternalLink className="h-3 w-3" />
                       </a>
                     </div>

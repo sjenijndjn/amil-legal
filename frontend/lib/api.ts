@@ -17,6 +17,9 @@ import {
 import {
   AuditHistoryEntry,
   AuthTokenResponse,
+  BharatCourtAttribution,
+  BharatCourtJudgment,
+  BharatCourtsSearchResponse,
   ChatMessage,
   CitedSource,
   Conversation,
@@ -951,6 +954,7 @@ export const api = {
     q?: string;
     precedent_status?: PrecedentStatus | "ALL";
     court?: string;
+    judge?: string;
     subject?: string;
   }): Promise<Judgment[]> {
     const q = (filters?.q || "").trim().toLowerCase();
@@ -963,6 +967,12 @@ export const api = {
         return false;
       }
       if (filters?.court && filters.court !== "ALL" && !j.court.includes(filters.court)) {
+        return false;
+      }
+      if (
+        filters?.judge &&
+        !j.judges.some((jg) => jg.toLowerCase().includes(filters.judge!.toLowerCase()))
+      ) {
         return false;
       }
       if (
@@ -1712,5 +1722,69 @@ Take notice that compliance with the requisitions stated hereinabove is required
     if (id && !id.startsWith("tsk-")) {
       requestBackend(`/api/v1/tasks/${id}`, { method: "DELETE" }).catch(() => {});
     }
+  },
+
+  async searchBharatCourts(params: {
+    q?: string;
+    court?: string;
+    judge?: string;
+    party?: string;
+    citation?: string;
+    cnr?: string;
+    year?: number;
+    year_from?: number;
+    year_to?: number;
+    source?: "archive" | "live" | "auto";
+    page?: number;
+    limit?: number;
+  }): Promise<BharatCourtsSearchResponse> {
+    const qParams = new URLSearchParams();
+    if (params.q) qParams.set("q", params.q);
+    if (params.court && params.court !== "ALL") qParams.set("court", params.court);
+    if (params.judge) qParams.set("judge", params.judge);
+    if (params.party) qParams.set("party", params.party);
+    if (params.citation) qParams.set("citation", params.citation);
+    if (params.cnr) qParams.set("cnr", params.cnr);
+    if (params.year) qParams.set("year", String(params.year));
+    if (params.year_from) qParams.set("year_from", String(params.year_from));
+    if (params.year_to) qParams.set("year_to", String(params.year_to));
+    if (params.source) qParams.set("source", params.source);
+    if (params.page) qParams.set("page", String(params.page));
+    if (params.limit) qParams.set("limit", String(params.limit));
+
+    const res = await requestBackend<BharatCourtsSearchResponse>(
+      `/api/v1/legal-research/judgments/search?${qParams.toString()}`
+    );
+    if (res && res.results) {
+      return res;
+    }
+    return {
+      success: false,
+      source: "bharat_courts",
+      total: 0,
+      page: params.page || 1,
+      limit: params.limit || 10,
+      results: []
+    };
+  },
+
+  async getBharatCourtJudgment(caseId: string): Promise<BharatCourtJudgment | null> {
+    const res = await requestBackend<BharatCourtJudgment>(
+      `/api/v1/legal-research/judgments/${encodeURIComponent(caseId)}`
+    );
+    return res || null;
+  },
+
+  getBharatCourtPdfUrl(caseId: string): string {
+    return `${BRAND.apiBaseUrl}/api/v1/legal-research/judgments/${encodeURIComponent(caseId)}/pdf`;
+  },
+
+  async getBharatCourtsHealth(): Promise<{
+    provider: string;
+    enabled: boolean;
+    status: string;
+    archive_ready: boolean;
+  } | null> {
+    return await requestBackend<any>("/api/v1/legal-research/providers/bharat-courts/health");
   }
 };

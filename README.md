@@ -63,14 +63,18 @@ AMIL is designed with 15 integrated modules tailored to Indian legal research, l
 * **Section-to-Section Comparative Tables:** Instantly view side-by-side equivalents (e.g., Section 318 BNS ↔ Section 420 IPC; Section 63 BSA ↔ Section 65B IEA; Section 35 BNSS ↔ Section 41A CrPC; Section 103 BNS ↔ Section 302 IPC).
 * **Instant Provision Actions:** Quick discovery pills, one-click verbatim statutory clipboard copy, client-side bookmarking, and linked annotation note-taking.
 
-### 4. Judicial Precedents & Case Law (`/case-laws`)
-* **Binding Precedent Indicators:** Identifies the precedential authority of decisions:
-  * 🟢 `BINDING` (Supreme Court Constitution/Division Benches).
-  * 🔵 `PERSUASIVE` (High Court rulings in relevant jurisdictions).
-  * 🔴 `OVERRULED` (Automatic warnings to prevent citing bad law).
-  * 🟡 `DISTINGUISHED` / `PENDING_VERIFICATION`.
-* **Standardized Citations:** Displays both official Supreme Court neutral citations (`INSC`) and law report citations (`SCC`, `AIR`).
-* **Headnotes & Ratio Decidendi:** Highlights governing legal principles and key judgment paragraphs.
+### 4. Judicial Precedents, Case Law & Bharat Courts Integration (`/case-laws`)
+* **Unified Bharat Courts Engine:** Directly integrates the official `bharat-courts` SDK (`forzayt/bharat-courts-API`) querying over 10+ million judgments across the Supreme Court of India and 25+ High Courts.
+* **Dual Retrieval Architecture:**
+  * **Historical Archive:** Queries the public AWS Open Data archive via local DuckDB serverless parquet queries (~1s query time, zero CAPTCHA).
+  * **Live Portal Search:** Queries live eCourts portals with automated OCR CAPTCHA solving via `ddddocr` for unarchived or newly filed proceedings.
+* **Constitutional Legal Authority Verification Engine:**
+  * Strict implementation of **Article 141 of the Constitution of India** (Supreme Court rulings bind all subordinate courts; obiter dicta distinguished from ratio decidendi).
+  * **Territorial Jurisdiction & Bench Hierarchy:** High Court decisions classified as binding within their territorial jurisdiction and persuasive elsewhere. Full Bench / Larger Bench priority over Division/Single Benches.
+  * **Status Taxonomy:** 🟢 `BINDING`, 🔵 `PERSUASIVE`, 🔴 `OVERRULED`, 🟠 `DISTINGUISHED`, 🟣 `REVERSED`, ⚪ `STAYED`, 🟡 `PENDING_VERIFICATION`. Never marks a judgment good law by omission.
+* **Juris RAG Evidence Retriever:** Precedents retrieved from Bharat Courts are dynamically extracted from official PDFs, chunked, and embedded into PostgreSQL (`pgvector`) as grounded evidence for Juris conversational opinions.
+* **Direct PDF Access:** View and download official court-certified judgment PDFs directly from the UI or stream via API.
+* **Standardized Citations & Provenance:** Full neutral citation support (`INSC`, `e-SCR`, `AIR`, `SCC`) and explicit CC-BY-4.0 attribution to Dattam Labs and eCourts.
 
 ### 5. Document Intelligence & OCR Studio (`/documents`)
 * **Multi-Format Processing:** Ingests PDF, Word (`.docx`), and text agreements with PyMuPDF and Tesseract OCR.
@@ -116,8 +120,10 @@ AMIL is designed with 15 integrated modules tailored to Indian legal research, l
 ```mermaid
 graph TD
     Client["Next.js 14 Frontend<br/>(Vercel Edge CDN)"] -->|"HTTPS / REST API"| Backend["FastAPI Backend<br/>(Railway Cloud Container)"]
-    Backend -->|"SQLAlchemy 2.0"| DB[("PostgreSQL 16 + pgvector<br/>(Railway Managed)")]
+    Backend -->|"SQLAlchemy 2.0"| DB[("PostgreSQL 16 + pgvector<br/>(legal_judgments cache)")]
     Backend -->|"Google GenAI API"| Gemini["Google Gemini 2.5 Flash<br/>(Grounded RAG Pipeline)"]
+    Backend -->|"bharat-courts SDK"| BC["Bharat Courts Archive & Live API<br/>(DuckDB AWS S3 + eCourts)"]
+    Backend -->|"Authority Engine"| AuthEngine["Constitutional Authority Verifier<br/>(Art. 141 & Bench Hierarchy)"]
     Backend -->|"PyMuPDF / OCR"| Vault["Private Document Vault<br/>(Local / S3 Storage)"]
 ```
 
@@ -129,18 +135,39 @@ graph TD
 * **State & Sync:** Dual-write persistence (PostgreSQL REST API + resilient LocalStorage caching)
 * **Icons:** Lucide React
 
-### Backend
+### Backend & Judicial Precedent Engine
 * **Framework:** Python 3.11 + FastAPI (Async REST API)
-* **ORM & Migrations:** SQLAlchemy 2.0 + Alembic
-* **Database:** PostgreSQL 16 with `pgvector` extension for semantic vector embeddings
+* **Judicial Precedent SDK:** `bharat-courts[archive,ocr]` (v0.5.0, DuckDB 2.0.0, ddddocr, PyMuPDF)
+* **ORM & Migrations:** SQLAlchemy 2.0 + Alembic (includes `0002_add_legal_judgments.py`)
+* **Database:** PostgreSQL 16 with `pgvector` extension for semantic vector embeddings and `legal_judgments` metadata cache
 * **Security & Auth:** Argon2id password hashing, rotating JWT Access & Refresh Tokens
-* **Document Processing:** PyMuPDF (`fitz`), `python-docx`, Pillow, Tesseract OCR
+* **Document Processing:** PyMuPDF (`pymupdf`), `python-docx`, Pillow, Tesseract OCR
 * **Production Server:** Gunicorn + Uvicorn Worker Processors
 
 ### AI & Legal RAG Pipeline
-* **LLM Engine:** Google Gemini 2.5 Flash (`gemini-2.5-flash`)
-* **Grounding Engine:** Verified Indian Legal Corpus (India Code & Supreme Court e-SCR)
+* **LLM Engine:** Google Gemini 2.5 Flash (`gemini-2.5-flash` / `gemini-flash-lite-latest`)
+* **Embedding Model:** `models/gemini-embedding-001` (768 dimensions)
+* **Grounding Engine:** Verified Indian Legal Corpus (India Code, Supreme Court e-SCR, Bharat Courts Archive)
 * **Citation Validator:** Pre-generation statutory checker preventing hallucinated sections or overruled citations
+* **Legal Authority Engine:** Multi-factor precedent verification (Art. 141, territorial jurisdiction, bench composition)
+
+---
+
+## ⚖️ Bharat Courts API & Legal Research Endpoints
+
+AMIL exposes standardized RESTful endpoints under `/api/v1/legal-research/`:
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/api/v1/legal-research/judgments/search` | Search 10M+ judgments with query parameters (`q`, `court`, `judge`, `party`, `citation`, `cnr`, `year`, `year_from`, `year_to`, `source`, `page`, `limit`). |
+| `GET` | `/api/v1/legal-research/judgments/{case_id}` | Retrieve comprehensive judgment metadata and constitutional authority assessment. |
+| `GET` | `/api/v1/legal-research/judgments/{case_id}/pdf` | Retrieve official judgment PDF (direct streaming or redirect URL). |
+| `GET` | `/api/v1/legal-research/providers/bharat-courts/health` | Diagnostic check reporting provider status, archive access, and configuration without running expensive searches. |
+
+### Data Attribution & Licensing (CC-BY-4.0)
+Judicial data retrieved via Bharat Courts is provided under **Creative Commons Attribution 4.0 International (CC-BY-4.0)**:
+* **Primary Curators:** Dattam Labs (Open Data Archive) and eCourts Platform (High Courts & Supreme Court of India).
+* **Freshness & Update Cadence:** Historical archive updated approximately every two months for the Supreme Court of India and quarterly for High Courts. Unarchived or newly listed matters can be queried in real time via live search.
 
 ---
 

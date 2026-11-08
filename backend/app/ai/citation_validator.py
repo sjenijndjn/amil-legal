@@ -8,6 +8,7 @@ from typing import Dict, List, Tuple
 from sqlalchemy.orm import Session
 
 from app.models.legal_corpus import Judgment, LegalAct, LegalSection
+from app.models.legal_judgment import LegalJudgment
 from app.schemas.juris import CitedSourceItem
 
 # Mapping between pre-July 1, 2024 statutes and post-July 1, 2024 Sanhitas
@@ -63,6 +64,7 @@ def validate_citations_against_db(
     """
     results: List[Dict[str, str]] = []
     all_judgments = db.query(Judgment).all()
+    all_legal_judgments = db.query(LegalJudgment).all()
     all_sections = db.query(LegalSection).join(LegalAct).all()
 
     for raw_cit in candidate_citations:
@@ -89,6 +91,31 @@ def validate_citations_against_db(
                             "[OVERRULED — DO NOT CITE AS GOOD LAW]"
                             if j.precedent_status == "OVERRULED"
                             else "[VERIFIED IN CORPUS]"
+                        ),
+                    }
+                )
+                matched = True
+                break
+
+        if matched:
+            continue
+
+        for lj in all_legal_judgments:
+            if (
+                (lj.citation and lj.citation.lower() in low)
+                or lj.case_title.lower() in low
+                or (lj.cnr_number and lj.cnr_number.lower() in low)
+            ):
+                results.append(
+                    {
+                        "input": cleaned,
+                        "status": lj.authority_status,
+                        "verified_title": lj.case_title,
+                        "verified_citation": lj.citation or lj.case_title,
+                        "badge": (
+                            "[OVERRULED — DO NOT CITE AS GOOD LAW]"
+                            if lj.authority_status == "OVERRULED"
+                            else f"[VERIFIED IN BHARAT COURTS: {lj.authority_status}]"
                         ),
                     }
                 )

@@ -9,6 +9,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 os.environ.setdefault("DATABASE_URL", "sqlite:///./test_amil_legal.db")
+os.environ.setdefault("ENVIRONMENT", "test")
 
 from app.core.config import settings
 from app.core.security import rate_limiter

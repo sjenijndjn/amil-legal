@@ -5,6 +5,8 @@ export type PrecedentStatus =
   | "PERSUASIVE"
   | "DISTINGUISHED"
   | "OVERRULED"
+  | "REVERSED"
+  | "STAYED"
   | "PENDING_VERIFICATION";
 
 export type LegislationStatus = "CURRENT" | "HISTORICAL";
@@ -361,3 +363,47 @@ export interface DashboardSummary {
   recent_drafts: LegalDraft[];
   upcoming_tasks: LegalTask[];
 }
+
+export interface BharatCourtAttribution {
+  provider: string;
+  dataset: string;
+  license: string;
+  license_url: string;
+  sources: string[];
+  freshness_policy: string;
+  retrieval_date?: string;
+  source_type?: string;
+}
+
+export interface BharatCourtJudgment {
+  case_id: string;
+  title: string;
+  court: string;
+  citation: string;
+  decision_date: string | null;
+  judges: string[];
+  case_number: string;
+  cnr: string;
+  disposal_nature: string;
+  source_type: "archive" | "live" | string;
+  document_url: string | null;
+  available: boolean;
+  authority_status: PrecedentStatus;
+  authority_notes?: string | null;
+  bench_type?: string | null;
+  petitioner?: string | null;
+  respondent?: string | null;
+  attribution?: BharatCourtAttribution;
+}
+
+export interface BharatCourtsSearchResponse {
+  success: boolean;
+  source: string;
+  total: number;
+  page: number;
+  limit: number;
+  results: BharatCourtJudgment[];
+  warning?: string | null;
+  error?: string | null;
+}
+

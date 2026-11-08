@@ -79,7 +79,31 @@ def get_judgment_detail(
 ) -> JudgmentDetailResponse:
     j = db.query(Judgment).filter(Judgment.id == judgment_id).first()
     if j is None:
-        raise ResourceNotFoundError("Judgment not found")
+        from app.models.legal_judgment import LegalJudgment
+
+        lj = db.query(LegalJudgment).filter(LegalJudgment.id == judgment_id).first()
+        if lj is None:
+            raise ResourceNotFoundError("Judgment not found")
+        return JudgmentDetailResponse(
+            id=lj.id,
+            case_title=lj.case_title,
+            neutral_citation=lj.citation or lj.external_case_id,
+            equivalent_citations=[],
+            court=lj.court,
+            bench_type=lj.bench_type or "High Court / Supreme Court Bench",
+            judges=lj.judges or [],
+            decision_date=lj.decision_date or date(2020, 1, 1),
+            subject_matter="Judicial Precedent (Bharat Courts)",
+            headnote_summary=lj.headnote_summary or lj.case_title,
+            precedent_status=lj.authority_status,
+            official_source_url=f"/api/v1/legal-research/judgments/{lj.external_case_id}",
+            legal_issues=[],
+            ratio_decidendi=lj.ratio_decidendi or lj.headnote_summary or lj.case_title,
+            key_paragraphs=[],
+            full_text_excerpt=lj.extracted_text or lj.headnote_summary or lj.case_title,
+            verification_notes=lj.authority_notes or "Retrieved from Bharat Courts open legal corpus.",
+            citations=[],
+        )
 
     detail = JudgmentDetailResponse.model_validate(j)
     detail.citations = [

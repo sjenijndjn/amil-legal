@@ -44,6 +44,11 @@ export function PrecedentBadge({ status }: { status: PrecedentStatus }) {
       return <Badge variant="warning">DISTINGUISHED</Badge>;
     case "OVERRULED":
       return <Badge variant="error">OVERRULED — DO NOT CITE AS GOOD LAW</Badge>;
+    case "REVERSED":
+      return <Badge variant="error">REVERSED ON APPEAL</Badge>;
+    case "STAYED":
+      return <Badge variant="warning">OPERATION STAYED</Badge>;
+    case "PENDING_VERIFICATION":
     default:
       return <Badge variant="default">PENDING VERIFICATION</Badge>;
   }

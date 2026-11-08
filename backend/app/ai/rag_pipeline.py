@@ -12,8 +12,11 @@ from sqlalchemy.orm import Session
 
 from app.ai.citation_validator import detect_overruled_warnings, detect_temporal_notes
 from app.ai.provider import get_ai_provider
+from app.core.config import settings
+from app.core.logging import logger
 from app.models.document import Document, DocumentChunk
 from app.models.legal_corpus import Judgment, LegalAct, LegalSection
+from app.models.legal_judgment import LegalJudgment
 from app.schemas.juris import CitedSourceItem, StructuredLegalAnswerSections
 
 STOPWORDS = {
@@ -182,9 +185,11 @@ def run_juris_rag_pipeline(
 
     scored_sections.sort(key=lambda x: x[0], reverse=True)
 
-    # 2. Score Supreme Court / High Court judgments
+    # 2. Score Supreme Court / High Court judgments (seed corpus + cached Bharat Courts)
     all_judgments = db.query(Judgment).all()
-    scored_judgments: List[Tuple[float, Judgment]] = []
+    all_cached_legal = db.query(LegalJudgment).all()
+    scored_judgments: List[Tuple[float, Any]] = []
+
     for j in all_judgments:
         cand_str = (
             f"{j.case_title} {j.neutral_citation} {' '.join(j.equivalent_citations)} "
@@ -195,6 +200,72 @@ def run_juris_rag_pipeline(
         hybrid = (0.65 * lex) + (0.35 * vec_sim)
         if lex > 0.12 or vec_sim > 0.22:
             scored_judgments.append((hybrid, j))
+
+    for lj in all_cached_legal:
+        cand_str = (
+            f"{lj.case_title} {lj.court} {lj.citation or ''} {' '.join(lj.judges)} "
+            f"{lj.headnote_summary or ''} {lj.ratio_decidendi or ''} {lj.extracted_text or ''}"
+        )
+        lex = lexical_match_score(query, query_tokens, cand_str)
+        vec_sim = cosine_similarity(query_vec, lj.embedding)
+        hybrid = (0.65 * lex) + (0.35 * vec_sim)
+        if lex > 0.12 or vec_sim > 0.22:
+            scored_judgments.append((hybrid, lj))
+
+    # On-demand Bharat Courts retrieval for judicial research if coverage is thin
+    if (
+        settings.BHARAT_COURTS_ENABLED
+        and settings.ENVIRONMENT.lower() != "test"
+        and (len(scored_judgments) < 2 or (scored_judgments and scored_judgments[0][0] < 0.35))
+    ):
+        from app.services.bharat_courts_service import bharat_courts_service
+
+        def _exec_search():
+            try:
+                import asyncio
+                return asyncio.run(
+                    bharat_courts_service.search(q=query[:120], source="archive", limit=3, db=db)
+                )
+            except Exception as e:
+                logger.info(f"On-demand Bharat Courts retrieval note: {e}")
+                return {"results": []}
+
+        try:
+            import concurrent.futures
+            with concurrent.futures.ThreadPoolExecutor(max_workers=1) as pool:
+                search_res = pool.submit(_exec_search).result(
+                    timeout=settings.BHARAT_COURTS_TIMEOUT_SECONDS
+                )
+                for r in search_res.get("results", []):
+                    c_id = r.get("case_id")
+                    if not c_id:
+                        continue
+                    db_entry = (
+                        db.query(LegalJudgment)
+                        .filter(LegalJudgment.external_case_id == c_id)
+                        .first()
+                    )
+                    if db_entry:
+                        if db_entry.embedding is None:
+                            embed_text = (
+                                f"{db_entry.case_title} {db_entry.court} {db_entry.citation or ''} "
+                                f"{db_entry.ratio_decidendi or db_entry.headnote_summary or ''}"
+                            )
+                            db_entry.embedding = provider.embed_text(
+                                embed_text, db=db, user_id=user_id
+                            )
+                            db.commit()
+                        cand_str = (
+                            f"{db_entry.case_title} {db_entry.court} {db_entry.citation or ''} "
+                            f"{db_entry.ratio_decidendi or ''}"
+                        )
+                        lex = lexical_match_score(query, query_tokens, cand_str)
+                        vec_sim = cosine_similarity(query_vec, db_entry.embedding)
+                        hybrid = (0.65 * lex) + (0.35 * vec_sim)
+                        if not any(sj[1] == db_entry for sj in scored_judgments):
+                            scored_judgments.append((hybrid, db_entry))
+        except Exception as search_err:
+            logger.warning(f"On-demand Bharat Courts retrieval skipped: {search_err}")
 
     scored_judgments.sort(key=lambda x: x[0], reverse=True)
 
@@ -255,19 +326,35 @@ def run_juris_rag_pipeline(
         )
 
     for _, j in scored_judgments[:top_k]:
-        eq_str = ", ".join(j.equivalent_citations[:2])
-        cited_sources.append(
-            CitedSourceItem(
-                source_type="JUDGMENT",
-                id=str(j.id),
-                title=j.case_title,
-                citation=f"{j.neutral_citation} ({eq_str})" if eq_str else j.neutral_citation,
-                status=j.precedent_status,
-                excerpt=j.ratio_decidendi[:380],
-                effective_or_decision_date=j.decision_date.isoformat(),
-                official_url=j.official_source_url,
+        if isinstance(j, LegalJudgment):
+            cited_sources.append(
+                CitedSourceItem(
+                    source_type="JUDGMENT",
+                    id=str(j.id),
+                    title=f"{j.case_title} ({j.court})",
+                    citation=j.citation or j.external_case_id,
+                    status=j.authority_status,
+                    excerpt=(j.ratio_decidendi or j.headnote_summary or j.case_title)[:380],
+                    effective_or_decision_date=(
+                        j.decision_date.isoformat() if j.decision_date else None
+                    ),
+                    official_url=f"/api/v1/legal-research/judgments/{j.external_case_id}",
+                )
             )
-        )
+        else:
+            eq_str = ", ".join(j.equivalent_citations[:2])
+            cited_sources.append(
+                CitedSourceItem(
+                    source_type="JUDGMENT",
+                    id=str(j.id),
+                    title=j.case_title,
+                    citation=f"{j.neutral_citation} ({eq_str})" if eq_str else j.neutral_citation,
+                    status=j.precedent_status,
+                    excerpt=j.ratio_decidendi[:380],
+                    effective_or_decision_date=j.decision_date.isoformat(),
+                    official_url=j.official_source_url,
+                )
+            )
 
     cited_sources.extend(doc_citations)
 

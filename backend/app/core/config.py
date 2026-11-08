@@ -122,6 +122,23 @@ class Settings:
             os.getenv("RATE_LIMIT_UPLOAD_PER_MINUTE", "20")
         )
 
+        # Bharat Courts Integration
+        self.BHARAT_COURTS_ENABLED: bool = os.getenv(
+            "BHARAT_COURTS_ENABLED", "true"
+        ).lower() in ("1", "true", "yes")
+        self.BHARAT_COURTS_TIMEOUT_SECONDS: float = float(
+            os.getenv("BHARAT_COURTS_TIMEOUT_SECONDS", "25.0")
+        )
+        self.BHARAT_COURTS_DEFAULT_LIMIT: int = int(
+            os.getenv("BHARAT_COURTS_DEFAULT_LIMIT", "20")
+        )
+        self.BHARAT_COURTS_MAX_LIMIT: int = int(
+            os.getenv("BHARAT_COURTS_MAX_LIMIT", "50")
+        )
+        self.BHARAT_COURTS_MAX_PDF_BYTES: int = int(
+            os.getenv("BHARAT_COURTS_MAX_PDF_BYTES", str(25 * 1024 * 1024))
+        )
+
     @property
     def resolved_database_url(self) -> str:
         return _normalize_db_url(self.DATABASE_URL)

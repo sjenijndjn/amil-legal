@@ -122,7 +122,48 @@ def unified_legal_search(
         for j in j_q.order_by(Judgment.decision_date.desc()).all():
             judgments_out.append(JudgmentSummaryResponse.model_validate(j))
 
+        from app.models.legal_judgment import LegalJudgment
+        lj_q = db.query(LegalJudgment)
+        if term:
+            lj_q = lj_q.filter(
+                or_(
+                    LegalJudgment.case_title.ilike(like_term),
+                    LegalJudgment.citation.ilike(like_term),
+                    LegalJudgment.headnote_summary.ilike(like_term),
+                    LegalJudgment.ratio_decidendi.ilike(like_term),
+                    LegalJudgment.court.ilike(like_term),
+                )
+            )
+        if court:
+            lj_q = lj_q.filter(LegalJudgment.court.ilike(f"%{court.strip()}%"))
+        if status:
+            lj_q = lj_q.filter(LegalJudgment.authority_status == status.upper())
+        if date_from:
+            lj_q = lj_q.filter(LegalJudgment.decision_date >= date_from)
+        if date_to:
+            lj_q = lj_q.filter(LegalJudgment.decision_date <= date_to)
+
+        for lj in lj_q.order_by(LegalJudgment.decision_date.desc()).limit(20).all():
+            judgments_out.append(
+                JudgmentSummaryResponse(
+                    id=lj.id,
+                    case_title=lj.case_title,
+                    neutral_citation=lj.citation or lj.external_case_id,
+                    equivalent_citations=[],
+                    court=lj.court,
+                    bench_type=lj.bench_type or "High Court / Supreme Court Bench",
+                    judges=lj.judges or [],
+                    decision_date=lj.decision_date or date(2020, 1, 1),
+                    subject_matter="Judicial Precedent (Bharat Courts)",
+                    headnote_summary=lj.headnote_summary or lj.case_title,
+                    precedent_status=lj.authority_status,
+                    official_source_url=f"/api/v1/legal-research/judgments/{lj.external_case_id}",
+                )
+            )
+
     sources_checked = [s.code for s in db.query(LegalSource).all()]
+    if "bharat_courts" not in sources_checked:
+        sources_checked.append("bharat_courts")
     total_results = len(acts_out) + len(sections_out) + len(judgments_out)
 
     if term:

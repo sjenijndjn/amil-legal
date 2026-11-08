@@ -145,3 +145,49 @@ class AuditHistoryEntry(BaseModel):
     resource_id: Optional[str] = None
     metadata_json: Dict[str, Any]
     created_at: datetime
+
+
+class BharatCourtJudgmentItem(BaseModel):
+    case_id: str
+    title: str
+    court: str
+    citation: Optional[str] = ""
+    decision_date: Optional[str] = None
+    judges: List[str] = []
+    case_number: Optional[str] = ""
+    cnr: Optional[str] = ""
+    disposal_nature: Optional[str] = ""
+    source_type: str = "archive"
+    document_url: Optional[str] = None
+    available: bool = True
+    authority_status: str = "PENDING_VERIFICATION"
+    authority_notes: Optional[str] = None
+    bench_type: Optional[str] = None
+    petitioner: Optional[str] = None
+    respondent: Optional[str] = None
+    attribution: Optional[Dict[str, Any]] = None
+
+
+class BharatCourtSearchResponse(BaseModel):
+    success: bool
+    source: str = "bharat_courts"
+    total: int
+    page: int = 1
+    limit: int = 10
+    results: List[BharatCourtJudgmentItem] = []
+    warning: Optional[str] = None
+    error: Optional[str] = None
+
+
+class BharatCourtHealthResponse(BaseModel):
+    provider: str
+    enabled: bool
+    status: str
+    archive_ready: bool
+    archive_info: str
+    live_search_configured: bool
+    timeout_seconds: float
+    max_result_limit: int
+    attribution: Dict[str, Any]
+    checked_at: str
+

@@ -11,6 +11,7 @@ from app.api.v1 import (
     health,
     judgments,
     juris,
+    legal_research,
     library,
     profile,
     research,
@@ -25,6 +26,7 @@ api_v1_router.include_router(juris.router)
 api_v1_router.include_router(research.router)
 api_v1_router.include_router(acts.router)
 api_v1_router.include_router(judgments.router)
+api_v1_router.include_router(legal_research.router)
 api_v1_router.include_router(documents.router)
 api_v1_router.include_router(library.router)
 api_v1_router.include_router(drafts.router)
