@@ -9,7 +9,7 @@ from sqlalchemy.orm import Session
 
 from app.core.security import get_current_user, record_audit_event
 from app.database.session import get_db
-from app.documents.storage import storage_service
+from app.documents.storage import document_storage
 from app.models.conversation import Conversation
 from app.models.document import Document
 from app.models.draft import Draft
@@ -92,7 +92,7 @@ def purge_personal_data(
 
     user_docs = db.query(Document).filter(Document.user_id == current_user.id).all()
     for doc in user_docs:
-        storage_service.delete_bytes(doc.storage_key)
+        document_storage.delete_document(doc.storage_key)
 
     db.query(Document).filter(Document.user_id == current_user.id).delete()
     db.query(Conversation).filter(Conversation.user_id == current_user.id).delete()

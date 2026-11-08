@@ -109,5 +109,8 @@ class PrivateDocumentStorage:
         except Exception as exc:
             logger.warning(f"Local vault delete warning: {exc}")
 
+    delete_bytes = delete_document
+
 
 document_storage = PrivateDocumentStorage()
+storage_service = document_storage
