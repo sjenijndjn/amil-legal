@@ -250,6 +250,22 @@ def get_current_user(
     return user
 
 
+def get_optional_current_user(
+    request: Request,
+    credentials: Optional[HTTPAuthorizationCredentials] = Depends(bearer_scheme),
+    db: Session = Depends(get_db),
+) -> Optional[User]:
+    """Optional authentication dependency returning active User or None for public endpoints."""
+    if credentials is None or not credentials.credentials:
+        return None
+    try:
+        payload = decode_token(credentials.credentials, expected_type="access")
+        user_uuid = uuid.UUID(str(payload.get("sub", "")))
+        return db.query(User).filter(User.id == user_uuid, User.is_active.is_(True)).first()
+    except Exception:
+        return None
+
+
 # ---------------------------------------------------------------------------
 # Sliding-Window Rate Limiter & Security Headers Middleware
 # ---------------------------------------------------------------------------

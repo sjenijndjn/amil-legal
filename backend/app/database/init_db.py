@@ -960,6 +960,468 @@ def _seed_acts_and_sections(
                 }
             ],
         },
+        # 13. The Negotiable Instruments Act, 1881
+        {
+            "title": "The Negotiable Instruments Act, 1881",
+            "short_title": "NI Act, 1881",
+            "act_number": "Act No. 26 of 1881",
+            "enactment_year": 1881,
+            "enactment_date": date(1881, 12, 9),
+            "commencement_date": date(1882, 3, 1),
+            "effective_date": date(1882, 3, 1),
+            "status": "CURRENT",
+            "replaces_act_code": None,
+            "replaced_by_act_code": None,
+            "subject_category": "Banking & Commercial Law",
+            "preamble": "An Act to define and amend the law relating to Promissory Notes, Bills of Exchange and Cheques.",
+            "amendment_history": [
+                {"date": "2018-09-01", "note": "Amended by Act 20 of 2018 inserting Section 143A and Section 148."}
+            ],
+            "sections": [
+                {
+                    "chapter_number": "XVII",
+                    "chapter_title": "Of Penalties in Case of Dishonour of Certain Cheques for Insufficiency of Funds",
+                    "section_number": "138",
+                    "section_title": "Dishonour of cheque for insufficiency, etc., of funds in the account",
+                    "statutory_text": (
+                        "Where any cheque drawn by a person on an account maintained by him with a banker for payment of any "
+                        "amount of money to another person from out of that account for the discharge, in whole or in part, of any "
+                        "debt or other liability, is returned by the bank unpaid, either because of the amount of money standing to the "
+                        "credit of that account is insufficient to honour the cheque or that it exceeds the amount arranged to be paid "
+                        "from that account by an agreement made with that bank, such person shall be deemed to have committed an offence "
+                        "and shall, without prejudice to any other provisions of this Act, be punished with imprisonment for a term which may "
+                        "be extended to two years, or with fine which may extend to twice the amount of the cheque, or with both:\n\n"
+                        "Provided that nothing contained in this section shall apply unless—\n"
+                        "(a) the cheque has been presented to the bank within a period of three months from the date on which it is drawn or within the period of its validity, whichever is earlier;\n"
+                        "(b) the payee or the holder in due course of the cheque, as the case may be, makes a demand for the payment of the said amount of money by giving a notice in writing, to the drawer of the cheque, within thirty days of the receipt of information by him from the bank regarding the return of the cheque as unpaid; and\n"
+                        "(c) the drawer of such cheque fails to make the payment of the said amount of money to the payee or, as the case may be, to the holder in due course of the cheque, within fifteen days of the receipt of the said notice."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "XVII",
+                    "chapter_title": "Of Penalties in Case of Dishonour of Certain Cheques",
+                    "section_number": "139",
+                    "section_title": "Presumption in favour of holder",
+                    "statutory_text": (
+                        "It shall be presumed, unless the contrary is proved, that the holder of a cheque received the cheque of the nature "
+                        "referred to in section 138 for the discharge, in whole or in part, of any debt or other liability."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "XVII",
+                    "chapter_title": "Of Penalties in Case of Dishonour of Certain Cheques",
+                    "section_number": "141",
+                    "section_title": "Offences by companies",
+                    "statutory_text": (
+                        "(1) If the person committing an offence under section 138 is a company, every person who; at the time the offence "
+                        "was committed, was in charge of, and was responsible to the company for the conduct of the business of the company, "
+                        "as well as the company, shall be deemed to be guilty of the offence and shall be liable to be proceeded against and "
+                        "punished accordingly.\n\n"
+                        "(2) Where any offence under this Act has been committed by a company and it is proved that the offence has been committed "
+                        "with the consent or connivance of, or is attributable to, any neglect on the part of, any director, manager, secretary or "
+                        "other officer of the company, such director, manager, secretary or other officer shall also be deemed to be guilty of that offence."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "XVII",
+                    "chapter_title": "Of Penalties in Case of Dishonour of Certain Cheques",
+                    "section_number": "142",
+                    "section_title": "Cognizance of offences",
+                    "statutory_text": (
+                        "(1) Notwithstanding anything contained in the Code of Criminal Procedure, 1973 (2 of 1974),—\n"
+                        "(a) no court shall take cognizance of any offence punishable under section 138 except upon a complaint, in writing, made by the payee or, as the case may be, the holder in due course of the cheque;\n"
+                        "(b) such complaint is made within one month of the date on which the cause of action arises under clause (c) of the proviso to section 138;\n"
+                        "(c) no court inferior to that of a Metropolitan Magistrate or a Judicial Magistrate of the first class shall try any offence punishable under section 138."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+            ],
+        },
+        # 14. The Arbitration and Conciliation Act, 1996
+        {
+            "title": "The Arbitration and Conciliation Act, 1996",
+            "short_title": "Arbitration Act, 1996",
+            "act_number": "Act No. 26 of 1996",
+            "enactment_year": 1996,
+            "enactment_date": date(1996, 8, 16),
+            "commencement_date": date(1996, 8, 22),
+            "effective_date": date(1996, 8, 22),
+            "status": "CURRENT",
+            "replaces_act_code": "Arbitration Act, 1940",
+            "replaced_by_act_code": None,
+            "subject_category": "Dispute Resolution & Commercial Arbitration",
+            "preamble": "An Act to consolidate and amend the law relating to domestic arbitration, international commercial arbitration and enforcement of foreign arbitral awards.",
+            "amendment_history": [
+                {"date": "2015-10-23", "note": "Amended by Act 3 of 2016 inserting Section 29A and amending Section 8, 9, 11, 34."}
+            ],
+            "sections": [
+                {
+                    "chapter_number": "II",
+                    "chapter_title": "Arbitration Agreement",
+                    "section_number": "8",
+                    "section_title": "Power to refer parties to arbitration where there is an arbitration agreement",
+                    "statutory_text": (
+                        "(1) A judicial authority, before which an action is brought in a matter which is the subject of an arbitration agreement shall, "
+                        "if a party to the arbitration agreement or any person claiming through or under him, so applies not later than the date of "
+                        "submitting his first statement on the substance of the dispute, refer the parties to arbitration unless it finds that prima facie no valid arbitration agreement exists."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "II",
+                    "chapter_title": "Arbitration Agreement",
+                    "section_number": "9",
+                    "section_title": "Interim measures, etc. by Court",
+                    "statutory_text": (
+                        "(1) A party may, before or during arbitral proceedings or at any time after the making of the arbitral award but before "
+                        "it is enforced in accordance with section 36, apply to a court for interim measures including preservation, custody or sale "
+                        "of goods, securing the amount in dispute, or interim injunction."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "III",
+                    "chapter_title": "Composition of Arbitral Tribunal",
+                    "section_number": "11",
+                    "section_title": "Appointment of arbitrators",
+                    "statutory_text": (
+                        "Governs appointment of arbitrators by party consensus or upon application to the Supreme Court or High Court. "
+                        "Under sub-section (6A), the Court confines its examination to the existence of an arbitration agreement."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "VII",
+                    "chapter_title": "Recourse against Arbitral Award",
+                    "section_number": "34",
+                    "section_title": "Application for setting aside arbitral award",
+                    "statutory_text": (
+                        "(1) Recourse to a Court against an arbitral award may be made only by an application for setting aside such award in accordance "
+                        "with sub-section (2) and sub-section (2A) on grounds of incapacity, invalid agreement, lack of proper notice, dispute outside scope, "
+                        "conflict with public policy of India, or patent illegality appearing on the face of the award."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+            ],
+        },
+        # 15. The Specific Relief Act, 1963
+        {
+            "title": "The Specific Relief Act, 1963",
+            "short_title": "Specific Relief Act, 1963",
+            "act_number": "Act No. 47 of 1963",
+            "enactment_year": 1963,
+            "enactment_date": date(1963, 12, 13),
+            "commencement_date": date(1964, 3, 1),
+            "effective_date": date(1964, 3, 1),
+            "status": "CURRENT",
+            "replaces_act_code": "Specific Relief Act, 1877",
+            "replaced_by_act_code": None,
+            "subject_category": "Civil Law & Remedies",
+            "preamble": "An Act to define and amend the law relating to certain kinds of specific relief.",
+            "amendment_history": [
+                {"date": "2018-10-01", "note": "Amended by Act 18 of 2018 making specific performance mandatory."}
+            ],
+            "sections": [
+                {
+                    "chapter_number": "I",
+                    "chapter_title": "Recovering Possession of Property",
+                    "section_number": "6",
+                    "section_title": "Suit by person dispossessed of immovable property",
+                    "statutory_text": (
+                        "(1) If any person is dispossessed without his consent of immovable property otherwise than in due course of law, "
+                        "he or any person through whom he has been in possession or any person claiming through him may, by suit, recover possession "
+                        "thereof, notwithstanding any other title that may be set up in such suit. (2) No suit under this section shall be brought "
+                        "after the expiry of six months from the date of dispossession or against the Government."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "II",
+                    "chapter_title": "Specific Performance of Contracts",
+                    "section_number": "10",
+                    "section_title": "Specific performance in respect of contracts",
+                    "statutory_text": (
+                        "The specific performance of a contract shall be enforced by the court subject to the provisions contained in "
+                        "sub-section (2) of section 11, section 14 and section 16."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "VI",
+                    "chapter_title": "Declaratory Decrees",
+                    "section_number": "34",
+                    "section_title": "Discretion of court as to declaration of status or right",
+                    "statutory_text": (
+                        "Any person entitled to any legal character, or to any right as to any property, may institute a suit against any person "
+                        "denying, or interested to deny, his title to such character or right, and the court may in its discretion make therein a "
+                        "declaration that he is so entitled."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+            ],
+        },
+        # 16. The Code of Civil Procedure, 1908 (CPC)
+        {
+            "title": "The Code of Civil Procedure, 1908",
+            "short_title": "CPC, 1908",
+            "act_number": "Act No. 5 of 1908",
+            "enactment_year": 1908,
+            "enactment_date": date(1908, 3, 21),
+            "commencement_date": date(1909, 1, 1),
+            "effective_date": date(1909, 1, 1),
+            "status": "CURRENT",
+            "replaces_act_code": None,
+            "replaced_by_act_code": None,
+            "subject_category": "Civil Procedure & Adjudication",
+            "preamble": "An Act to consolidate and amend the laws relating to the procedure of the Courts of Civil Judicature.",
+            "amendment_history": [
+                {"date": "2002-07-01", "note": "Major procedural amendments under CPC Amendment Acts of 1999 and 2002."}
+            ],
+            "sections": [
+                {
+                    "chapter_number": "Preliminary",
+                    "chapter_title": "Jurisdiction of Courts",
+                    "section_number": "9",
+                    "section_title": "Courts to try all civil suits unless barred",
+                    "statutory_text": (
+                        "The Courts shall (subject to the provisions herein contained) have jurisdiction to try all suits of a civil nature "
+                        "excepting suits of which their cognizance is either expressly or impliedly barred."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "Part I",
+                    "chapter_title": "Suits in General",
+                    "section_number": "11",
+                    "section_title": "Res Judicata",
+                    "statutory_text": (
+                        "No Court shall try any suit or issue in which the matter directly and substantially in issue has been directly and "
+                        "substantially in issue in a former suit between the same parties, litigating under the same title, in a Court competent "
+                        "to try such subsequent suit and has been heard and finally decided by such Court."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "Part XI",
+                    "chapter_title": "Miscellaneous",
+                    "section_number": "151",
+                    "section_title": "Saving of inherent powers of Court",
+                    "statutory_text": (
+                        "Nothing in this Code shall be deemed to limit or otherwise affect the inherent power of the Court to make such orders "
+                        "as may be necessary for the ends of justice or to prevent abuse of the process of the Court."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "First Schedule",
+                    "chapter_title": "Order VII — Plaint",
+                    "section_number": "Order VII Rule 11",
+                    "section_title": "Rejection of plaint",
+                    "statutory_text": (
+                        "The plaint shall be rejected: (a) where it does not disclose a cause of action; (b) where relief is undervalued; "
+                        "(c) where insufficiently stamped; (d) where the suit appears from the statement in the plaint to be barred by any law."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "First Schedule",
+                    "chapter_title": "Order XXXIX — Temporary Injunctions",
+                    "section_number": "Order XXXIX Rules 1 & 2",
+                    "section_title": "Cases in which temporary injunction may be granted",
+                    "statutory_text": (
+                        "Where in any suit it is proved by affidavit or otherwise that any property in dispute is in danger of being wasted, damaged "
+                        "or alienated, or the defendant threatens to dispossess the plaintiff, the Court may grant a temporary injunction."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+            ],
+        },
+        # 17. The Transfer of Property Act, 1882
+        {
+            "title": "The Transfer of Property Act, 1882",
+            "short_title": "Transfer of Property Act, 1882",
+            "act_number": "Act No. 4 of 1882",
+            "enactment_year": 1882,
+            "enactment_date": date(1882, 2, 17),
+            "commencement_date": date(1882, 7, 1),
+            "effective_date": date(1882, 7, 1),
+            "status": "CURRENT",
+            "replaces_act_code": None,
+            "replaced_by_act_code": None,
+            "subject_category": "Property Law",
+            "preamble": "An Act to define and amend certain parts of the law relating to the transfer of property by act of parties.",
+            "amendment_history": [],
+            "sections": [
+                {
+                    "chapter_number": "II",
+                    "chapter_title": "Of Transfers of Property by Act of Parties",
+                    "section_number": "52",
+                    "section_title": "Transfer of property pending suit relating thereto (Lis Pendens)",
+                    "statutory_text": (
+                        "During the pendency in any Court of any suit or proceeding in which any right to immovable property is directly and specifically "
+                        "in question, the property cannot be transferred or otherwise dealt with by any party so as to affect the rights of any other party thereto."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "II",
+                    "chapter_title": "Of Transfers of Property by Act of Parties",
+                    "section_number": "53A",
+                    "section_title": "Part performance",
+                    "statutory_text": (
+                        "Where any person contracts to transfer for consideration any immovable property by writing signed by him, and the transferee has, "
+                        "in part performance of the contract, taken possession and performed his part, the transferor is debarred from enforcing any right against the transferee."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "III",
+                    "chapter_title": "Of Sales of Immovable Property",
+                    "section_number": "54",
+                    "section_title": "Sale defined, Sale how made, Contract for sale",
+                    "statutory_text": (
+                        "'Sale' is a transfer of ownership in exchange for a price paid or promised. Transfer of tangible immovable property of value 100 rupees and upwards can be made only by registered instrument."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+            ],
+        },
+        # 18. The Limitation Act, 1963
+        {
+            "title": "The Limitation Act, 1963",
+            "short_title": "Limitation Act, 1963",
+            "act_number": "Act No. 36 of 1963",
+            "enactment_year": 1963,
+            "enactment_date": date(1963, 10, 5),
+            "commencement_date": date(1964, 1, 1),
+            "effective_date": date(1964, 1, 1),
+            "status": "CURRENT",
+            "replaces_act_code": "Limitation Act, 1908",
+            "replaced_by_act_code": None,
+            "subject_category": "Procedural Law & Timelines",
+            "preamble": "An Act to consolidate and amend the law for the limitation of suits and other proceedings.",
+            "amendment_history": [],
+            "sections": [
+                {
+                    "chapter_number": "Part II",
+                    "chapter_title": "Limitation of Suits, Appeals and Applications",
+                    "section_number": "3",
+                    "section_title": "Bar of limitation",
+                    "statutory_text": (
+                        "Subject to the provisions contained in sections 4 to 24 (inclusive), every suit instituted, appeal preferred, and application "
+                        "made after the prescribed period shall be dismissed, although limitation has not been set up as a defence."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "Part II",
+                    "chapter_title": "Limitation of Suits, Appeals and Applications",
+                    "section_number": "5",
+                    "section_title": "Extension of prescribed period in certain cases (Condonation of Delay)",
+                    "statutory_text": (
+                        "Any appeal or any application, other than an application under Order XXI of CPC, may be admitted after the prescribed period, "
+                        "if the appellant or the applicant satisfies the court that he had sufficient cause for not preferring the appeal or application within such period."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+            ],
+        },
+        # 19. The Insolvency and Bankruptcy Code, 2016 (IBC)
+        {
+            "title": "The Insolvency and Bankruptcy Code, 2016",
+            "short_title": "IBC, 2016",
+            "act_number": "Act No. 31 of 2016",
+            "enactment_year": 2016,
+            "enactment_date": date(2016, 5, 28),
+            "commencement_date": date(2016, 12, 1),
+            "effective_date": date(2016, 12, 1),
+            "status": "CURRENT",
+            "replaces_act_code": None,
+            "replaced_by_act_code": None,
+            "subject_category": "Insolvency & Corporate Restructuring",
+            "preamble": "An Act to consolidate and amend the laws relating to reorganisation and insolvency resolution of corporate persons.",
+            "amendment_history": [],
+            "sections": [
+                {
+                    "chapter_number": "Part II, Chapter II",
+                    "chapter_title": "Corporate Insolvency Resolution Process",
+                    "section_number": "7",
+                    "section_title": "Initiation of corporate insolvency resolution process by financial creditor",
+                    "statutory_text": (
+                        "A financial creditor either by itself or jointly with other financial creditors may file an application for initiating "
+                        "corporate insolvency resolution process against a corporate debtor before the Adjudicating Authority (NCLT) when a default has occurred."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "Part II, Chapter II",
+                    "chapter_title": "Corporate Insolvency Resolution Process",
+                    "section_number": "9",
+                    "section_title": "Application for initiation of corporate insolvency resolution process by operational creditor",
+                    "statutory_text": (
+                        "After the expiry of ten days from the date of delivery of statutory demand notice or invoice under section 8, if payment "
+                        "is not received or dispute not notified, the operational creditor may file an application before the NCLT."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "Part II, Chapter II",
+                    "chapter_title": "Corporate Insolvency Resolution Process",
+                    "section_number": "14",
+                    "section_title": "Moratorium",
+                    "statutory_text": (
+                        "On insolvency commencement date, the Adjudicating Authority declares moratorium prohibiting institution or continuation of suits, "
+                        "transferring or disposing of debtor's assets, foreclosing security interests, and recovery of occupied property."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+            ],
+        },
+        # 20. The Protection of Children from Sexual Offences Act, 2012 (POCSO)
+        {
+            "title": "The Protection of Children from Sexual Offences Act, 2012",
+            "short_title": "POCSO Act, 2012",
+            "act_number": "Act No. 32 of 2012",
+            "enactment_year": 2012,
+            "enactment_date": date(2012, 6, 19),
+            "commencement_date": date(2012, 11, 14),
+            "effective_date": date(2012, 11, 14),
+            "status": "CURRENT",
+            "replaces_act_code": None,
+            "replaced_by_act_code": None,
+            "subject_category": "Criminal Law & Child Protection",
+            "preamble": "An Act to protect children from offences of sexual assault, sexual harassment and pornography.",
+            "amendment_history": [
+                {"date": "2019-08-16", "note": "Amended by Act 25 of 2019 introducing death penalty for aggravated penetrative sexual assault."}
+            ],
+            "sections": [
+                {
+                    "chapter_number": "II",
+                    "chapter_title": "Offences under the Act",
+                    "section_number": "4",
+                    "section_title": "Punishment for penetrative sexual assault",
+                    "statutory_text": (
+                        "Whoever commits penetrative sexual assault shall be punished with rigorous imprisonment for a term which shall not be less "
+                        "than twenty years, but which may extend to imprisonment for life, and shall also be liable to fine."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "V",
+                    "chapter_title": "Procedure for Reporting of Cases",
+                    "section_number": "19",
+                    "section_title": "Reporting of offences",
+                    "statutory_text": (
+                        "Mandatory reporting: Notwithstanding anything contained in the Code of Criminal Procedure, 1973, any person who has apprehension "
+                        "that an offence under this Act has been committed shall provide such information to Special Juvenile Police Unit or local police."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+            ],
+        },
     ]
 
     sections_lookup: Dict[str, LegalSection] = {}

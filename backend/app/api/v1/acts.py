@@ -1,4 +1,4 @@
-"""Bare Acts Library endpoints: /acts, /acts/{id}, /acts/{id}/sections."""
+"""Bare Acts Library endpoints: /acts, /acts/lookup, /acts/{id}, /acts/{id}/sections."""
 
 from __future__ import annotations
 
@@ -10,11 +10,18 @@ from sqlalchemy import or_
 from sqlalchemy.orm import Session
 
 from app.core.exceptions import ResourceNotFoundError
-from app.core.security import get_current_user
+from app.core.security import get_optional_current_user
 from app.database.session import get_db
 from app.models.legal_corpus import LegalAct, LegalSection
 from app.models.user import User
-from app.schemas.legal import LegalActDetailResponse, LegalActResponse, LegalSectionResponse
+from app.schemas.legal import (
+    ActLookupRequest,
+    ActLookupResponse,
+    LegalActDetailResponse,
+    LegalActResponse,
+    LegalSectionResponse,
+)
+from app.services.statutory_discovery import StatutoryDiscoveryService
 
 router = APIRouter(prefix="/acts", tags=["Bare Acts Library"])
 
@@ -24,9 +31,10 @@ def list_acts(
     q: Optional[str] = Query(default=None),
     status: Optional[str] = Query(default=None, pattern="^(CURRENT|HISTORICAL)$"),
     subject: Optional[str] = Query(default=None),
-    current_user: User = Depends(get_current_user),
+    current_user: Optional[User] = Depends(get_optional_current_user),
     db: Session = Depends(get_db),
 ) -> List[LegalActResponse]:
+    """List all Indian bare acts with optional text and status filtering."""
     query_obj = db.query(LegalAct)
     if q and q.strip():
         term = f"%{q.strip()}%"
@@ -50,16 +58,39 @@ def list_acts(
         sec_count = db.query(LegalSection).filter(LegalSection.act_id == act.id).count()
         resp = LegalActResponse.model_validate(act)
         resp.section_count = sec_count
+        resp.sections_count = sec_count
+        resp.source_name = act.source.name if act.source else "India Code — Legislative Department"
+        resp.official_url = act.source.official_url if act.source else "https://www.indiacode.nic.in"
         out.append(resp)
     return out
+
+
+@router.post("/lookup", response_model=ActLookupResponse)
+def universal_act_lookup(
+    payload: ActLookupRequest,
+    current_user: Optional[User] = Depends(get_optional_current_user),
+    db: Session = Depends(get_db),
+) -> ActLookupResponse:
+    """Universal On-Demand Indian Statutory Discovery & Grounding.
+
+    Searches PostgreSQL, and if an Act or Section is not yet indexed, dynamically extracts,
+    verifies, and persists the authentic provisions from India Code & Gemini AI.
+    """
+    service = StatutoryDiscoveryService(db)
+    return service.lookup_or_discover(
+        query=payload.query,
+        act_title_hint=payload.act_title_hint,
+        section_number_hint=payload.section_number_hint,
+    )
 
 
 @router.get("/{act_id}", response_model=LegalActDetailResponse)
 def get_act_detail(
     act_id: uuid.UUID,
-    current_user: User = Depends(get_current_user),
+    current_user: Optional[User] = Depends(get_optional_current_user),
     db: Session = Depends(get_db),
 ) -> LegalActDetailResponse:
+    """Get full details of a Bare Act including all indexed sections."""
     act = db.query(LegalAct).filter(LegalAct.id == act_id).first()
     if act is None:
         raise ResourceNotFoundError("Bare Act not found")
@@ -70,14 +101,23 @@ def get_act_detail(
         s_resp = LegalSectionResponse.model_validate(sec)
         s_resp.act_short_title = act.short_title
         s_resp.act_status = act.status
+        s_resp.chapter_number = sec.chapter_number or ""
+        s_resp.chapter_title = sec.chapter_title or ""
         sections_out.append(s_resp)
         if sec.chapter_title:
-            label = f"Chapter {sec.chapter_number}: {sec.chapter_title}" if sec.chapter_number else sec.chapter_title
+            label = (
+                f"Chapter {sec.chapter_number}: {sec.chapter_title}"
+                if sec.chapter_number
+                else sec.chapter_title
+            )
             if label not in chapters_seen:
                 chapters_seen.append(label)
 
     detail = LegalActDetailResponse.model_validate(act)
     detail.section_count = len(sections_out)
+    detail.sections_count = len(sections_out)
+    detail.source_name = act.source.name if act.source else "India Code — Legislative Department"
+    detail.official_url = act.source.official_url if act.source else "https://www.indiacode.nic.in"
     detail.chapters = chapters_seen
     detail.sections = sections_out
     return detail
@@ -88,9 +128,10 @@ def list_act_sections(
     act_id: uuid.UUID,
     q: Optional[str] = Query(default=None),
     chapter: Optional[str] = Query(default=None),
-    current_user: User = Depends(get_current_user),
+    current_user: Optional[User] = Depends(get_optional_current_user),
     db: Session = Depends(get_db),
 ) -> List[LegalSectionResponse]:
+    """List sections for a given bare act with optional full-text search."""
     act = db.query(LegalAct).filter(LegalAct.id == act_id).first()
     if act is None:
         raise ResourceNotFoundError("Bare Act not found")
@@ -120,5 +161,7 @@ def list_act_sections(
         resp = LegalSectionResponse.model_validate(sec)
         resp.act_short_title = act.short_title
         resp.act_status = act.status
+        resp.chapter_number = sec.chapter_number or ""
+        resp.chapter_title = sec.chapter_title or ""
         out.append(resp)
     return out

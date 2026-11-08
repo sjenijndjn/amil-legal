@@ -389,6 +389,176 @@ export const SEED_LEGAL_ACTS: LegalAct[] = [
     ],
     sections_count: 167,
     official_url: "https://www.indiacode.nic.in"
+  },
+  {
+    id: "act-ni-1881",
+    source_id: "src-indiacode",
+    source_name: "India Code Digital Repository",
+    title: "The Negotiable Instruments Act, 1881",
+    short_title: "NI Act, 1881",
+    act_number: "Act No. 26 of 1881",
+    enactment_year: 1881,
+    enactment_date: "1881-12-09",
+    commencement_date: "1882-03-01",
+    effective_date: "1882-03-01",
+    status: "CURRENT",
+    replaces_act_code: null,
+    replaced_by_act_code: null,
+    subject_category: "Banking & Commercial Law",
+    preamble: "An Act to define and amend the law relating to Promissory Notes, Bills of Exchange and Cheques.",
+    amendment_history: [
+      { year: 2018, note: "Amended by Act 20 of 2018 inserting Section 143A and Section 148." }
+    ],
+    sections_count: 148,
+    official_url: "https://www.indiacode.nic.in"
+  },
+  {
+    id: "act-arb-1996",
+    source_id: "src-indiacode",
+    source_name: "India Code Digital Repository",
+    title: "The Arbitration and Conciliation Act, 1996",
+    short_title: "Arbitration Act, 1996",
+    act_number: "Act No. 26 of 1996",
+    enactment_year: 1996,
+    enactment_date: "1996-08-16",
+    commencement_date: "1996-08-22",
+    effective_date: "1996-08-22",
+    status: "CURRENT",
+    replaces_act_code: "Arbitration Act, 1940",
+    replaced_by_act_code: null,
+    subject_category: "Dispute Resolution & Arbitration",
+    preamble: "An Act to consolidate and amend the law relating to domestic arbitration, international commercial arbitration and enforcement of foreign arbitral awards.",
+    amendment_history: [
+      { year: 2015, note: "Major reform under Act 3 of 2016 inserting Section 29A and amending Section 8, 9, 11, 34." }
+    ],
+    sections_count: 86,
+    official_url: "https://www.indiacode.nic.in"
+  },
+  {
+    id: "act-sra-1963",
+    source_id: "src-indiacode",
+    source_name: "India Code Digital Repository",
+    title: "The Specific Relief Act, 1963",
+    short_title: "Specific Relief Act, 1963",
+    act_number: "Act No. 47 of 1963",
+    enactment_year: 1963,
+    enactment_date: "1963-12-13",
+    commencement_date: "1964-03-01",
+    effective_date: "1964-03-01",
+    status: "CURRENT",
+    replaces_act_code: "Specific Relief Act, 1877",
+    replaced_by_act_code: null,
+    subject_category: "Civil Law & Remedies",
+    preamble: "An Act to define and amend the law relating to certain kinds of specific relief.",
+    amendment_history: [
+      { year: 2018, note: "Amended by Act 18 of 2018 making specific performance of contract mandatory." }
+    ],
+    sections_count: 44,
+    official_url: "https://www.indiacode.nic.in"
+  },
+  {
+    id: "act-cpc-1908",
+    source_id: "src-indiacode",
+    source_name: "India Code Digital Repository",
+    title: "The Code of Civil Procedure, 1908",
+    short_title: "CPC, 1908",
+    act_number: "Act No. 5 of 1908",
+    enactment_year: 1908,
+    enactment_date: "1908-03-21",
+    commencement_date: "1909-01-01",
+    effective_date: "1909-01-01",
+    status: "CURRENT",
+    replaces_act_code: null,
+    replaced_by_act_code: null,
+    subject_category: "Civil Procedure & Adjudication",
+    preamble: "An Act to consolidate and amend the laws relating to the procedure of the Courts of Civil Judicature.",
+    amendment_history: [
+      { year: 2002, note: "Major amendments in procedure, summons, and appeals under CPC Amendment Acts of 1999 and 2002." }
+    ],
+    sections_count: 158,
+    official_url: "https://www.indiacode.nic.in"
+  },
+  {
+    id: "act-tpa-1882",
+    source_id: "src-indiacode",
+    source_name: "India Code Digital Repository",
+    title: "The Transfer of Property Act, 1882",
+    short_title: "Transfer of Property Act, 1882",
+    act_number: "Act No. 4 of 1882",
+    enactment_year: 1882,
+    enactment_date: "1882-02-17",
+    commencement_date: "1882-07-01",
+    effective_date: "1882-07-01",
+    status: "CURRENT",
+    replaces_act_code: null,
+    replaced_by_act_code: null,
+    subject_category: "Property Law",
+    preamble: "An Act to define and amend certain parts of the law relating to the transfer of property by act of parties.",
+    amendment_history: [],
+    sections_count: 137,
+    official_url: "https://www.indiacode.nic.in"
+  },
+  {
+    id: "act-lim-1963",
+    source_id: "src-indiacode",
+    source_name: "India Code Digital Repository",
+    title: "The Limitation Act, 1963",
+    short_title: "Limitation Act, 1963",
+    act_number: "Act No. 36 of 1963",
+    enactment_year: 1963,
+    enactment_date: "1963-10-05",
+    commencement_date: "1964-01-01",
+    effective_date: "1964-01-01",
+    status: "CURRENT",
+    replaces_act_code: "Limitation Act, 1908",
+    replaced_by_act_code: null,
+    subject_category: "Procedural Law & Timelines",
+    preamble: "An Act to consolidate and amend the law for the limitation of suits and other proceedings.",
+    amendment_history: [],
+    sections_count: 32,
+    official_url: "https://www.indiacode.nic.in"
+  },
+  {
+    id: "act-ibc-2016",
+    source_id: "src-indiacode",
+    source_name: "India Code Digital Repository",
+    title: "The Insolvency and Bankruptcy Code, 2016",
+    short_title: "IBC, 2016",
+    act_number: "Act No. 31 of 2016",
+    enactment_year: 2016,
+    enactment_date: "2016-05-28",
+    commencement_date: "2016-12-01",
+    effective_date: "2016-12-01",
+    status: "CURRENT",
+    replaces_act_code: null,
+    replaced_by_act_code: null,
+    subject_category: "Insolvency & Corporate Restructuring",
+    preamble: "An Act to consolidate and amend the laws relating to reorganisation and insolvency resolution of corporate persons.",
+    amendment_history: [],
+    sections_count: 255,
+    official_url: "https://www.indiacode.nic.in"
+  },
+  {
+    id: "act-pocso-2012",
+    source_id: "src-indiacode",
+    source_name: "India Code Digital Repository",
+    title: "The Protection of Children from Sexual Offences Act, 2012",
+    short_title: "POCSO Act, 2012",
+    act_number: "Act No. 32 of 2012",
+    enactment_year: 2012,
+    enactment_date: "2012-06-19",
+    commencement_date: "2012-11-14",
+    effective_date: "2012-11-14",
+    status: "CURRENT",
+    replaces_act_code: null,
+    replaced_by_act_code: null,
+    subject_category: "Criminal Law & Child Protection",
+    preamble: "An Act to protect children from offences of sexual assault, sexual harassment and pornography.",
+    amendment_history: [
+      { year: 2019, note: "Amended by Act 25 of 2019 introducing death penalty for aggravated penetrative sexual assault." }
+    ],
+    sections_count: 46,
+    official_url: "https://www.indiacode.nic.in"
   }
 ];
 
@@ -606,6 +776,236 @@ export const SEED_LEGAL_SECTIONS: LegalSection[] = [
         "Proceedings initiated on or after July 1, 2024 require certification under Section 63(4) and the Schedule to the BSA 2023."
       ]
     }
+  },
+  {
+    id: "sec-ni-138",
+    act_id: "act-ni-1881",
+    act_short_title: "NI Act, 1881",
+    part_number: "Chapter XVII",
+    chapter_number: "XVII",
+    chapter_title: "Of Penalties in Case of Dishonour of Certain Cheques for Insufficiency of Funds in the Accounts",
+    section_number: "138",
+    section_title: "Dishonour of cheque for insufficiency, etc., of funds in the account",
+    statutory_text:
+      "Where any cheque drawn by a person on an account maintained by him with a banker for payment of any amount of money to another person from out of that account for the discharge, in whole or in part, of any debt or other liability, is returned by the bank unpaid, either because of the amount of money standing to the credit of that account is insufficient to honour the cheque or that it exceeds the amount arranged to be paid from that account by an agreement made with that bank, such person shall be deemed to have committed an offence and shall, without prejudice to any other provisions of this Act, be punished with imprisonment for a term which may be extended to two years, or with fine which may extend to twice the amount of the cheque, or with both:\n\nProvided that nothing contained in this section shall apply unless—\n(a) the cheque has been presented to the bank within a period of three months from the date on which it is drawn or within the period of its validity, whichever is earlier;\n(b) the payee or the holder in due course of the cheque, as the case may be, makes a demand for the payment of the said amount of money by giving a notice in writing, to the drawer of the cheque, within thirty days of the receipt of information by him from the bank regarding the return of the cheque as unpaid; and\n(c) the drawer of such cheque fails to make the payment of the said amount of money to the payee or, as the case may be, to the holder in due course of the cheque, within fifteen days of the receipt of the said notice.\n\nExplanation.—For the purposes of this section, 'debt or other liability' means a legally enforceable debt or other liability.",
+    amendment_notes: "Amended by Act 55 of 2002 and Act 20 of 2018.",
+    effective_date: "1882-03-01",
+    corresponding_historical_section: null,
+    historical_comparison: null
+  },
+  {
+    id: "sec-ni-139",
+    act_id: "act-ni-1881",
+    act_short_title: "NI Act, 1881",
+    part_number: "Chapter XVII",
+    chapter_number: "XVII",
+    chapter_title: "Of Penalties in Case of Dishonour of Certain Cheques",
+    section_number: "139",
+    section_title: "Presumption in favour of holder",
+    statutory_text:
+      "It shall be presumed, unless the contrary is proved, that the holder of a cheque received the cheque of the nature referred to in section 138 for the discharge, in whole or in part, of any debt or other liability.",
+    effective_date: "1882-03-01",
+    corresponding_historical_section: null,
+    historical_comparison: null
+  },
+  {
+    id: "sec-ni-141",
+    act_id: "act-ni-1881",
+    act_short_title: "NI Act, 1881",
+    part_number: "Chapter XVII",
+    chapter_number: "XVII",
+    chapter_title: "Of Penalties in Case of Dishonour of Certain Cheques",
+    section_number: "141",
+    section_title: "Offences by companies",
+    statutory_text:
+      "(1) If the person committing an offence under section 138 is a company, every person who; at the time the offence was committed, was in charge of, and was responsible to the company for the conduct of the business of the company, as well as the company, shall be deemed to be guilty of the offence and shall be liable to be proceeded against and punished accordingly.\n\n(2) Where any offence under this Act has been committed by a company and it is proved that the offence has been committed with the consent or connivance of, or is attributable to, any neglect on the part of, any director, manager, secretary or other officer of the company, such director, manager, secretary or other officer shall also be deemed to be guilty of that offence.",
+    effective_date: "1882-03-01",
+    corresponding_historical_section: null,
+    historical_comparison: null
+  },
+  {
+    id: "sec-arb-9",
+    act_id: "act-arb-1996",
+    act_short_title: "Arbitration Act, 1996",
+    part_number: "Part I",
+    chapter_number: "II",
+    chapter_title: "Arbitration Agreement",
+    section_number: "9",
+    section_title: "Interim measures, etc. by Court",
+    statutory_text:
+      "(1) A party may, before or during arbitral proceedings or at any time after the making of the arbitral award but before it is enforced in accordance with section 36, apply to a court for interim measures of protection.\n(2) Where, before the commencement of the arbitral proceedings, a Court passes an order for any interim measure of protection under sub-section (1), the arbitral proceedings shall be commenced within a period of ninety days from the date of such order or within such further time as the Court may determine.\n(3) Once the arbitral tribunal has been constituted, the Court shall not entertain an application under sub-section (1), unless the Court finds that circumstances exist which may not render the remedy provided under section 17 efficacious.",
+    amendment_notes: "Sub-sections (2) and (3) inserted by 2015 Amendment Act w.e.f. 23-10-2015.",
+    effective_date: "1996-08-22",
+    corresponding_historical_section: null,
+    historical_comparison: null
+  },
+  {
+    id: "sec-arb-34",
+    act_id: "act-arb-1996",
+    act_short_title: "Arbitration Act, 1996",
+    part_number: "Part I",
+    chapter_number: "VII",
+    chapter_title: "Recourse against Arbitral Award",
+    section_number: "34",
+    section_title: "Application for setting aside arbitral award",
+    statutory_text:
+      "(1) Recourse to a Court against an arbitral award may be made only by an application for setting aside such award in accordance with sub-section (2) and sub-section (2A).\n(2) An arbitral award may be set aside by the Court only if: party was under incapacity, agreement not valid, proper notice not given, award beyond scope, or award in conflict with public policy of India.\n(2A) An arbitral award arising out of domestic arbitrations may also be set aside if the Court finds that the award is vitiated by patent illegality appearing on the face of the award (provided it is not merely an erroneous application of law or reappreciation of evidence).",
+    amendment_notes: "Ground of patent illegality under (2A) inserted by 2015 Amendment Act.",
+    effective_date: "1996-08-22",
+    corresponding_historical_section: null,
+    historical_comparison: null
+  },
+  {
+    id: "sec-sra-6",
+    act_id: "act-sra-1963",
+    act_short_title: "Specific Relief Act, 1963",
+    part_number: "Part II",
+    chapter_number: "I",
+    chapter_title: "Recovering Possession of Property",
+    section_number: "6",
+    section_title: "Suit by person dispossessed of immovable property",
+    statutory_text:
+      "(1) If any person is dispossessed without his consent of immovable property otherwise than in due course of law, he or any person through whom he has been in possession or any person claiming through him may, by suit, recover possession thereof, notwithstanding any other title that may be set up in such suit.\n(2) No suit under this section shall be brought— (a) after the expiry of six months from the date of dispossession; or (b) against the Government.\n(3) No appeal shall lie from any order or decree passed in any suit instituted under this section, nor shall any review of any such order or decree be allowed.",
+    effective_date: "1964-03-01",
+    corresponding_historical_section: null,
+    historical_comparison: null
+  },
+  {
+    id: "sec-sra-10",
+    act_id: "act-sra-1963",
+    act_short_title: "Specific Relief Act, 1963",
+    part_number: "Part II",
+    chapter_number: "II",
+    chapter_title: "Specific Performance of Contracts",
+    section_number: "10",
+    section_title: "Specific performance in respect of contracts",
+    statutory_text:
+      "The specific performance of a contract shall be enforced by the court subject to the provisions contained in sub-section (2) of section 11, section 14 and section 16.",
+    amendment_notes: "Substituted by Act 18 of 2018 making specific performance a mandatory rule instead of discretionary relief.",
+    effective_date: "2018-10-01",
+    corresponding_historical_section: null,
+    historical_comparison: null
+  },
+  {
+    id: "sec-cpc-9",
+    act_id: "act-cpc-1908",
+    act_short_title: "CPC, 1908",
+    part_number: "Preliminary",
+    chapter_number: "Preliminary",
+    chapter_title: "Jurisdiction of Courts",
+    section_number: "9",
+    section_title: "Courts to try all civil suits unless barred",
+    statutory_text:
+      "The Courts shall (subject to the provisions herein contained) have jurisdiction to try all suits of a civil nature excepting suits of which their cognizance is either expressly or impliedly barred.\n\nExplanation I.—A suit in which the right to property or to an office is contested is a suit of a civil nature, notwithstanding that such right may depend entirely on the decision of questions as to religious rites or ceremonies.\n\nExplanation II.—For the purposes of this section, it is immaterial whether or not any fees are attached to the office referred to in Explanation I or whether or not such office is attached to a particular place.",
+    effective_date: "1909-01-01",
+    corresponding_historical_section: null,
+    historical_comparison: null
+  },
+  {
+    id: "sec-cpc-11",
+    act_id: "act-cpc-1908",
+    act_short_title: "CPC, 1908",
+    part_number: "Part I",
+    chapter_number: "Part I",
+    chapter_title: "Suits in General — Jurisdiction and Res Judicata",
+    section_number: "11",
+    section_title: "Res Judicata",
+    statutory_text:
+      "No Court shall try any suit or issue in which the matter directly and substantially in issue has been directly and substantially in issue in a former suit between the same parties, or between parties under whom they or any of them claim, litigating under the same title, in a Court competent to try such subsequent suit and has been heard and finally decided by such Court.",
+    effective_date: "1909-01-01",
+    corresponding_historical_section: null,
+    historical_comparison: null
+  },
+  {
+    id: "sec-cpc-o7r11",
+    act_id: "act-cpc-1908",
+    act_short_title: "CPC, 1908",
+    part_number: "First Schedule",
+    chapter_number: "Order VII",
+    chapter_title: "Order VII — Plaint",
+    section_number: "Order VII Rule 11",
+    section_title: "Rejection of plaint",
+    statutory_text:
+      "The plaint shall be rejected in the following cases:—\n(a) where it does not disclose a cause of action;\n(b) where the relief claimed is undervalued, and the plaintiff, on being required by the Court to correct the valuation within a time to be fixed by the Court, fails to do so;\n(c) where the relief claimed is properly valued, but the plaint is returned upon paper insufficiently stamped, and the plaintiff fails to supply the requisite stamp-paper within time;\n(d) where the suit appears from the statement in the plaint to be barred by any law.",
+    effective_date: "1909-01-01",
+    corresponding_historical_section: null,
+    historical_comparison: null
+  },
+  {
+    id: "sec-cpc-o39r1",
+    act_id: "act-cpc-1908",
+    act_short_title: "CPC, 1908",
+    part_number: "First Schedule",
+    chapter_number: "Order XXXIX",
+    chapter_title: "Order XXXIX — Temporary Injunctions and Interlocutory Orders",
+    section_number: "Order XXXIX Rules 1 & 2",
+    section_title: "Cases in which temporary injunction may be granted",
+    statutory_text:
+      "Where in any suit it is proved by affidavit or otherwise: (a) that any property in dispute in a suit is in danger of being wasted, damaged or alienated by any party to the suit, or wrongfully sold in execution of a decree; or (b) that the defendant threatens, or intends, to remove or dispose of his property with a view to defrauding his creditors; (c) that the defendant threatens to dispossess the plaintiff, the Court may by order grant a temporary injunction.",
+    effective_date: "1909-01-01",
+    corresponding_historical_section: null,
+    historical_comparison: null
+  },
+  {
+    id: "sec-tpa-52",
+    act_id: "act-tpa-1882",
+    act_short_title: "Transfer of Property Act, 1882",
+    part_number: "Chapter II",
+    chapter_number: "II",
+    chapter_title: "Of Transfers of Property by Act of Parties",
+    section_number: "52",
+    section_title: "Transfer of property pending suit relating thereto (Lis Pendens)",
+    statutory_text:
+      "During the pendency in any Court having authority within the limits of India of any suit or proceeding which is not collusive and in which any right to immovable property is directly and specifically in question, the property cannot be transferred or otherwise dealt with by any party to the suit or proceeding so as to affect the rights of any other party thereto under any decree or order which may be made therein, except under the authority of the Court and on such terms as it may impose.",
+    effective_date: "1882-07-01",
+    corresponding_historical_section: null,
+    historical_comparison: null
+  },
+  {
+    id: "sec-lim-5",
+    act_id: "act-lim-1963",
+    act_short_title: "Limitation Act, 1963",
+    part_number: "Part II",
+    chapter_number: "Part II",
+    chapter_title: "Limitation of Suits, Appeals and Applications",
+    section_number: "5",
+    section_title: "Extension of prescribed period in certain cases (Condonation of Delay)",
+    statutory_text:
+      "Any appeal or any application, other than an application under any of the provisions of Order XXI of the Code of Civil Procedure, 1908, may be admitted after the prescribed period, if the appellant or the applicant satisfies the court that he had sufficient cause for not preferring the appeal or making the application within such period.",
+    effective_date: "1964-01-01",
+    corresponding_historical_section: null,
+    historical_comparison: null
+  },
+  {
+    id: "sec-ibc-7",
+    act_id: "act-ibc-2016",
+    act_short_title: "IBC, 2016",
+    part_number: "Part II",
+    chapter_number: "Chapter II",
+    chapter_title: "Corporate Insolvency Resolution Process",
+    section_number: "7",
+    section_title: "Initiation of CIRP by financial creditor",
+    statutory_text:
+      "A financial creditor either by itself or jointly with other financial creditors may file an application for initiating corporate insolvency resolution process against a corporate debtor before the Adjudicating Authority (NCLT) when a default has occurred.",
+    effective_date: "2016-12-01",
+    corresponding_historical_section: null,
+    historical_comparison: null
+  },
+  {
+    id: "sec-pocso-4",
+    act_id: "act-pocso-2012",
+    act_short_title: "POCSO Act, 2012",
+    part_number: "Chapter II",
+    chapter_number: "II",
+    chapter_title: "Offences under the Act",
+    section_number: "4",
+    section_title: "Punishment for penetrative sexual assault",
+    statutory_text:
+      "Whoever commits penetrative sexual assault shall be punished with rigorous imprisonment for a term which shall not be less than twenty years, but which may extend to imprisonment for life, and shall also be liable to fine, or with death in aggravated cases.",
+    amendment_notes: "Amended by Act 25 of 2019.",
+    effective_date: "2012-11-14",
+    corresponding_historical_section: null,
+    historical_comparison: null
   }
 ];
 

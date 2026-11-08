@@ -768,31 +768,182 @@ export const api = {
 
   // 6. Bare Acts Library
   async getActs(status?: "CURRENT" | "HISTORICAL", searchQuery = ""): Promise<LegalAct[]> {
-    const q = searchQuery.trim().toLowerCase();
+    const q = searchQuery.trim();
+    const params = new URLSearchParams();
+    if (status) params.set("status", status);
+    if (q) params.set("q", q);
+    const qs = params.toString() ? `?${params.toString()}` : "";
+
+    const remote = await requestBackend<any[]>(`/acts${qs}`);
+    if (remote && Array.isArray(remote) && remote.length > 0) {
+      const remoteActs: LegalAct[] = remote.map((a) => ({
+        id: String(a.id),
+        source_id: String(a.source_id),
+        source_name: a.source_name || "India Code — Legislative Department",
+        title: a.title,
+        short_title: a.short_title,
+        act_number: a.act_number,
+        enactment_year: a.enactment_year,
+        enactment_date: a.enactment_date ? String(a.enactment_date) : "N/A",
+        commencement_date: a.commencement_date ? String(a.commencement_date) : "N/A",
+        effective_date: a.effective_date ? String(a.effective_date) : "N/A",
+        status: (a.status as any) || "CURRENT",
+        replaces_act_code: a.replaces_act_code || null,
+        replaced_by_act_code: a.replaced_by_act_code || null,
+        subject_category: a.subject_category || "General Legislation",
+        preamble: a.preamble || "",
+        amendment_history: Array.isArray(a.amendment_history) ? a.amendment_history : [],
+        sections_count: a.sections_count ?? a.section_count ?? 0,
+        official_url: a.official_url || "https://www.indiacode.nic.in"
+      }));
+
+      // Also merge any offline seed acts not present in remote
+      const seenTitles = new Set(remoteActs.map((x) => x.short_title.toLowerCase()));
+      const extraSeed = SEED_LEGAL_ACTS.filter((s) => {
+        if (status && s.status !== status) return false;
+        if (q) {
+          const qLower = q.toLowerCase();
+          const match =
+            s.title.toLowerCase().includes(qLower) ||
+            s.short_title.toLowerCase().includes(qLower) ||
+            s.subject_category.toLowerCase().includes(qLower) ||
+            s.act_number.toLowerCase().includes(qLower);
+          if (!match) return false;
+        }
+        return !seenTitles.has(s.short_title.toLowerCase());
+      });
+
+      return [...remoteActs, ...extraSeed];
+    }
+
+    const qLower = q.toLowerCase();
     return SEED_LEGAL_ACTS.filter((a) => {
       if (status && a.status !== status) return false;
-      if (!q) return true;
+      if (!qLower) return true;
       return (
-        a.title.toLowerCase().includes(q) ||
-        a.short_title.toLowerCase().includes(q) ||
-        a.subject_category.toLowerCase().includes(q) ||
-        a.act_number.toLowerCase().includes(q)
+        a.title.toLowerCase().includes(qLower) ||
+        a.short_title.toLowerCase().includes(qLower) ||
+        a.subject_category.toLowerCase().includes(qLower) ||
+        a.act_number.toLowerCase().includes(qLower)
       );
     });
   },
 
   async getActSections(actId?: string, searchQuery = ""): Promise<LegalSection[]> {
-    const q = searchQuery.trim().toLowerCase();
+    const q = searchQuery.trim();
+    if (actId) {
+      const qs = q ? `?q=${encodeURIComponent(q)}` : "";
+      const remote = await requestBackend<any[]>(`/acts/${actId}/sections${qs}`);
+      if (remote && Array.isArray(remote) && remote.length > 0) {
+        return remote.map((s) => ({
+          id: String(s.id),
+          act_id: String(s.act_id),
+          act_short_title: s.act_short_title || "",
+          part_number: s.part_number || undefined,
+          chapter_number: s.chapter_number || "General",
+          chapter_title: s.chapter_title || "General Provisions",
+          section_number: s.section_number,
+          section_title: s.section_title,
+          statutory_text: s.statutory_text,
+          amendment_notes: s.amendment_notes || undefined,
+          effective_date: s.effective_date ? String(s.effective_date) : "Current",
+          corresponding_historical_section: s.corresponding_historical_section || null,
+          historical_comparison: s.historical_comparison || null
+        }));
+      }
+    }
+
+    const qLower = q.toLowerCase();
     return SEED_LEGAL_SECTIONS.filter((s) => {
       if (actId && s.act_id !== actId) return false;
-      if (!q) return true;
+      if (!qLower) return true;
       return (
-        s.section_number.toLowerCase().includes(q) ||
-        s.section_title.toLowerCase().includes(q) ||
-        s.statutory_text.toLowerCase().includes(q) ||
-        (s.corresponding_historical_section || "").toLowerCase().includes(q)
+        s.section_number.toLowerCase().includes(qLower) ||
+        s.section_title.toLowerCase().includes(qLower) ||
+        s.statutory_text.toLowerCase().includes(qLower) ||
+        (s.corresponding_historical_section || "").toLowerCase().includes(qLower)
       );
     });
+  },
+
+  async lookupUniversalAct(
+    query: string,
+    actHint?: string,
+    secHint?: string
+  ): Promise<{
+    act: LegalAct;
+    matched_section?: LegalSection | null;
+    all_matched_sections: LegalSection[];
+    is_newly_discovered: boolean;
+    source_message: string;
+  } | null> {
+    const remote = await requestBackend<any>(
+      "/acts/lookup",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          query,
+          act_title_hint: actHint || null,
+          section_number_hint: secHint || null
+        })
+      },
+      45000
+    );
+
+    if (!remote || !remote.act) return null;
+
+    const act: LegalAct = {
+      id: String(remote.act.id),
+      source_id: String(remote.act.source_id),
+      source_name: remote.act.source_name || "India Code — Legislative Department",
+      title: remote.act.title,
+      short_title: remote.act.short_title,
+      act_number: remote.act.act_number,
+      enactment_year: remote.act.enactment_year,
+      enactment_date: remote.act.enactment_date ? String(remote.act.enactment_date) : "N/A",
+      commencement_date: remote.act.commencement_date ? String(remote.act.commencement_date) : "N/A",
+      effective_date: remote.act.effective_date ? String(remote.act.effective_date) : "N/A",
+      status: remote.act.status || "CURRENT",
+      replaces_act_code: remote.act.replaces_act_code || null,
+      replaced_by_act_code: remote.act.replaced_by_act_code || null,
+      subject_category: remote.act.subject_category || "General Legislation",
+      preamble: remote.act.preamble || "",
+      amendment_history: Array.isArray(remote.act.amendment_history) ? remote.act.amendment_history : [],
+      sections_count: remote.act.sections_count ?? remote.act.section_count ?? (remote.act.sections ? remote.act.sections.length : 0),
+      official_url: remote.act.official_url || "https://www.indiacode.nic.in"
+    };
+
+    const mapSection = (s: any): LegalSection => ({
+      id: String(s.id),
+      act_id: String(s.act_id || act.id),
+      act_short_title: s.act_short_title || act.short_title,
+      part_number: s.part_number || undefined,
+      chapter_number: s.chapter_number || "General",
+      chapter_title: s.chapter_title || "General Provisions",
+      section_number: s.section_number,
+      section_title: s.section_title,
+      statutory_text: s.statutory_text,
+      amendment_notes: s.amendment_notes || undefined,
+      effective_date: s.effective_date ? String(s.effective_date) : "Current",
+      corresponding_historical_section: s.corresponding_historical_section || null,
+      historical_comparison: s.historical_comparison || null
+    });
+
+    const all_matched_sections: LegalSection[] = (
+      remote.all_matched_sections ||
+      remote.act.sections ||
+      []
+    ).map(mapSection);
+
+    const matched_section = remote.matched_section ? mapSection(remote.matched_section) : null;
+
+    return {
+      act,
+      matched_section,
+      all_matched_sections,
+      is_newly_discovered: !!remote.is_newly_discovered,
+      source_message: remote.source_message || "Verified from India Code"
+    };
   },
 
   // 7. Case Law Research

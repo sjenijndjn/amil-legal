@@ -50,6 +50,8 @@ class LegalActResponse(BaseModel):
 
     id: uuid.UUID
     source_id: uuid.UUID
+    source_name: Optional[str] = "India Code — Legislative Department"
+    official_url: Optional[str] = "https://www.indiacode.nic.in"
     title: str
     short_title: str
     act_number: str
@@ -63,12 +65,27 @@ class LegalActResponse(BaseModel):
     subject_category: str
     preamble: str
     section_count: int = 0
+    sections_count: int = 0
 
 
 class LegalActDetailResponse(LegalActResponse):
-    amendment_history: List[Dict[str, Any]]
+    amendment_history: List[Dict[str, Any]] = []
     chapters: List[str] = []
     sections: List[LegalSectionResponse] = []
+
+
+class ActLookupRequest(BaseModel):
+    query: str
+    act_title_hint: Optional[str] = None
+    section_number_hint: Optional[str] = None
+
+
+class ActLookupResponse(BaseModel):
+    act: LegalActDetailResponse
+    matched_section: Optional[LegalSectionResponse] = None
+    all_matched_sections: List[LegalSectionResponse] = []
+    is_newly_discovered: bool = False
+    source_message: str = "Verified from India Code & Grounded Indian Legal Corpus"
 
 
 class CitationItemResponse(BaseModel):
