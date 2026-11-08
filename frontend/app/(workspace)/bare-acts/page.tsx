@@ -25,12 +25,21 @@ import { useToast } from "@/components/ui/Toast";
 
 const QUICK_DISCOVERY_PROVISIONS = [
   "Section 138 NI Act",
+  "Section 166 Motor Vehicles Act",
+  "Section 45 PMLA",
   "Order 39 Rule 1 CPC",
   "Section 9 Arbitration Act",
+  "Section 13B Hindu Marriage Act",
+  "Section 12 Domestic Violence Act",
   "Section 6 Specific Relief Act",
+  "Section 6 RTI Act",
+  "Section 4 Partnership Act",
   "Section 52 Transfer of Property Act",
   "Section 5 Limitation Act",
   "Section 7 IBC",
+  "Section 37 NDPS Act",
+  "Section 18 RERA",
+  "Section 4 POSH Act",
   "Section 69 BNS",
   "Section 528 BNSS",
   "Section 63 BSA"

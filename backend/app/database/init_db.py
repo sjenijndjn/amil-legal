@@ -1422,6 +1422,318 @@ def _seed_acts_and_sections(
                 },
             ],
         },
+        # 21. The Motor Vehicles Act, 1988
+        {
+            "title": "The Motor Vehicles Act, 1988",
+            "short_title": "Motor Vehicles Act, 1988",
+            "act_number": "Act No. 59 of 1988",
+            "enactment_year": 1988,
+            "enactment_date": date(1988, 10, 14),
+            "commencement_date": date(1989, 7, 1),
+            "effective_date": date(1989, 7, 1),
+            "status": "CURRENT",
+            "replaces_act_code": None,
+            "replaced_by_act_code": None,
+            "subject_category": "Transport & Tort Law",
+            "preamble": "An Act to consolidate and amend the law relating to motor vehicles.",
+            "amendment_history": [
+                {"date": "2019-09-01", "note": "Motor Vehicles (Amendment) Act, 2019 enhancing fines and setting 6-month claim limit."}
+            ],
+            "sections": [
+                {
+                    "chapter_number": "XII",
+                    "chapter_title": "Claims Tribunals",
+                    "section_number": "166",
+                    "section_title": "Application for compensation",
+                    "statutory_text": (
+                        "(1) An application for compensation arising out of an accident of the nature specified in sub-section (1) of section 165 may be made—\n"
+                        "(a) by the person who has sustained the injury; or\n"
+                        "(b) by the owner of the property; or\n"
+                        "(c) where death has resulted from the accident, by all or any of the legal representatives of the deceased; or\n"
+                        "(d) by any agent duly authorised by the person injured or all or any of the legal representatives of the deceased, as the case may be.\n"
+                        "(3) No application for compensation shall be entertained unless it is made within six months of the occurrence of the accident."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "VIII",
+                    "chapter_title": "Control of Traffic",
+                    "section_number": "134",
+                    "section_title": "Duty of driver in case of accident and injury to a person",
+                    "statutory_text": (
+                        "When any person is injured or any property of a third party is damaged, as a result of an accident in which a motor vehicle is involved, "
+                        "the driver of the vehicle or other person in charge of the vehicle shall take all reasonable steps to secure medical attention for the injured person."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "XIII",
+                    "chapter_title": "Offences, Penalties and Procedure",
+                    "section_number": "185",
+                    "section_title": "Driving by a drunken person or by a person under the influence of drugs",
+                    "statutory_text": (
+                        "Whoever, while driving, or attempting to drive, a motor vehicle has, in his blood, alcohol exceeding 30 mg. per 100 ml. of blood "
+                        "detected in a test by a breath analyser, shall be punishable with imprisonment for a term which may extend to six months, or with fine."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+            ],
+        },
+        # 22. The Prevention of Money Laundering Act, 2002 (PMLA)
+        {
+            "title": "The Prevention of Money Laundering Act, 2002",
+            "short_title": "PMLA, 2002",
+            "act_number": "Act No. 15 of 2003",
+            "enactment_year": 2002,
+            "enactment_date": date(2003, 1, 17),
+            "commencement_date": date(2005, 7, 1),
+            "effective_date": date(2005, 7, 1),
+            "status": "CURRENT",
+            "replaces_act_code": None,
+            "replaced_by_act_code": None,
+            "subject_category": "Criminal & Financial Law",
+            "preamble": "An Act to prevent money-laundering and to provide for confiscation of property derived from, or involved in, money-laundering.",
+            "amendment_history": [
+                {"date": "2019-08-01", "note": "Finance (No. 2) Act, 2019 clarifying continuing character of money laundering."}
+            ],
+            "sections": [
+                {
+                    "chapter_number": "II",
+                    "chapter_title": "Offence of Money-Laundering",
+                    "section_number": "3",
+                    "section_title": "Offence of money-laundering",
+                    "statutory_text": (
+                        "Whosoever directly or indirectly attempts to indulge or knowingly assists or knowingly is a party or is actually involved in any process "
+                        "or activity connected with the proceeds of crime including its concealment, possession, acquisition or use and projecting or claiming it as untainted property shall be guilty of offence of money-laundering."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "II",
+                    "chapter_title": "Offence of Money-Laundering",
+                    "section_number": "4",
+                    "section_title": "Punishment for money-laundering",
+                    "statutory_text": (
+                        "Whoever commits the offence of money-laundering shall be punishable with rigorous imprisonment for a term which shall not be less than three years but which may extend to seven years and shall also be liable to fine."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "VII",
+                    "chapter_title": "Special Courts",
+                    "section_number": "45",
+                    "section_title": "Offences to be cognizable and non-bailable",
+                    "statutory_text": (
+                        "Notwithstanding anything contained in the Code of Criminal Procedure, 1973, no person accused of an offence under this Act shall be released on bail unless the Public Prosecutor has been given an opportunity to oppose and the court is satisfied that there are reasonable grounds for believing that he is not guilty of such offence."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+            ],
+        },
+        # 23. The Hindu Marriage Act, 1955
+        {
+            "title": "The Hindu Marriage Act, 1955",
+            "short_title": "Hindu Marriage Act, 1955",
+            "act_number": "Act No. 25 of 1955",
+            "enactment_year": 1955,
+            "enactment_date": date(1955, 5, 18),
+            "commencement_date": date(1955, 5, 18),
+            "effective_date": date(1955, 5, 18),
+            "status": "CURRENT",
+            "replaces_act_code": None,
+            "replaced_by_act_code": None,
+            "subject_category": "Family & Matrimonial Law",
+            "preamble": "An Act to amend and codify the law relating to marriage among Hindus.",
+            "amendment_history": [
+                {"date": "1976-05-27", "note": "Marriage Laws (Amendment) Act, 1976 inserting Section 13B mutual consent divorce."}
+            ],
+            "sections": [
+                {
+                    "chapter_number": "II",
+                    "chapter_title": "Restitution of Conjugal Rights",
+                    "section_number": "9",
+                    "section_title": "Restitution of conjugal rights",
+                    "statutory_text": (
+                        "When either the husband or the wife has, without reasonable excuse, withdrawn from the society of the other, the aggrieved party may apply, by petition to the district court, for restitution of conjugal rights."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "III",
+                    "chapter_title": "Nullity of Marriage and Divorce",
+                    "section_number": "13",
+                    "section_title": "Divorce",
+                    "statutory_text": (
+                        "(1) Any marriage solemnized, whether before or after the commencement of this Act, may, on a petition presented by either the husband or the wife, be dissolved by a decree of divorce on the ground of cruelty, desertion, adultery, or conversion."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "III",
+                    "chapter_title": "Nullity of Marriage and Divorce",
+                    "section_number": "13B",
+                    "section_title": "Divorce by mutual consent",
+                    "statutory_text": (
+                        "(1) A petition for dissolution of marriage by a decree of divorce may be presented to the district court by both the parties together on the ground that they have been living separately for a period of one year or more, that they have not been able to live together and that they have mutually agreed that the marriage should be dissolved."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "V",
+                    "chapter_title": "Jurisdiction and Procedure",
+                    "section_number": "24",
+                    "section_title": "Maintenance pendente lite and expenses of proceedings",
+                    "statutory_text": (
+                        "Where in any proceeding under this Act it appears to the court that either the wife or the husband has no independent income sufficient for support and necessary expenses, the court may order the respondent to pay monthly maintenance and litigation expenses."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+            ],
+        },
+        # 24. The Protection of Women from Domestic Violence Act, 2005
+        {
+            "title": "The Protection of Women from Domestic Violence Act, 2005",
+            "short_title": "Domestic Violence Act, 2005",
+            "act_number": "Act No. 43 of 2005",
+            "enactment_year": 2005,
+            "enactment_date": date(2005, 9, 13),
+            "commencement_date": date(2006, 10, 26),
+            "effective_date": date(2006, 10, 26),
+            "status": "CURRENT",
+            "replaces_act_code": None,
+            "replaced_by_act_code": None,
+            "subject_category": "Family & Criminal Law",
+            "preamble": "An Act to provide for more effective protection of the rights of women guaranteed under the Constitution who are victims of violence occurring within the family.",
+            "amendment_history": [],
+            "sections": [
+                {
+                    "chapter_number": "IV",
+                    "chapter_title": "Procedure for Obtaining Orders of Reliefs",
+                    "section_number": "12",
+                    "section_title": "Application to Magistrate",
+                    "statutory_text": (
+                        "(1) An aggrieved person or a Protection Officer or any other person on behalf of the aggrieved person may present an application to the Magistrate seeking one or more reliefs under this Act."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "IV",
+                    "chapter_title": "Procedure for Obtaining Orders of Reliefs",
+                    "section_number": "18",
+                    "section_title": "Protection orders",
+                    "statutory_text": (
+                        "The Magistrate may pass a protection order prohibiting the respondent from committing any act of domestic violence, aiding or abetting, or entering the place of employment of the aggrieved person."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "IV",
+                    "chapter_title": "Procedure for Obtaining Orders of Reliefs",
+                    "section_number": "19",
+                    "section_title": "Residence orders",
+                    "statutory_text": (
+                        "While disposing of an application under section 12, the Magistrate may pass a residence order restraining the respondent from dispossessing or disturbing the possession of the aggrieved person from the shared household."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+            ],
+        },
+        # 25. The Right to Information Act, 2005
+        {
+            "title": "The Right to Information Act, 2005",
+            "short_title": "RTI Act, 2005",
+            "act_number": "Act No. 22 of 2005",
+            "enactment_year": 2005,
+            "enactment_date": date(2005, 6, 15),
+            "commencement_date": date(2005, 10, 12),
+            "effective_date": date(2005, 10, 12),
+            "status": "CURRENT",
+            "replaces_act_code": None,
+            "replaced_by_act_code": None,
+            "subject_category": "Administrative & Public Law",
+            "preamble": "An Act to provide for setting out the practical regime of right to information for citizens to secure access to information under the control of public authorities.",
+            "amendment_history": [
+                {"date": "2019-10-24", "note": "Right to Information (Amendment) Act, 2019 regulating terms of office and salaries of Information Commissioners."}
+            ],
+            "sections": [
+                {
+                    "chapter_number": "II",
+                    "chapter_title": "Right to Information",
+                    "section_number": "3",
+                    "section_title": "Right to information",
+                    "statutory_text": "Subject to the provisions of this Act, all citizens shall have the right to information.",
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "II",
+                    "chapter_title": "Right to Information",
+                    "section_number": "6",
+                    "section_title": "Request for obtaining information",
+                    "statutory_text": (
+                        "A person who desires to obtain any information under this Act shall make a request in writing or through electronic means to the Public Information Officer."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "II",
+                    "chapter_title": "Right to Information",
+                    "section_number": "8",
+                    "section_title": "Exemption from disclosure of information",
+                    "statutory_text": (
+                        "Notwithstanding anything contained in this Act, there shall be no obligation to give any citizen information which would prejudicially affect sovereignty, national security, or relations with foreign States, or trade secrets, or personal privacy."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+            ],
+        },
+        # 26. The Indian Partnership Act, 1932
+        {
+            "title": "The Indian Partnership Act, 1932",
+            "short_title": "Partnership Act, 1932",
+            "act_number": "Act No. 9 of 1932",
+            "enactment_year": 1932,
+            "enactment_date": date(1932, 4, 8),
+            "commencement_date": date(1932, 10, 1),
+            "effective_date": date(1932, 10, 1),
+            "status": "CURRENT",
+            "replaces_act_code": None,
+            "replaced_by_act_code": None,
+            "subject_category": "Commercial Law",
+            "preamble": "An Act to define and amend the law relating to partnership.",
+            "amendment_history": [],
+            "sections": [
+                {
+                    "chapter_number": "I",
+                    "chapter_title": "Preliminary",
+                    "section_number": "4",
+                    "section_title": "Definition of 'partnership', 'partner', 'firm' and 'firm name'",
+                    "statutory_text": (
+                        "'Partnership' is the relation between persons who have agreed to share the profits of a business carried on by all or any of them acting for all."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "IV",
+                    "chapter_title": "Incoming and Outgoing Partners",
+                    "section_number": "30",
+                    "section_title": "Minors admitted to the benefits of partnership",
+                    "statutory_text": (
+                        "A person who is a minor according to the law to which he is subject may not be a partner in a firm, but, with the consent of all the partners, he may be admitted to the benefits of partnership."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+                {
+                    "chapter_number": "VII",
+                    "chapter_title": "Registration of Firms",
+                    "section_number": "69",
+                    "section_title": "Effect of non-registration",
+                    "statutory_text": (
+                        "No suit to enforce a right arising from a contract shall be instituted in any court by or on behalf of any person suing as a partner in a firm unless the firm is registered."
+                    ),
+                    "corresponding_historical_section": None,
+                },
+            ],
+        },
     ]
 
     sections_lookup: Dict[str, LegalSection] = {}

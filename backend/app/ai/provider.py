@@ -259,6 +259,7 @@ class GeminiProvider(AIProvider):
         payload = {
             "model": f"models/{self.embedding_model}",
             "content": {"parts": [{"text": text_input[:6000]}]},
+            "outputDimensionality": 768,
         }
         start = time.perf_counter()
         try:
@@ -339,65 +340,71 @@ class GeminiProvider(AIProvider):
             f"Verified Corpus Context:\n" + "\n\n".join(context_blocks)
         )
 
-        url = (
-            f"https://generativelanguage.googleapis.com/v1beta/models/"
-            f"{self.model}:generateContent?key={self.api_key}"
-        )
-        payload: Dict[str, Any] = {
-            "systemInstruction": {"parts": [{"text": system_prompt}]},
-            "contents": [{"role": "user", "parts": [{"text": user_prompt}]}],
-            "generationConfig": {
-                "temperature": 0.1,
-                "responseMimeType": "application/json",
-            },
-        }
+        candidate_models = []
+        for m in [self.model, "gemini-flash-lite-latest", "gemini-3-flash-preview"]:
+            if m and m not in candidate_models:
+                candidate_models.append(m)
 
         start = time.perf_counter()
-        for attempt in range(max(1, settings.AI_MAX_RETRIES)):
-            try:
-                req = urllib.request.Request(
-                    url,
-                    data=json.dumps(payload).encode("utf-8"),
-                    headers={"Content-Type": "application/json"},
-                    method="POST",
-                )
-                with urllib.request.urlopen(
-                    req, timeout=settings.AI_REQUEST_TIMEOUT_SECONDS
-                ) as resp:
-                    raw_body = json.loads(resp.read().decode("utf-8"))
-
-                text_out = (
-                    raw_body.get("candidates", [{}])[0]
-                    .get("content", {})
-                    .get("parts", [{}])[0]
-                    .get("text", "{}")
-                )
-                parsed = json.loads(text_out)
-                parsed["verification_and_disclaimer_footer"] = LEGAL_DISCLAIMER_FOOTER
-                sections = StructuredLegalAnswerSections(**parsed)
-
-                latency_ms = int((time.perf_counter() - start) * 1000)
-                usage_meta = raw_body.get("usageMetadata", {})
-                if db is not None:
-                    db.add(
-                        AIUsage(
-                            user_id=user_id,
-                            provider=self.provider_name,
-                            model_name=self.model,
-                            operation_type=f"CHAT_{response_mode.upper()}",
-                            prompt_tokens=int(usage_meta.get("promptTokenCount", 250)),
-                            completion_tokens=int(usage_meta.get("candidatesTokenCount", 300)),
-                            total_tokens=int(usage_meta.get("totalTokenCount", 550)),
-                            latency_ms=latency_ms,
-                            success=True,
-                        )
+        for model_name in candidate_models:
+            url = (
+                f"https://generativelanguage.googleapis.com/v1beta/models/"
+                f"{model_name}:generateContent?key={self.api_key}"
+            )
+            for attempt in range(max(1, settings.AI_MAX_RETRIES)):
+                try:
+                    req = urllib.request.Request(
+                        url,
+                        data=json.dumps(payload).encode("utf-8"),
+                        headers={"Content-Type": "application/json"},
+                        method="POST",
                     )
-                    db.commit()
-                return sections, f"{self.provider_name}:{self.model}"
-            except Exception as exc:
-                logger.warning(
-                    f"Gemini generation attempt {attempt + 1} failed ({type(exc).__name__}); using grounded fallback."
-                )
+                    with urllib.request.urlopen(
+                        req, timeout=settings.AI_REQUEST_TIMEOUT_SECONDS
+                    ) as resp:
+                        raw_body = json.loads(resp.read().decode("utf-8"))
+
+                    text_out = (
+                        raw_body.get("candidates", [{}])[0]
+                        .get("content", {})
+                        .get("parts", [{}])[0]
+                        .get("text", "{}")
+                    )
+                    parsed = json.loads(text_out)
+                    parsed["verification_and_disclaimer_footer"] = LEGAL_DISCLAIMER_FOOTER
+                    sections = StructuredLegalAnswerSections(**parsed)
+
+                    latency_ms = int((time.perf_counter() - start) * 1000)
+                    usage_meta = raw_body.get("usageMetadata", {})
+                    if db is not None:
+                        db.add(
+                            AIUsage(
+                                user_id=user_id,
+                                provider=self.provider_name,
+                                model_name=model_name,
+                                operation_type=f"CHAT_{response_mode.upper()}",
+                                prompt_tokens=int(usage_meta.get("promptTokenCount", 250)),
+                                completion_tokens=int(usage_meta.get("candidatesTokenCount", 300)),
+                                total_tokens=int(usage_meta.get("totalTokenCount", 550)),
+                                latency_ms=latency_ms,
+                                success=True,
+                            )
+                        )
+                        db.commit()
+                    return sections, f"{self.provider_name}:{model_name}"
+                except urllib.error.HTTPError as http_err:
+                    if http_err.code in (404, 400):
+                        logger.warning(
+                            f"Gemini model {model_name} returned {http_err.code}; trying fallback model..."
+                        )
+                        break
+                    logger.warning(
+                        f"Gemini generation attempt {attempt + 1} with {model_name} failed ({http_err}); retrying..."
+                    )
+                except Exception as exc:
+                    logger.warning(
+                        f"Gemini generation attempt {attempt + 1} with {model_name} failed ({type(exc).__name__}: {exc})"
+                    )
 
         return self.fallback.generate_structured_legal_answer(
             query=query,

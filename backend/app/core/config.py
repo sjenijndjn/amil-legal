@@ -77,9 +77,9 @@ class Settings:
 
         # AI / Gemini Configuration
         self.GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "").strip()
-        self.GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+        self.GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-flash-lite-latest")
         self.GEMINI_EMBEDDING_MODEL: str = os.getenv(
-            "GEMINI_EMBEDDING_MODEL", "text-embedding-004"
+            "GEMINI_EMBEDDING_MODEL", "gemini-embedding-001"
         )
         self.AI_REQUEST_TIMEOUT_SECONDS: float = float(
             os.getenv("AI_REQUEST_TIMEOUT_SECONDS", "30.0")

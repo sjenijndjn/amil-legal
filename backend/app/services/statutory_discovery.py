@@ -659,6 +659,581 @@ BUILTIN_ACTS_FALLBACK: Dict[str, Dict[str, Any]] = {
             },
         ],
     },
+    "motor vehicle": {
+        "title": "The Motor Vehicles Act, 1988",
+        "short_title": "Motor Vehicles Act, 1988",
+        "act_number": "Act No. 59 of 1988",
+        "enactment_year": 1988,
+        "enactment_date": "1988-10-14",
+        "commencement_date": "1989-07-01",
+        "effective_date": "1989-07-01",
+        "status": "CURRENT",
+        "subject_category": "Transport & Tort Law",
+        "preamble": "An Act to consolidate and amend the law relating to motor vehicles.",
+        "sections": [
+            {
+                "section_number": "166",
+                "section_title": "Application for compensation",
+                "chapter_number": "XII",
+                "chapter_title": "Claims Tribunals",
+                "statutory_text": (
+                    "(1) An application for compensation arising out of an accident of the nature specified in sub-section (1) of section 165 may be made—\n"
+                    "(a) by the person who has sustained the injury; or\n"
+                    "(b) by the owner of the property; or\n"
+                    "(c) where death has resulted from the accident, by all or any of the legal representatives of the deceased; or\n"
+                    "(d) by any agent duly authorised by the person injured or all or any of the legal representatives of the deceased, as the case may be:\n\n"
+                    "Provided that where all the legal representatives of the deceased have not joined in any such application for compensation, the application shall be made on behalf of or for the benefit of all the legal representatives of the deceased and the legal representatives who have not so joined, shall be impleaded as respondents to the application.\n\n"
+                    "(2) Every application under sub-section (1) shall be made, at the option of the claimant, either to the Claims Tribunal having jurisdiction over the area in which the accident occurred, or to the Claims Tribunal within the local limits of whose jurisdiction the claimant resides or carries on business or within the local limits of whose jurisdiction the defendant resides.\n\n"
+                    "(3) No application for compensation shall be entertained unless it is made within six months of the occurrence of the accident."
+                ),
+                "amendment_notes": "Amended by Motor Vehicles (Amendment) Act, 2019 (Act 32 of 2019) introducing the 6-month limitation period under subsection (3).",
+            },
+            {
+                "section_number": "163A",
+                "section_title": "Special provisions as to payment of compensation on structured formula basis",
+                "chapter_number": "XI",
+                "chapter_title": "Insurance of Motor Vehicles Against Third Party Risks",
+                "statutory_text": (
+                    "(1) Notwithstanding anything contained in this Act or in any other law for the time being in force or instrument having the force of law, the owner of the motor vehicle or the authorised insurer shall be liable to pay in the case of death or permanent disablement due to accident arising out of the use of motor vehicle, compensation, as indicated in the Second Schedule, to the legal heirs or the victim, as the case may be.\n\n"
+                    "(2) In any claim for compensation under sub-section (1), the claimant shall not be required to plead or establish that the death or permanent disablement in respect of which the claim has been made was due to any wrongful act or neglect or default of the owner of the vehicle or vehicles concerned or of any other person."
+                ),
+                "amendment_notes": "Statutory strict liability / no-fault scheme based on structured formula.",
+            },
+            {
+                "section_number": "134",
+                "section_title": "Duty of driver in case of accident and injury to a person",
+                "chapter_number": "VIII",
+                "chapter_title": "Control of Traffic",
+                "statutory_text": (
+                    "When any person is injured or any property of a third party is damaged, as a result of an accident in which a motor vehicle is involved, the driver of the vehicle or other person in charge of the vehicle shall—\n"
+                    "(a) unless it is not practicable to do so on account of mob fury or any other reason beyond his control, take all reasonable steps to secure medical attention for the injured person, by conveying him to the nearest medical practitioner or hospital, and it shall be the duty of every registered medical practitioner or the doctor on duty in the hospital immediately to attend to the injured person and render medical aid or treatment without waiting for any procedural formalities, unless the injured person or his guardian, in case he is a minor, desires otherwise;\n"
+                    "(b) give on demand by a police officer any information required by him, or, if no police officer is present, report the circumstances of the occurrence, including the circumstances, if any, for not taking reasonable steps to secure medical attention as required under clause (a), at the nearest police station as soon as possible, and in any case within twenty-four hours of the occurrence;\n"
+                    "(c) give the following information in writing to the insurer, who has issued the certificate of insurance, namely:— (i) insurance policy number and period of validity; (ii) date, time and place of accident; (iii) particulars of the persons injured or killed in the accident; (iv) name of the driver and the particulars of his driving licence."
+                ),
+            },
+            {
+                "section_number": "185",
+                "section_title": "Driving by a drunken person or by a person under the influence of drugs",
+                "chapter_number": "XIII",
+                "chapter_title": "Offences, Penalties and Procedure",
+                "statutory_text": (
+                    "Whoever, while driving, or attempting to drive, a motor vehicle—\n"
+                    "(a) has, in his blood, alcohol exceeding 30 mg. per 100 ml. of blood detected in a test by a breath analyser or in any other test including a laboratory test, or\n"
+                    "(b) is under the influence of a drug to such an extent as to be incapable of exercising proper control over the vehicle,\n"
+                    "shall be punishable for the first offence with imprisonment for a term which may extend to six months, or with fine of ten thousand rupees, or with both; and for a second or subsequent offence, with imprisonment for a term which may extend to two years, or with fine of fifteen thousand rupees, or with both."
+                ),
+                "amendment_notes": "Penalties enhanced by the Motor Vehicles (Amendment) Act, 2019.",
+            },
+        ],
+    },
+    "money laundering": {
+        "title": "The Prevention of Money Laundering Act, 2002",
+        "short_title": "PMLA, 2002",
+        "act_number": "Act No. 15 of 2003",
+        "enactment_year": 2002,
+        "enactment_date": "2003-01-17",
+        "commencement_date": "2005-07-01",
+        "effective_date": "2005-07-01",
+        "status": "CURRENT",
+        "subject_category": "Criminal & Financial Law",
+        "preamble": (
+            "An Act to prevent money-laundering and to provide for confiscation of property "
+            "derived from, or involved in, money-laundering and for matters connected therewith or incidental thereto."
+        ),
+        "sections": [
+            {
+                "section_number": "3",
+                "section_title": "Offence of money-laundering",
+                "chapter_number": "II",
+                "chapter_title": "Offence of Money-Laundering",
+                "statutory_text": (
+                    "Whosoever directly or indirectly attempts to indulge or knowingly assists or knowingly is a party or is "
+                    "actually involved in any process or activity connected with the proceeds of crime including its concealment, "
+                    "possession, acquisition or use and projecting or claiming it as untainted property shall be guilty of offence of money-laundering.\n\n"
+                    "Explanation.—For the removal of doubts, it is hereby clarified that—\n"
+                    "(i) a person shall be guilty of offence of money-laundering if such person is found to have directly or indirectly concealed the proceeds of crime or acquired them, or possesses them or uses them or projects them as untainted property, or claims them as untainted property in any manner whatsoever;\n"
+                    "(ii) the process or activity connected with proceeds of crime is a continuing activity and continues till such time a person is directly or indirectly enjoying the proceeds of crime by its concealment or possession or acquisition or use or projecting it as untainted property or claiming it as untainted property in any manner whatsoever."
+                ),
+                "amendment_notes": "Explanation added by Finance (No. 2) Act, 2019 to clarify continuing nature of offence.",
+            },
+            {
+                "section_number": "4",
+                "section_title": "Punishment for money-laundering",
+                "chapter_number": "II",
+                "chapter_title": "Offence of Money-Laundering",
+                "statutory_text": (
+                    "Whoever commits the offence of money-laundering shall be punishable with rigorous imprisonment for a term "
+                    "which shall not be less than three years but which may extend to seven years and shall also be liable to fine:\n\n"
+                    "Provided that where the proceeds of crime involved in money-laundering relates to any offence specified under paragraph 2 of Part A of the Schedule, the provisions of this section shall have effect as if for the words 'which may extend to seven years', the words 'which may extend to ten years' had been substituted."
+                ),
+            },
+            {
+                "section_number": "5",
+                "section_title": "Attachment of property involved in money-laundering",
+                "chapter_number": "III",
+                "chapter_title": "Attachment, Adjudication and Confiscation",
+                "statutory_text": (
+                    "(1) Where the Director or any other officer not below the rank of Deputy Director authorised by him for the purposes of this section, has reason to believe (the reason for such belief to be recorded in writing), on the basis of material in his possession, that—\n"
+                    "(a) any person is in possession of any proceeds of crime; and\n"
+                    "(b) such proceeds of crime are likely to be concealed, transferred or dealt with in any manner which may result in frustrating any proceedings relating to confiscation of such proceeds of crime under this Chapter,\n"
+                    "he may, by order in writing, provisionally attach such property for a period not exceeding one hundred and eighty days from the date of the order, in such manner as may be prescribed."
+                ),
+            },
+            {
+                "section_number": "24",
+                "section_title": "Burden of proof",
+                "chapter_number": "V",
+                "chapter_title": "Summons, Searches and Seizures, etc.",
+                "statutory_text": (
+                    "In any proceeding relating to proceeds of crime under this Act,—\n"
+                    "(a) in the case of a person charged with the offence of money-laundering under section 3, the Authority or Court shall, unless the contrary is proved, presume that such proceeds of crime are involved in money-laundering; and\n"
+                    "(b) in the case of any other person the Authority or Court, may presume that such proceeds of crime are involved in money-laundering."
+                ),
+            },
+            {
+                "section_number": "45",
+                "section_title": "Offences to be cognizable and non-bailable",
+                "chapter_number": "VII",
+                "chapter_title": "Special Courts",
+                "statutory_text": (
+                    "(1) Notwithstanding anything contained in the Code of Criminal Procedure, 1973 (2 of 1974), no person accused of an offence under this Act shall be released on bail or on his own bond unless—\n"
+                    "(i) the Public Prosecutor has been given an opportunity to oppose the application for such release; and\n"
+                    "(ii) where the Public Prosecutor opposes the application, the court is satisfied that there are reasonable grounds for believing that he is not guilty of such offence and that he is not likely to commit any offence while on bail:\n\n"
+                    "Provided that a person, who is under the age of sixteen years, or is a woman or is sick or infirm, or is accused either on his own or along with other co-accused of money-laundering a sum of less than one crore rupees, may be released on bail, if the Special Court so directs:\n\n"
+                    "Provided further that the Special Court shall not take cognizance of any offence punishable under section 4 except upon a complaint in writing made by— (i) the Director; or (ii) any officer of the Central Government or State Government authorised in writing in this behalf by the Central Government by a general or special order made in this behalf by that Government."
+                ),
+                "amendment_notes": "Twin conditions for bail sustained by Supreme Court in Vijay Madanlal Choudhary v. Union of India (2022).",
+            },
+        ],
+    },
+    "hindu marriage": {
+        "title": "The Hindu Marriage Act, 1955",
+        "short_title": "Hindu Marriage Act, 1955",
+        "act_number": "Act No. 25 of 1955",
+        "enactment_year": 1955,
+        "enactment_date": "1955-05-18",
+        "commencement_date": "1955-05-18",
+        "effective_date": "1955-05-18",
+        "status": "CURRENT",
+        "subject_category": "Family & Matrimonial Law",
+        "preamble": "An Act to amend and codify the law relating to marriage among Hindus.",
+        "sections": [
+            {
+                "section_number": "9",
+                "section_title": "Restitution of conjugal rights",
+                "chapter_number": "II",
+                "chapter_title": "Restitution of Conjugal Rights and Judicial Separation",
+                "statutory_text": (
+                    "When either the husband or the wife has, without reasonable excuse, withdrawn from the society of the other, "
+                    "the aggrieved party may apply, by petition to the district court, for restitution of conjugal rights and the court, "
+                    "on being satisfied of the truth of the statements made in such petition and that there is no legal ground why the "
+                    "application should not be granted, may decree restitution of conjugal rights accordingly.\n\n"
+                    "Explanation.—Where a question arises whether there has been reasonable excuse for withdrawal from the society, the burden of proving reasonable excuse shall be on the person who has withdrawn from the society."
+                ),
+            },
+            {
+                "section_number": "13",
+                "section_title": "Divorce",
+                "chapter_number": "III",
+                "chapter_title": "Nullity of Marriage and Divorce",
+                "statutory_text": (
+                    "(1) Any marriage solemnized, whether before or after the commencement of this Act, may, on a petition presented by either the husband or the wife, be dissolved by a decree of divorce on the ground that the other party—\n"
+                    "(i) has, after the solemnization of the marriage, had voluntary sexual intercourse with any person other than his or her spouse; or\n"
+                    "(ia) has, after the solemnization of the marriage, treated the petitioner with cruelty; or\n"
+                    "(ib) has deserted the petitioner for a continuous period of not less than two years immediately preceding the presentation of the petition; or\n"
+                    "(ii) has ceased to be a Hindu by conversion to another religion; or\n"
+                    "(iii) has been incurably of unsound mind, or has been suffering continuously or intermittently from mental disorder of such a kind and to such an extent that the petitioner cannot reasonably be expected to live with the respondent."
+                ),
+            },
+            {
+                "section_number": "13B",
+                "section_title": "Divorce by mutual consent",
+                "chapter_number": "III",
+                "chapter_title": "Nullity of Marriage and Divorce",
+                "statutory_text": (
+                    "(1) Subject to the provisions of this Act a petition for dissolution of marriage by a decree of divorce may be presented to the district court by both the parties to a marriage together, whether such marriage was solemnized before or after the commencement of the Marriage Laws (Amendment) Act, 1976, on the ground that they have been living separately for a period of one year or more, that they have not been able to live together and that they have mutually agreed that the marriage should be dissolved.\n\n"
+                    "(2) On the motion of both the parties made not earlier than six months after the date of the presentation of the petition referred to in sub-section (1) and not later than eighteen months after the said date, if the petition is not withdrawn in the meantime, the court shall, on being satisfied, after hearing the parties and after making such inquiry as it thinks fit, that a marriage has been solemnized and that the averments in the petition are true, pass a decree of divorce declaring the marriage to be dissolved with effect from the date of the decree."
+                ),
+                "amendment_notes": "Inserted by Act 68 of 1976. 6-month statutory waiting period may be waived under Article 142 as held in Amardeep Singh v. Harveen Kaur (2017) and Shilpa Sailesh (2023).",
+            },
+            {
+                "section_number": "24",
+                "section_title": "Maintenance pendente lite and expenses of proceedings",
+                "chapter_number": "V",
+                "chapter_title": "Jurisdiction and Procedure",
+                "statutory_text": (
+                    "Where in any proceeding under this Act it appears to the court that either the wife or the husband, as the case may be, has no independent income sufficient for her or his support and the necessary expenses of the proceeding, it may, on the application of the wife or the husband, order the respondent to pay to the petitioner the expenses of the proceeding, and monthly during the proceeding such sum as, having regard to the petitioner's own income and the income of the respondent, it may seem to the court to be reasonable:\n\n"
+                    "Provided that the application for the payment of the expenses of the proceeding and such monthly sum during the proceeding, shall, as far as possible, be disposed of within sixty days from the date of service of notice on the wife or the husband, as the case may be."
+                ),
+            },
+            {
+                "section_number": "25",
+                "section_title": "Permanent alimony and maintenance",
+                "chapter_number": "V",
+                "chapter_title": "Jurisdiction and Procedure",
+                "statutory_text": (
+                    "(1) Any court exercising jurisdiction under this Act may, at the time of passing any decree or at any time subsequent thereto, on application made to it for the purpose by either the wife or the husband, as the case may be, order that the respondent shall pay to the applicant for her or his maintenance and support such gross sum or such monthly or periodical sum for a term not exceeding the life of the applicant as, having regard to the respondent's own income and other property, if any, the income and other property of the applicant, the conduct of the parties and other circumstances of the case, it may seem to the court to be just."
+                ),
+            },
+        ],
+    },
+    "domestic violence": {
+        "title": "The Protection of Women from Domestic Violence Act, 2005",
+        "short_title": "Domestic Violence Act, 2005",
+        "act_number": "Act No. 43 of 2005",
+        "enactment_year": 2005,
+        "enactment_date": "2005-09-13",
+        "commencement_date": "2006-10-26",
+        "effective_date": "2006-10-26",
+        "status": "CURRENT",
+        "subject_category": "Family & Criminal Law",
+        "preamble": "An Act to provide for more effective protection of the rights of women guaranteed under the Constitution who are victims of violence of any kind occurring within the family.",
+        "sections": [
+            {
+                "section_number": "12",
+                "section_title": "Application to Magistrate",
+                "chapter_number": "IV",
+                "chapter_title": "Procedure for Obtaining Orders of Reliefs",
+                "statutory_text": (
+                    "(1) An aggrieved person or a Protection Officer or any other person on behalf of the aggrieved person may present an application to the Magistrate seeking one or more reliefs under this Act:\n"
+                    "Provided that before passing any order on such application, the Magistrate shall take into consideration any domestic incident report received by him from the Protection Officer or the service provider.\n\n"
+                    "(2) The relief sought for under sub-section (1) may include a relief for issuance of an order for payment of compensation or damages without prejudice to the right of such person to institute a suit for compensation or damages for the injuries caused by the acts of domestic violence committed by the respondent.\n\n"
+                    "(4) The Magistrate shall fix the first date of hearing, which shall not ordinarily be beyond three days from the date of receipt of the application by the court.\n\n"
+                    "(5) The Magistrate shall endeavour to dispose of every application made under sub-section (1) within a period of sixty days from the date of its first hearing."
+                ),
+            },
+            {
+                "section_number": "18",
+                "section_title": "Protection orders",
+                "chapter_number": "IV",
+                "chapter_title": "Procedure for Obtaining Orders of Reliefs",
+                "statutory_text": (
+                    "The Magistrate may, after giving the aggrieved person and the respondent an opportunity of being heard and on being prima facie satisfied that domestic violence has taken place or is likely to take place, pass a protection order in favour of the aggrieved person and prohibit the respondent from—\n"
+                    "(a) committing any act of domestic violence;\n"
+                    "(b) aiding or abetting in the commission of acts of domestic violence;\n"
+                    "(c) entering the place of employment of the aggrieved person or, if the person aggrieved is a child, its school or any other place frequented by the aggrieved person;\n"
+                    "(d) attempting to communicate in any form, whatsoever, with the aggrieved person, including personal, oral or written or electronic or telephonic contact;\n"
+                    "(e) alienating any assets, operating bank lockers or bank accounts used or held or enjoyed by both the parties, jointly by the aggrieved person and the respondent or singly by the respondent, including her stridhan or any other property held either jointly by the parties or separately by them without the leave of the Magistrate;\n"
+                    "(f) causing violence to the dependants, other relatives or any person who give the aggrieved person assistance from domestic violence."
+                ),
+            },
+            {
+                "section_number": "19",
+                "section_title": "Residence orders",
+                "chapter_number": "IV",
+                "chapter_title": "Procedure for Obtaining Orders of Reliefs",
+                "statutory_text": (
+                    "(1) While disposing of an application under sub-section (1) of section 12, the Magistrate may, on being satisfied that domestic violence has taken place, pass a residence order—\n"
+                    "(a) restraining the respondent from dispossessing or in any other manner disturbing the possession of the aggrieved person from the shared household, whether or not the respondent has a legal or equitable interest in the shared household;\n"
+                    "(b) directing the respondent to remove himself from the shared household;\n"
+                    "(c) restraining the respondent or any of his relatives from entering any portion of the shared household in which the aggrieved person resides;\n"
+                    "(d) restraining the respondent from alienating or disposing of the shared household or encumbering the same;\n"
+                    "(e) restraining the respondent from renouncing his rights in the shared household except with the leave of the Magistrate; or\n"
+                    "(f) directing the respondent to secure same level of alternate accommodation for the aggrieved person as enjoyed by her in the shared household or to pay rent for the same, if the circumstances so require."
+                ),
+            },
+            {
+                "section_number": "20",
+                "section_title": "Monetary reliefs",
+                "chapter_number": "IV",
+                "chapter_title": "Procedure for Obtaining Orders of Reliefs",
+                "statutory_text": (
+                    "(1) While disposing of an application under sub-section (1) of section 12, the Magistrate may direct the respondent to pay monetary relief to meet the expenses incurred and losses suffered by the aggrieved person and any child of the aggrieved person as a result of the domestic violence and such relief may include, but is not limited to—\n"
+                    "(a) the loss of earnings;\n"
+                    "(b) the medical expenses;\n"
+                    "(c) the loss caused due to the destruction, damage or removal of any property from the control of the aggrieved person; and\n"
+                    "(d) the maintenance for the aggrieved person as well as her children, if any, including an order under or in addition to an order of maintenance under section 125 of the Code of Criminal Procedure, 1973 (2 of 1974) or any other law for the time being in force."
+                ),
+            },
+            {
+                "section_number": "23",
+                "section_title": "Power to grant interim and ex parte orders",
+                "chapter_number": "IV",
+                "chapter_title": "Procedure for Obtaining Orders of Reliefs",
+                "statutory_text": (
+                    "(1) In any proceeding before him under this Act, the Magistrate may pass such interim order as he deems just and proper.\n"
+                    "(2) If the Magistrate is satisfied that an application prima facie discloses that the respondent is committing, or has committed an act of domestic violence or that there is a likelihood that the respondent may commit an act of domestic violence, he may grant an ex parte order on the basis of the affidavit in such form, as may be prescribed, of the aggrieved person under section 18, section 19, section 20, section 21 or, as the case may be, section 22 against the respondent."
+                ),
+            },
+        ],
+    },
+    "right to information": {
+        "title": "The Right to Information Act, 2005",
+        "short_title": "RTI Act, 2005",
+        "act_number": "Act No. 22 of 2005",
+        "enactment_year": 2005,
+        "enactment_date": "2005-06-15",
+        "commencement_date": "2005-10-12",
+        "effective_date": "2005-10-12",
+        "status": "CURRENT",
+        "subject_category": "Administrative & Public Law",
+        "preamble": "An Act to provide for setting out the practical regime of right to information for citizens to secure access to information under the control of public authorities, in order to promote transparency and accountability in the working of every public authority.",
+        "sections": [
+            {
+                "section_number": "3",
+                "section_title": "Right to information",
+                "chapter_number": "II",
+                "chapter_title": "Right to Information and Obligations of Public Authorities",
+                "statutory_text": "Subject to the provisions of this Act, all citizens shall have the right to information.",
+            },
+            {
+                "section_number": "6",
+                "section_title": "Request for obtaining information",
+                "chapter_number": "II",
+                "chapter_title": "Right to Information and Obligations of Public Authorities",
+                "statutory_text": (
+                    "(1) A person, who desires to obtain any information under this Act, shall make a request in writing or through electronic means in English or Hindi or in the official language of the area in which the application is being made, accompanying such fee as may be prescribed, to—\n"
+                    "(a) the Central Public Information Officer or State Public Information Officer, as the case may be, of the concerned public authority;\n"
+                    "(b) the Central Assistant Public Information Officer or State Assistant Public Information Officer, as the case may be,\n"
+                    "specifying the particulars of the information sought by him or her:\n"
+                    "Provided that where such request cannot be made in writing, the Central Public Information Officer or State Public Information Officer, as the case may be, shall render all reasonable assistance to the person making the request orally to reduce the same in writing.\n\n"
+                    "(2) An applicant making request for information shall not be required to give any reason for requesting the information or any other personal details except those that may be necessary for contacting him."
+                ),
+            },
+            {
+                "section_number": "7",
+                "section_title": "Disposal of request",
+                "chapter_number": "II",
+                "chapter_title": "Right to Information and Obligations of Public Authorities",
+                "statutory_text": (
+                    "(1) Subject to the proviso to sub-section (2) of section 5 or the proviso to sub-section (3) of section 6, the Central Public Information Officer or State Public Information Officer, as the case may be, on receipt of a request under section 6 shall, as expeditiously as possible, and in any case within thirty days of the receipt of the request, either provide the information on payment of such fee as may be prescribed or reject the request for any of the reasons specified in sections 8 and 9:\n\n"
+                    "Provided that where the information sought for concerns the life or liberty of a person, the same shall be provided within forty-eight hours of the receipt of the request."
+                ),
+            },
+            {
+                "section_number": "8",
+                "section_title": "Exemption from disclosure of information",
+                "chapter_number": "II",
+                "chapter_title": "Right to Information and Obligations of Public Authorities",
+                "statutory_text": (
+                    "(1) Notwithstanding anything contained in this Act, there shall be no obligation to give any citizen,—\n"
+                    "(a) information, disclosure of which would prejudicially affect the sovereignty and integrity of India, the security, strategic, scientific or economic interests of the State, relation with foreign State or lead to incitement of an offence;\n"
+                    "(b) information which has been expressly forbidden to be published by any court of law or tribunal or the disclosure of which may constitute contempt of court;\n"
+                    "(c) information, the disclosure of which would cause a breach of privilege of Parliament or the State Legislature;\n"
+                    "(d) information including commercial confidence, trade secrets or intellectual property, the disclosure of which would harm the competitive position of a third party, unless the competent authority is satisfied that larger public interest warrants the disclosure of such information;\n"
+                    "(e) information available to a person in his fiduciary relationship, unless the competent authority is satisfied that the larger public interest warrants the disclosure of such information;\n"
+                    "(f) information received in confidence from foreign Government;\n"
+                    "(g) information, the disclosure of which would endanger the life or physical safety of any person or identify the source of information or assistance given in confidence for law enforcement or security purposes;\n"
+                    "(h) information which would impede the process of investigation or apprehension or prosecution of offenders;\n"
+                    "(i) cabinet papers including records of deliberations of the Council of Ministers, Secretaries and other officers;\n"
+                    "(j) information which relates to personal information the disclosure of which has no relationship to any public activity or interest, or which would cause unwarranted invasion of the privacy of the individual unless the Central Public Information Officer or the State Public Information Officer or the appellate authority, as the case may be, is satisfied that the larger public interest justifies the disclosure of such information."
+                ),
+            },
+            {
+                "section_number": "19",
+                "section_title": "Appeal",
+                "chapter_number": "III",
+                "chapter_title": "Appeals and Penalties",
+                "statutory_text": (
+                    "(1) Any person who, does not receive a decision within the time specified in sub-section (1) or clause (a) of sub-section (3) of section 7, or is aggrieved by a decision of the Central Public Information Officer or State Public Information Officer, as the case may be, may within thirty days from the expiry of such period or from the receipt of such a decision prefer an appeal to such officer who is senior in rank to the Central Public Information Officer or State Public Information Officer as the case may be, in each public authority.\n\n"
+                    "(3) A second appeal against the decision under sub-section (1) shall lie within ninety days from the date on which the decision should have been made or was actually received, with the Central Information Commission or the State Information Commission."
+                ),
+            },
+        ],
+    },
+    "partnership": {
+        "title": "The Indian Partnership Act, 1932",
+        "short_title": "Partnership Act, 1932",
+        "act_number": "Act No. 9 of 1932",
+        "enactment_year": 1932,
+        "enactment_date": "1932-04-08",
+        "commencement_date": "1932-10-01",
+        "effective_date": "1932-10-01",
+        "status": "CURRENT",
+        "subject_category": "Commercial Law",
+        "preamble": "An Act to define and amend the law relating to partnership.",
+        "sections": [
+            {
+                "section_number": "4",
+                "section_title": "Definition of 'partnership', 'partner', 'firm' and 'firm name'",
+                "chapter_number": "I",
+                "chapter_title": "Preliminary",
+                "statutory_text": (
+                    "'Partnership' is the relation between persons who have agreed to share the profits of a business carried on by all or any of them acting for all.\n\n"
+                    "Persons who have entered into partnership with one another are called individually 'partners' and collectively 'a firm', and the name under which their business is carried on is called the 'firm name'."
+                ),
+            },
+            {
+                "section_number": "6",
+                "section_title": "Mode of determining existence of partnership",
+                "chapter_number": "II",
+                "chapter_title": "The Nature of Partnership",
+                "statutory_text": (
+                    "In determining whether a group of persons is or is not a firm, or whether a person is or is not a partner in a firm, regard shall be had to the real relation between the parties, as shown by all relevant facts taken together.\n\n"
+                    "Explanation 1.—The sharing of profits or of gross returns arising from property by persons holding a joint or common interest in that property does not of itself make such persons partners.\n"
+                    "Explanation 2.—The receipt by a person of a share of the profits of a business, or of a payment contingent upon the earning of profits or varying with the profits earned by a business, does not of itself make him a partner with the persons carrying on the business."
+                ),
+            },
+            {
+                "section_number": "30",
+                "section_title": "Minors admitted to the benefits of partnership",
+                "chapter_number": "IV",
+                "chapter_title": "Incoming and Outgoing Partners",
+                "statutory_text": (
+                    "(1) A person who is a minor according to the law to which he is subject may not be a partner in a firm, but, with the consent of all the partners for the time being, he may be admitted to the benefits of partnership.\n"
+                    "(2) Such minor has a right to such share of the property and of the profits of the firm as may be agreed upon, and he may have access to and inspect and copy any of the accounts of the firm.\n"
+                    "(3) Such minor's share is liable for the acts of the firm, but the minor is not personally liable for any such act."
+                ),
+            },
+            {
+                "section_number": "69",
+                "section_title": "Effect of non-registration",
+                "chapter_number": "VII",
+                "chapter_title": "Registration of Firms",
+                "statutory_text": (
+                    "(1) No suit to enforce a right arising from a contract or conferred by this Act shall be instituted in any court by or on behalf of any person suing as a partner in a firm against the firm or any person alleged to be or to have been a partner in the firm unless the firm is registered and the person suing is or has been shown in the Register of Firms as a partner in the firm.\n\n"
+                    "(2) No suit to enforce a right arising from a contract shall be instituted in any Court by or on behalf of a firm against any third party unless the firm is registered and the persons suing are or have been shown in the Register of Firms as partners in the firm."
+                ),
+                "amendment_notes": "Crucial statutory bar on unregistered partnership suits.",
+            },
+        ],
+    },
+    "ndps": {
+        "title": "The Narcotic Drugs and Psychotropic Substances Act, 1985",
+        "short_title": "NDPS Act, 1985",
+        "act_number": "Act No. 61 of 1985",
+        "enactment_year": 1985,
+        "enactment_date": "1985-09-16",
+        "commencement_date": "1985-11-14",
+        "effective_date": "1985-11-14",
+        "status": "CURRENT",
+        "subject_category": "Criminal Law",
+        "preamble": "An Act to consolidate and amend the law relating to narcotic drugs, to make stringent provisions for the control and regulation of operations relating to narcotic drugs and psychotropic substances.",
+        "sections": [
+            {
+                "section_number": "8",
+                "section_title": "Prohibition of certain operations",
+                "chapter_number": "III",
+                "chapter_title": "Prohibition, Control and Regulation",
+                "statutory_text": "No person shall— (a) cultivate any coca plant or gather any portion of coca plant; or (b) cultivate the opium poppy or any cannabis plant; or (c) produce, manufacture, possess, sell, purchase, transport, warehouse, use, consume, import inter-State, export inter-State, import into India, export from India or tranship any narcotic drug or psychotropic substance, except for medical or scientific purposes and in the manner and to the extent provided by the provisions of this Act.",
+            },
+            {
+                "section_number": "20",
+                "section_title": "Punishment for contravention in relation to cannabis plant and cannabis",
+                "chapter_number": "IV",
+                "chapter_title": "Offences and Penalties",
+                "statutory_text": "Whoever, in contravention of any provision of this Act or any rule or order made or condition of licence granted thereunder produces, manufactures, possesses, sells, purchases, transports, imports inter-State, exports inter-State or uses cannabis, shall be punishable with rigorous imprisonment and fine depending on small quantity, commercial quantity or intermediate quantity.",
+            },
+            {
+                "section_number": "37",
+                "section_title": "Offences to be cognizable and non-bailable",
+                "chapter_number": "IV",
+                "chapter_title": "Offences and Penalties",
+                "statutory_text": (
+                    "(1) Notwithstanding anything contained in the Code of Criminal Procedure, 1973 (2 of 1974)—\n"
+                    "(a) every offence punishable under this Act shall be cognizable;\n"
+                    "(b) no person accused of an offence punishable for offences under section 19 or section 24 or section 27A and also for offences involving commercial quantity shall be released on bail or on his own bond unless—\n"
+                    "(i) the Public Prosecutor has been given an opportunity to oppose the application for such release, and\n"
+                    "(ii) where the Public Prosecutor opposes the application, the court is satisfied that there are reasonable grounds for believing that he is not guilty of such offence and that he is not likely to commit any offence while on bail."
+                ),
+                "amendment_notes": "Stringent twin bail conditions for commercial quantity offences.",
+            },
+            {
+                "section_number": "50",
+                "section_title": "Conditions under which search of persons shall be conducted",
+                "chapter_number": "V",
+                "chapter_title": "Procedure",
+                "statutory_text": (
+                    "(1) When any officer duly authorised under section 42 is about to search any person under the provisions of section 41, section 42 or section 43, he shall, if such person so requires, take such person without unnecessary delay to the nearest Gazetted Officer of any of the departments mentioned in section 42 or to the nearest Magistrate.\n"
+                    "(5) When an officer duly authorised under section 42 has reason to believe that it is not possible to take the person to be searched to the nearest Gazetted Officer or Magistrate without the possibility of the person to be searched parting with possession of any narcotic drug or psychotropic substance, he may proceed to search the person as provided under section 100 of the Code of Criminal Procedure, 1973."
+                ),
+                "amendment_notes": "Mandatory compliance laid down by Constitution Bench in Vijaysinh Chandubha Jadeja (2011).",
+            },
+        ],
+    },
+    "rera": {
+        "title": "The Real Estate (Regulation and Development) Act, 2016",
+        "short_title": "RERA, 2016",
+        "act_number": "Act No. 16 of 2016",
+        "enactment_year": 2016,
+        "enactment_date": "2016-03-25",
+        "commencement_date": "2016-05-01",
+        "effective_date": "2016-05-01",
+        "status": "CURRENT",
+        "subject_category": "Real Estate & Consumer Law",
+        "preamble": "An Act to establish the Real Estate Regulatory Authority for regulation and promotion of the real estate sector and to ensure sale of plot, apartment or building in an efficient and transparent manner.",
+        "sections": [
+            {
+                "section_number": "3",
+                "section_title": "Prior registration of real estate project with Real Estate Regulatory Authority",
+                "chapter_number": "II",
+                "chapter_title": "Registration of Real Estate Project and Registration of Real Estate Agents",
+                "statutory_text": (
+                    "(1) No promoter shall advertise, market, book, sell or offer for sale, or invite persons to purchase in any manner any plot, apartment or building, as the case may be, in any real estate project or part of it, in any planning area, without registering the real estate project with the Real Estate Regulatory Authority established under this Act."
+                ),
+            },
+            {
+                "section_number": "18",
+                "section_title": "Return of amount and compensation",
+                "chapter_number": "III",
+                "chapter_title": "Functions and Duties of Promoter",
+                "statutory_text": (
+                    "(1) If the promoter fails to complete or is unable to give possession of an apartment, plot or building—\n"
+                    "(a) in accordance with the terms of the agreement for sale or, as the case may be, duly completed by the date specified therein; or\n"
+                    "(b) due to discontinuance of his business as a developer on account of suspension or revocation of the registration under this Act or for any other reason;\n"
+                    "he shall be liable on demand to the allottees, in case the allottee wishes to withdraw from the project, without prejudice to any other remedy available, to return the amount received by him in respect of that apartment, plot, building, as the case may be, with interest at such rate as may be prescribed in this behalf including compensation in the manner as provided under this Act:\n\n"
+                    "Provided that where an allottee does not intend to withdraw from the project, he shall be paid, by the promoter, interest for every month of delay, till the handing over of the possession, at such rate as may be prescribed."
+                ),
+            },
+            {
+                "section_number": "31",
+                "section_title": "Filing of complaints with the Authority or the adjudicating officer",
+                "chapter_number": "V",
+                "chapter_title": "The Real Estate Regulatory Authority",
+                "statutory_text": "Any aggrieved person may file a complaint with the Authority or the adjudicating officer, as the case may be, for any violation or contravention of the provisions of this Act or the rules and regulations made thereunder against any promoter, allottee or real estate agent, as the case may be.",
+            },
+        ],
+    },
+    "posh": {
+        "title": "The Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013",
+        "short_title": "POSH Act, 2013",
+        "act_number": "Act No. 14 of 2013",
+        "enactment_year": 2013,
+        "enactment_date": "2013-04-22",
+        "commencement_date": "2013-12-09",
+        "effective_date": "2013-12-09",
+        "status": "CURRENT",
+        "subject_category": "Labour & Gender Law",
+        "preamble": "An Act to provide protection against sexual harassment of women at workplace and for the prevention and redressal of complaints of sexual harassment.",
+        "sections": [
+            {
+                "section_number": "4",
+                "section_title": "Constitution of Internal Complaints Committee",
+                "chapter_number": "II",
+                "chapter_title": "Constitution of Internal Complaints Committee",
+                "statutory_text": (
+                    "(1) Every employer of a workplace shall, by an order in writing, constitute a Committee to be known as the 'Internal Complaints Committee':\n"
+                    "Provided that where the offices or administrative units of the workplace are located at different places or divisional or sub-divisional level, the Internal Committee shall be constituted at all administrative units or offices.\n\n"
+                    "(2) The Internal Committee shall consist of the following members to be nominated by the employer, namely:—\n"
+                    "(a) a Presiding Officer who shall be a woman employed at a senior level at workplace from amongst the employees;\n"
+                    "(b) not less than two Members from amongst employees preferably committed to the cause of women or who have had experience in social work or have legal knowledge;\n"
+                    "(c) one member from amongst non-governmental organisations or associations committed to the cause of women or a person familiar with the issues relating to sexual harassment:\n"
+                    "Provided that at least one-half of the total Members so nominated shall be women."
+                ),
+            },
+            {
+                "section_number": "9",
+                "section_title": "Complaint of sexual harassment",
+                "chapter_number": "IV",
+                "chapter_title": "Complaint",
+                "statutory_text": (
+                    "(1) Any aggrieved woman may make, in writing, a complaint of sexual harassment at workplace to the Internal Committee if so constituted, or the Local Committee, in case it is not so constituted, within a period of three months from the date of incident and in case of a series of incidents, within a period of three months from the date of last incident:\n"
+                    "Provided that where such complaint cannot be made in writing, the Presiding Officer or any Member of the Internal Committee or the Chairperson or any Member of the Local Committee, as the case may be, shall render all reasonable assistance to the woman for making the complaint in writing:\n"
+                    "Provided further that the Internal Committee or, as the case may be, the Local Committee may, for the reasons to be recorded in writing, extend the time limit not exceeding three months, if it is satisfied that the circumstances were such which prevented the woman from filing a complaint within the said period."
+                ),
+            },
+            {
+                "section_number": "10",
+                "section_title": "Conciliation",
+                "chapter_number": "V",
+                "chapter_title": "Inquiry into Complaint",
+                "statutory_text": (
+                    "(1) The Internal Committee or, as the case may be, the Local Committee, may, before initiating an inquiry under section 11 and at the request of the aggrieved woman take steps to settle the matter between her and the respondent through conciliation:\n"
+                    "Provided that no monetary settlement shall be made as a basis of conciliation."
+                ),
+            },
+        ],
+    },
 }
 
 
@@ -669,6 +1244,14 @@ BUILTIN_ACTS_FALLBACK["ni act"] = BUILTIN_ACTS_FALLBACK["negotiable instruments"
 BUILTIN_ACTS_FALLBACK["sra"] = BUILTIN_ACTS_FALLBACK["specific relief"]
 BUILTIN_ACTS_FALLBACK["tpa"] = BUILTIN_ACTS_FALLBACK["transfer of property"]
 BUILTIN_ACTS_FALLBACK["ibc"] = BUILTIN_ACTS_FALLBACK["insolvency and bankruptcy"]
+BUILTIN_ACTS_FALLBACK["pmla"] = BUILTIN_ACTS_FALLBACK["money laundering"]
+BUILTIN_ACTS_FALLBACK["mva"] = BUILTIN_ACTS_FALLBACK["motor vehicle"]
+BUILTIN_ACTS_FALLBACK["motor vehicles"] = BUILTIN_ACTS_FALLBACK["motor vehicle"]
+BUILTIN_ACTS_FALLBACK["hma"] = BUILTIN_ACTS_FALLBACK["hindu marriage"]
+BUILTIN_ACTS_FALLBACK["pwdva"] = BUILTIN_ACTS_FALLBACK["domestic violence"]
+BUILTIN_ACTS_FALLBACK["dv act"] = BUILTIN_ACTS_FALLBACK["domestic violence"]
+BUILTIN_ACTS_FALLBACK["rti"] = BUILTIN_ACTS_FALLBACK["right to information"]
+BUILTIN_ACTS_FALLBACK["rti act"] = BUILTIN_ACTS_FALLBACK["right to information"]
 
 
 # ---------------------------------------------------------------------------
@@ -735,6 +1318,34 @@ def extract_act_and_section_hints(query: str) -> Tuple[Optional[str], Optional[s
         "ibc": "IBC, 2016",
         "pocso": "POCSO Act, 2012",
         "dpdp": "DPDP Act, 2023",
+        "mva": "Motor Vehicles Act, 1988",
+        "mv act": "Motor Vehicles Act, 1988",
+        "motor vehicle": "Motor Vehicles Act, 1988",
+        "motor vehicle act": "Motor Vehicles Act, 1988",
+        "motor vehicles act": "Motor Vehicles Act, 1988",
+        "pmla": "PMLA, 2002",
+        "money laundering": "PMLA, 2002",
+        "money laundering act": "PMLA, 2002",
+        "hma": "Hindu Marriage Act, 1955",
+        "hindu marriage act": "Hindu Marriage Act, 1955",
+        "dv act": "Domestic Violence Act, 2005",
+        "pwdva": "Domestic Violence Act, 2005",
+        "domestic violence": "Domestic Violence Act, 2005",
+        "domestic violence act": "Domestic Violence Act, 2005",
+        "rti": "RTI Act, 2005",
+        "rti act": "RTI Act, 2005",
+        "right to information": "RTI Act, 2005",
+        "right to information act": "RTI Act, 2005",
+        "posh": "POSH Act, 2013",
+        "posh act": "POSH Act, 2013",
+        "partnership": "Partnership Act, 1932",
+        "partnership act": "Partnership Act, 1932",
+        "indian partnership act": "Partnership Act, 1932",
+        "ndps": "NDPS Act, 1985",
+        "ndps act": "NDPS Act, 1985",
+        "rera": "RERA, 2016",
+        "rera act": "RERA, 2016",
+        "pca": "Prevention of Corruption Act, 1988",
     }
     if act_hint and act_hint.lower() in abbr_map:
         act_hint = abbr_map[act_hint.lower()]
@@ -752,7 +1363,7 @@ def call_gemini_statutory_synthesizer(
     act_hint: Optional[str] = None,
     section_hint: Optional[str] = None,
 ) -> Optional[Dict[str, Any]]:
-    """Query Gemini 2.5 Flash to synthesize verbatim statutory provision from India Code repository."""
+    """Query Gemini API to synthesize statutory provision from India Code repository."""
     if not settings.GEMINI_API_KEY:
         logger.info("No GEMINI_API_KEY available for dynamic statutory discovery.")
         return None
@@ -773,7 +1384,7 @@ def call_gemini_statutory_synthesizer(
         '    "effective_date": "YYYY-MM-DD",\n'
         '    "status": "CURRENT" or "HISTORICAL",\n'
         '    "subject_category": "e.g. Civil Law & Remedies",\n'
-        '    "preamble": "Verbatim legislative preamble of the Act",\n'
+        '    "preamble": "Legislative preamble and statutory objective of the Act",\n'
         '    "official_url": "https://www.indiacode.nic.in"\n'
         "  },\n"
         '  "sections": [\n'
@@ -782,7 +1393,7 @@ def call_gemini_statutory_synthesizer(
         '      "section_title": "Official Title of Section",\n'
         '      "chapter_number": "XVII",\n'
         '      "chapter_title": "Title of Chapter",\n'
-        '      "statutory_text": "Verbatim authentic statutory text including provisos and explanations",\n'
+        '      "statutory_text": "Operative statutory provisions, subsections, provisos, and legal rules",\n'
         '      "amendment_notes": "Key legislative amendments if applicable",\n'
         '      "corresponding_historical_section": "Pre-2024 equivalent or null"\n'
         "    }\n"
@@ -791,19 +1402,14 @@ def call_gemini_statutory_synthesizer(
         "Rules:\n"
         "1. STRICT TRUTH: Never fabricate statutory sections. If the Act does not exist, return null.\n"
         "2. If a specific section is requested, return that section FIRST, plus 2-4 key adjacent or famous sections.\n"
-        "3. Provide verbatim statutory text including all provisos (a), (b), (c) and explanations."
+        "3. Provide complete statutory formulation and operative legal rules for each section."
     )
 
     user_prompt = (
         f"Search Query: {query}\n"
         f"Candidate Act Hint: {act_hint or 'Unknown'}\n"
         f"Candidate Section Hint: {section_hint or 'All Key Provisions'}\n\n"
-        "Generate the complete authentic Indian statute and section records in valid JSON."
-    )
-
-    url = (
-        f"https://generativelanguage.googleapis.com/v1beta/models/"
-        f"{settings.GEMINI_MODEL}:generateContent?key={settings.GEMINI_API_KEY}"
+        "Synthesize the authentic Indian statute and section records in valid JSON."
     )
 
     payload = {
@@ -815,39 +1421,69 @@ def call_gemini_statutory_synthesizer(
         },
     }
 
-    try:
-        req = urllib.request.Request(
-            url,
-            data=json.dumps(payload).encode("utf-8"),
-            headers={"Content-Type": "application/json"},
-            method="POST",
+    candidate_models = []
+    for m in [settings.GEMINI_MODEL, "gemini-flash-lite-latest", "gemini-3-flash-preview"]:
+        if m and m not in candidate_models:
+            candidate_models.append(m)
+
+    for model_name in candidate_models:
+        url = (
+            f"https://generativelanguage.googleapis.com/v1beta/models/"
+            f"{model_name}:generateContent?key={settings.GEMINI_API_KEY}"
         )
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
+        try:
+            req = urllib.request.Request(
+                url,
+                data=json.dumps(payload).encode("utf-8"),
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
 
-        raw_text = (
-            data.get("candidates", [{}])[0]
-            .get("content", {})
-            .get("parts", [{}])[0]
-            .get("text", "")
-        )
-        if not raw_text:
-            return None
+            candidates = data.get("candidates", [])
+            if not candidates:
+                continue
 
-        # Clean JSON fences if present
-        cleaned_json = raw_text.strip()
-        if cleaned_json.startswith("```json"):
-            cleaned_json = cleaned_json[7:]
-        if cleaned_json.startswith("```"):
-            cleaned_json = cleaned_json[3:]
-        if cleaned_json.endswith("```"):
-            cleaned_json = cleaned_json[:-3]
+            cand = candidates[0]
+            parts = cand.get("content", {}).get("parts", [])
+            if not parts:
+                continue
 
-        parsed = json.loads(cleaned_json.strip())
-        if isinstance(parsed, dict) and "act" in parsed and "sections" in parsed:
-            return parsed
-    except Exception as exc:
-        logger.warning(f"Gemini statutory discovery call encountered: {type(exc).__name__}: {exc}")
+            raw_text = parts[0].get("text", "")
+            if not raw_text:
+                continue
+
+            # Clean JSON fences if present
+            cleaned_json = raw_text.strip()
+            if cleaned_json.startswith("```json"):
+                cleaned_json = cleaned_json[7:]
+            if cleaned_json.startswith("```"):
+                cleaned_json = cleaned_json[3:]
+            if cleaned_json.endswith("```"):
+                cleaned_json = cleaned_json[:-3]
+
+            parsed = json.loads(cleaned_json.strip())
+            if isinstance(parsed, dict) and "act" in parsed and "sections" in parsed:
+                # Normalize section fields
+                for sec in parsed.get("sections", []):
+                    if "statutory_text" not in sec:
+                        sec["statutory_text"] = (
+                            sec.get("operative_analysis")
+                            or sec.get("provision_text")
+                            or sec.get("text")
+                            or f"Section {sec.get('section_number', '')}: {sec.get('section_title', '')}"
+                        )
+                return parsed
+        except urllib.error.HTTPError as http_err:
+            if http_err.code in (404, 400):
+                logger.warning(f"Gemini model {model_name} returned {http_err.code}; trying fallback model...")
+                continue
+            logger.warning(f"Gemini API error ({model_name}): {http_err}")
+            break
+        except Exception as exc:
+            logger.warning(f"Gemini statutory discovery call encountered ({model_name}): {type(exc).__name__}: {exc}")
+            break
 
     return None
 
