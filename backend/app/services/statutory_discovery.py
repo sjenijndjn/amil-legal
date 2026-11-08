@@ -1001,6 +1001,10 @@ class StatutoryDiscoveryService:
             self.db.query(LegalAct)
             .filter(
                 or_(
+                    (LegalAct.short_title == short_title) & (LegalAct.enactment_year == year),
+                    (LegalAct.act_number == act_number) & (LegalAct.enactment_year == year) & (LegalAct.title == title),
+                    LegalAct.title == title,
+                    LegalAct.short_title == short_title,
                     LegalAct.title.ilike(f"%{short_title}%"),
                     LegalAct.short_title.ilike(f"%{short_title}%"),
                 )
@@ -1017,22 +1021,30 @@ class StatutoryDiscoveryService:
                 return None
 
         if not act:
-            act = LegalAct(
-                source_id=source.id,
-                title=title,
-                short_title=short_title,
-                act_number=act_number,
-                enactment_year=year,
-                enactment_date=parse_date(act_data.get("enactment_date")),
-                commencement_date=parse_date(act_data.get("commencement_date")),
-                effective_date=parse_date(act_data.get("effective_date")),
-                status=act_data.get("status", "CURRENT"),
-                subject_category=act_data.get("subject_category", "Commercial & Civil Law"),
-                preamble=act_data.get("preamble", f"An Act to define and amend the law relating to {title}."),
-                amendment_history=[],
-            )
-            self.db.add(act)
-            self.db.flush()
+            try:
+                act = LegalAct(
+                    source_id=source.id,
+                    title=title,
+                    short_title=short_title,
+                    act_number=act_number,
+                    enactment_year=year,
+                    enactment_date=parse_date(act_data.get("enactment_date")),
+                    commencement_date=parse_date(act_data.get("commencement_date")),
+                    effective_date=parse_date(act_data.get("effective_date")),
+                    status=act_data.get("status", "CURRENT"),
+                    subject_category=act_data.get("subject_category", "Commercial & Civil Law"),
+                    preamble=act_data.get("preamble", f"An Act to define and amend the law relating to {title}."),
+                    amendment_history=[],
+                )
+                self.db.add(act)
+                self.db.flush()
+            except Exception:
+                self.db.rollback()
+                act = (
+                    self.db.query(LegalAct)
+                    .filter(or_(LegalAct.title == title, LegalAct.short_title == short_title))
+                    .first()
+                )
 
         sections_list = data.get("sections", [])
         persisted_sections: List[LegalSection] = []

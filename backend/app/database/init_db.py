@@ -1431,15 +1431,38 @@ def _seed_acts_and_sections(
         act = (
             db.query(LegalAct)
             .filter(
-                LegalAct.short_title == act_item["short_title"],
-                LegalAct.enactment_year == act_item["enactment_year"],
+                or_(
+                    (LegalAct.short_title == act_item["short_title"])
+                    & (LegalAct.enactment_year == act_item["enactment_year"]),
+                    (LegalAct.act_number == act_item["act_number"])
+                    & (LegalAct.enactment_year == act_item["enactment_year"])
+                    & (LegalAct.title == act_item["title"]),
+                    LegalAct.title == act_item["title"],
+                    LegalAct.short_title == act_item["short_title"],
+                )
             )
             .first()
         )
         if act is None:
-            act = LegalAct(source_id=india_code.id, **act_item)
-            db.add(act)
-            db.flush()
+            try:
+                act = LegalAct(source_id=india_code.id, **act_item)
+                db.add(act)
+                db.flush()
+            except Exception:
+                db.rollback()
+                act = (
+                    db.query(LegalAct)
+                    .filter(
+                        or_(
+                            LegalAct.title == act_item["title"],
+                            LegalAct.short_title == act_item["short_title"],
+                        )
+                    )
+                    .first()
+                )
+
+        if act is None:
+            continue
 
         for sec_item in sections_list:
             existing_sec = (
@@ -1456,25 +1479,38 @@ def _seed_acts_and_sections(
                 f"{sec_item.get('corresponding_historical_section') or ''}"
             )
             if existing_sec is None:
-                existing_sec = LegalSection(
-                    act_id=act.id,
-                    part_number=sec_item.get("part_number"),
-                    chapter_number=sec_item.get("chapter_number"),
-                    chapter_title=sec_item.get("chapter_title"),
-                    section_number=sec_item["section_number"],
-                    section_title=sec_item["section_title"],
-                    statutory_text=sec_item["statutory_text"],
-                    amendment_notes=f"Status: {act.status}. Effective: {act.effective_date}.",
-                    effective_date=act.effective_date,
-                    corresponding_historical_section=sec_item.get(
-                        "corresponding_historical_section"
-                    ),
-                    embedding=deterministic_embedding(embed_input),
-                )
-                db.add(existing_sec)
-                db.flush()
+                try:
+                    existing_sec = LegalSection(
+                        act_id=act.id,
+                        part_number=sec_item.get("part_number"),
+                        chapter_number=sec_item.get("chapter_number"),
+                        chapter_title=sec_item.get("chapter_title"),
+                        section_number=sec_item["section_number"],
+                        section_title=sec_item["section_title"],
+                        statutory_text=sec_item["statutory_text"],
+                        amendment_notes=f"Status: {act.status}. Effective: {act.effective_date}.",
+                        effective_date=act.effective_date,
+                        corresponding_historical_section=sec_item.get(
+                            "corresponding_historical_section"
+                        ),
+                        embedding=deterministic_embedding(embed_input),
+                    )
+                    db.add(existing_sec)
+                    db.flush()
+                except Exception:
+                    db.rollback()
+                    existing_sec = (
+                        db.query(LegalSection)
+                        .filter(
+                            LegalSection.act_id == act.id,
+                            LegalSection.section_number == sec_item["section_number"],
+                        )
+                        .first()
+                    )
+
             key = f"{act.short_title}:{sec_item['section_number']}"
-            sections_lookup[key] = existing_sec
+            if existing_sec is not None:
+                sections_lookup[key] = existing_sec
 
     return sections_lookup
 
